@@ -1,17 +1,21 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Usuario
 from .forms import UsuarioForm
 
 # Create your views here.
+@login_required()
 def hello(request):
     #return HttpResponse('Ola Mundo')
     return render(request, 'index.html')
 
+@login_required()
 def list_usuario(request):
     usu = Usuario.objects.all()
     return render(request, 'list_usuario.html', {'usu': usu})
 
+@login_required()
 def new_usuario(request):
     form = UsuarioForm(request.POST or None)
     if form.is_valid():

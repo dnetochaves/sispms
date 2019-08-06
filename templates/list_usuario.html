@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <h1>List Usuário</h1>
+   <ul>
+        {% for usu in usu %}
+        <a href="{% url 'update_usuario' usu.id %}"><li>{{ usu.Nome }}</li></a>
+          <a href="{% url 'delete_usuario' usu.id %}">Deletar</a>
+       <hr>
+        {% endfor %}
+   </ul>
+
+  <a href="{% url 'new_usuario' %}">Novo</a>
+</body>
+</html>

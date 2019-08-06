@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from usuario import urls as usuario_urls
 from home import urls as home_urls
+from colaborador import urls as colaborador_urls
 from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     path('', include(home_urls)),
     path('login/', LoginView.as_view(), name="login"),
     path('usuario/', include(usuario_urls)),
+    path('colaborador/', include(colaborador_urls)),
     path('admin/', admin.site.urls),
 ]

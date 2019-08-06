@@ -3,14 +3,24 @@
 {% block title %} Administracao {% endblock %}
 
 {% block container %}
- <h1>List Usuário</h1>
-   <ul>
-        {% for usu in usu %}
-        <a href="{% url 'update_usuario' usu.id %}"><li>{{ usu.Nome }}</li></a>
-          <a href="{% url 'delete_usuario' usu.id %}">Deletar</a>
-       <hr>
-        {% endfor %}
-   </ul>
 
-  <a href="{% url 'new_usuario' %}">Novo</a>
+
+<table class="table table-dark">
+
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+         <th scope="col">Operações</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for usu in usu %}
+    <tr>
+      <th scope="row">{{ usu.Nome }}</th>
+         <th scope="col"> <a href="{% url 'delete_usuario' usu.id %}">Deletar</a></th>
+    </tr>
+  {% endfor %}
+  </tbody>
+
+</table>
 {% endblock %}

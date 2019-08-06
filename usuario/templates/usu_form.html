@@ -1,13 +1,13 @@
+{% extends 'base_usuario.html' %}
+{% load bootstrap %}
 
-
-{% extends 'base.html' %}
 
 {% block title %} Administracao {% endblock %}
 
 {% block container %}
   <form method="post">
                 {% csrf_token %}
-                {{ form }}
-                <button type="submit">Salvar</button>
+               {{ form|bootstrap_horizontal }}
+               <button type="submit" class="btn btn-primary">Primary</button>
         </form>
 {% endblock %}

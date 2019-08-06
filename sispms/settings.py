@@ -27,8 +27,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['sispms.herokuapp.com']
-
+#ALLOWED_HOSTS = ['sispms.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuario',
     'home',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [

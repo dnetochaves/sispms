@@ -9,18 +9,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>SisPms</title>
   </head>
-  <body>
+  <body class="bg-light">
 
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="javascript:void(0)">SisPms</a>
+        <a class="navbar-brand" href="javascript:void(0)">Prefeitura Municipal de Salvador</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav">
-            <li class="nav-item">
+           <!-- <li class="nav-item">
               <a class="nav-link" href="javascript:void(0)">Link</a>
             </li>
             <li class="nav-item">
@@ -39,43 +39,61 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-              </li>
+              </li>-->
           </ul>
         </div>
         <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="" target="_blank">
+           <nav class="navbar navbar-dark bg-darkt">
+                  <form class="form-inline">
+                      {% if user.is_authenticated %}
+                            <a href="#" class="nav-link btn btn-dark"> {{ user.username }}</a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav-link btn btn-dark"><i class="fa fa-sign-in-alt"></i></a>
+                        {% endif %} |
+                            <a href="{% url 'login' %}" class="nav-link btn btn-dark"><i class="fa fa-sign-out-alt"></i></a>
+                  </form>
+                </nav>
 
-            {% if user.is_authenticated %}
-                {{ user.username }}
-            {% else %}
-                <a href="{% url 'login' %}" class="btn btn-info">Entrar</a>
-            {% endif %}
-              </a>
-            </li>
+
           </ul>
       </nav>
-
-      <div class="container" style="margin-top:60px">
-          {% block container %}
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-</div>
-<button type="button" class="btn btn-primary">Primary</button>
-<button type="button" class="btn btn-secondary">Secondary</button>
-<button type="button" class="btn btn-success">Success</button>
-<button type="button" class="btn btn-danger">Danger</button>
-<button type="button" class="btn btn-warning">Warning</button>
-<button type="button" class="btn btn-info">Info</button>
-<button type="button" class="btn btn-light">Light</button>
-<button type="button" class="btn btn-dark">Dark</button>
-
-<button type="button" class="btn btn-link">Link</button>
-            {% endblock %}
+      <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+              <h1 class="display-4"><center>SisPms</center></h1>
+            <p class="lead"><center>Sistema para integração de pessoas</center></p>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col">
+              <div class="card">
+                  <h5 class="card-header">Organização de Tarefas</h5>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+              </div>
+          </div>
+           <div class="col">
+              <div class="card">
+                  <h5 class="card-header">Controle de Colaboradores</h5>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+              </div>
+          </div>
+           <div class="col">
+              <div class="card">
+                  <h5 class="card-header">Gestão de Documentos</h5>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+              </div>
+          </div>
       </div>
 
 

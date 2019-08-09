@@ -27,8 +27,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['sispms.herokuapp.com']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['sispms.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home',
     'bootstrapform',
     'colaborador',
+    'setor',
 ]
 
 MIDDLEWARE = [
@@ -122,5 +123,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/usuario/list_usuario/'
+LOGIN_URL = '/usuario/'
+LOGIN_REDIRECT_URL = '/usuario/perfil/'

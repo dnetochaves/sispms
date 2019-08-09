@@ -1,17 +1,38 @@
-<!DOCTYPE html>
+{% load bootstrap %}
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SisPms</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-info">Login</button>
-    </form>
+</head>
+<body class="bg-dark">
+<div class="container-fluid" style="margin-top:60px">
+<section class="row">
+    <div class="col bg-dark"></div>
+    <div class="col bg-light border border-dark">
+         <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|bootstrap_horizontal }}
+                <button type="submit" class="btn btn-outline-secondary btn-block">Login</button>
+            </form>
+    </div>
+    <div class="col bg-dark"></div>
+</section>
+</div>
 
 </body>
 </html>
+
+
+
+
+
+

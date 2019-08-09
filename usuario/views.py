@@ -11,6 +11,10 @@ def hello(request):
     return render(request, 'index.html')
 
 @login_required()
+def perfil(request):
+    return render(request, 'perfil.html')
+
+@login_required()
 def list_usuario(request):
     usu = Usuario.objects.all()
     return render(request, 'list_usuario.html', {'usu': usu})

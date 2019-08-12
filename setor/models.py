@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Setor(models.Model):
     Nome = models.CharField(max_length=50)
     Telefone1 = models.CharField(max_length=50)

@@ -19,11 +19,12 @@ from usuario import urls as usuario_urls
 from home import urls as home_urls
 from colaborador import urls as colaborador_urls
 from setor import urls as setor_urls
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('', include(home_urls)),
     path('login/', LoginView.as_view(), name="login"),
+    path("logout/", LogoutView.as_view(), name="logout"),
     path('usuario/', include(usuario_urls)),
     path('colaborador/', include(colaborador_urls)),
     path('setor/', include(setor_urls)),

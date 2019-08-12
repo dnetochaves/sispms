@@ -1,5 +1,6 @@
 from django.core.checks import Tags
 from django.db import models
+from setor.models import Setor
 
 
 # Create your models here.
@@ -8,6 +9,7 @@ class Colaborador(models.Model):
     Cpf = models.CharField(max_length=50)
     Telefone = models.CharField(max_length=50)
     tags = models.ManyToManyField('Tags')
+    SetorColaborador = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='setor')
 
     def __str__(self):
         return self.Nome

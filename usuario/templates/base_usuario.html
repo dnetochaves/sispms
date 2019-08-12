@@ -49,7 +49,7 @@
                   <a class="dropdown-item" href="#">Tarefas</a>
                     <a class="dropdown-item" href="#">Mensagem</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Colaborador</a>
+                  <a class="dropdown-item" href="{% url 'painel_colaborador' %}">Colaborador</a>
                 </div>
               </li>
           </ul>
@@ -71,7 +71,13 @@
       </nav>
 
       <div class="container-fluid" style="margin-top:100px">
-
+       <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'perfil' %}"><i class="fa fa-user"></i></a></li>
+                    <li class="breadcrumb-item"> <a href="javascript:history.back()"><i class="fa fa-undo-alt"></i></a></li>
+          </ol>
+       </nav>
           {% block container %}
             {% endblock %}
       </div>

@@ -1,44 +1,28 @@
 {% extends 'base_usuario.html' %}
 
-{% block title %} Administracao {% endblock %}
+{% block title %}
+    Perfil
+{% endblock %}
 
 {% block container %}
-      <div class="row border">
-              <div class="col-2">Usuário:</div>
-              <div class="col-10">
-                   {% if user.is_authenticated %}
-                       {{ user.username }}
-                   {% else %}
-                     Por favor efetue o login para que possamos indetificalo | <a href="{% url 'login' %}" class="btn btn-dark"><i class="fa fa-sign-in-alt"></i></a>
-                  {% endif %}
-              </div>
-          </div>
-            <div class="row border">
-              <div class="col-2">Setor:</div>
-              <div class="col-10">2</div>
-          </div>
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                           <li class="nav-item">
-                            <a class="nav-link active" id="atividade-tab" data-toggle="tab" href="#atividades" role="tab" aria-controls="home" aria-selected="true">Atividades</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#notas" role="tab" aria-controls="profile" aria-selected="false"><i class="fa fa-book-reader"></i></a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#notas" role="tab" aria-controls="profile" aria-selected="false">Notas</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tarefas" role="tab" aria-controls="contact" aria-selected="false">tarefas</a>
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tarefas" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-tasks"></i></a>
                           </li>
                          <li class="nav-item">
-                            <a class="nav-link" id="mensagens-tab" data-toggle="tab" href="#mensagens" role="tab" aria-controls="contact" aria-selected="false">mensagens</a>
+                            <a class="nav-link" id="mensagens-tab" data-toggle="tab" href="#mensagens" role="tab" aria-controls="contact" aria-selected="false"><i class="fa fa-envelope-open"></i></a>
                           </li>
                          <li class="nav-item">
-                            <a class="nav-link" id="documentos-tab" data-toggle="tab" href="#documentos" role="tab" aria-controls="documentos" aria-selected="false">documentos</a>
+                            <a class="nav-link" id="documentos-tab" data-toggle="tab" href="#documentos" role="tab" aria-controls="documentos" aria-selected="false"><i class="fa fa-folder"></i></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="demandas-tab" data-toggle="tab" href="#demandas" role="tab" aria-controls="demandas" aria-selected="false"><i class="fa fa-chalkboard"></i></a>
                           </li>
            </ul>
                     <div class="tab-content" id="myTabContent">
-                          <div class="tab-pane fade show active" id="atividades" role="tabpanel" aria-labelledby="atividade-tab">
-                             aa Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                          </div>
                           <div class="tab-pane fade" id="notas" role="tabpanel" aria-labelledby="profile-tab">
                               nn Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                           </div>
@@ -50,6 +34,9 @@
                            </div>
                          <div class="tab-pane fade" id="documentos" role="tabpanel" aria-labelledby="documentos-tab">
                               documentos Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                           </div>
+                          <div class="tab-pane fade" id="demandas" role="tabpanel" aria-labelledby="demandas-tab">
+                              Demandas Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                            </div>
                     </div>
 

@@ -1,0 +1,31 @@
+{% extends 'base_usuario.html' %}
+
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+
+<table class="table table-striped"">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Observação</th>
+      <th scope="col">Comandos</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for tags in tags %}
+    <tr>
+      <th scope="row">{{ tags.id }}</th>
+      <td>{{ tags.Nome }}</td>
+      <td>{{ tags.Observacao }}</td>
+      <td>
+        <a href="{% url 'update_tags' tags.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+      </td>
+    </tr>
+ {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -11,7 +11,7 @@
 
     <title>SisPms</title>
   </head>
-  <body class="bg-light">
+  <body class="bg-light" style="margin-top:100px">
 
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <a class="navbar-brand" href="javascript:void(0)">Prefeitura Municipal de Salvador</a>
@@ -46,55 +46,69 @@
            <nav class="navbar navbar-dark bg-darkt">
                   <form class="form-inline">
                       {% if user.is_authenticated %}
-                            <a href="#" class="nav-link btn btn-dark"> {{ user.username }}</a>
+                            <a href="{% url 'perfil' %}" class="nav-link btn btn-dark"> {{ user.username }}</a>
                         {% else %}
                             <a href="{% url 'login' %}" class="nav-link btn btn-dark"><i class="fa fa-sign-in-alt"></i></a>
                         {% endif %} |
-                            <a href="{% url 'login' %}" class="nav-link btn btn-dark"><i class="fa fa-sign-out-alt"></i></a>
+                            <a href="{% url 'logout' %}" class="nav-link btn btn-dark"><i class="fa fa-sign-out-alt"></i></a>
                   </form>
                 </nav>
 
 
           </ul>
       </nav>
-      <div class="jumbotron jumbotron-fluid">
-          <div class="container">
-              <h1 class="display-4"><center>SisPms</center></h1>
-            <p class="lead"><center>Sistema para integração de pessoas</center></p>
-          </div>
+    <div class="container-fluid">
+            <h1 class="mt-5">SisPms</h1>
+            <p class="lead">Buscando praticidade para resolver suas tarefas do dia a dia</code>.</p>
+       <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Solicitar senha para Login
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
       </div>
-      <div class="row">
-          <div class="col">
-              <div class="card">
-                  <h5 class="card-header">Organização de Tarefas</h5>
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-              </div>
-          </div>
-           <div class="col">
-              <div class="card">
-                  <h5 class="card-header">Controle de Colaboradores</h5>
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-              </div>
-          </div>
-           <div class="col">
-              <div class="card">
-                  <h5 class="card-header">Gestão de Documentos</h5>
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-              </div>
-          </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
       </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    </div>
 
 
 

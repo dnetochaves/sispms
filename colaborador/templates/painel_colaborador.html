@@ -1,49 +1,53 @@
 {% extends 'base_colaborador.html' %}
 
-{% block title %} Administracao {% endblock %}
+{% block title %}
+    Painel Colaborador
+{% endblock %}
 
 {% block container %}
 
-    <section class="row">
-        <div class="col">
-             <div class="card">
-              <div class="card-header">
-                Novo Colaborado
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-dark"><i class="fas fa-user-plus"></i></a>
-              </div>
-              </div>
-        </div>
-
-        <div class="col">
-             <div class="card">
-              <div class="card-header">
-                Localizar
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-dark"><i class="fas fa-street-view"></i></a>
-              </div>
-              </div>
-        </div>
-
-          <div class="col">
-             <div class="card">
-              <div class="card-header">
-                Relatórios
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-dark"><i class="fas fa-print"></i></a>
-              </div>
-              </div>
-        </div>
 
 
-    </section>
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Colaborador
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <ul class="list-group list-group-horizontal-sm">
+              <li class="list-group-item"> <a href="{% url 'add_colaborador' %}" class="btn btn-dark btn-block">Add <i class="fas fa-user-plus"></i></a></li>
+              <li class="list-group-item"><a href="{% url 'list_colaborador' %}" class="btn btn-dark btn-block">Relação <i class="fas fa-street-view"></i></a></li>
+              <li class="list-group-item"><a href="{% url 'list_colaborador' %}" class="btn btn-dark btn-block">Relatórios para Impressão <i class="fas fa-street-view"></i></a></li>
+            </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Tags
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+           <div class="card-body">
+        <ul class="list-group list-group-horizontal-sm">
+              <li class="list-group-item"> <a href="{% url 'tags_colaborador' %}" class="btn btn-dark btn-block">Add <i class="fas fa-tags"></i></a></li>
+              <li class="list-group-item"> <a href="{% url 'list_tags' %}" class="btn btn-dark btn-block">Relação <i class="fas fa-tags"></i></a></li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}

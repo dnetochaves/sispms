@@ -9,6 +9,7 @@ class Usuario(models.Model):
     Senha = models.CharField(max_length=50)
     SetorUsuario = models.OneToOneField(Setor, on_delete=models.CASCADE, null=True, related_name='SetorUsuario')
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='profile')
+    photo = models.ImageField(upload_to='user_photo', null=True, blank=True)
 
     def __str__(self):
         return self.Nome

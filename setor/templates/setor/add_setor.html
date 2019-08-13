@@ -1,0 +1,11 @@
+{% extends 'base_colaborador.html' %}
+{% load bootstrap %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+    <form method="post">
+                {% csrf_token %}
+               {{ form|bootstrap }}
+               <button type="submit" class="btn btn-dark btn-block">Salvar</button>
+    </form>
+{% endblock %}

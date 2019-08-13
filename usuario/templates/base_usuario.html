@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,10 +12,10 @@
 
     <title>{% block title %}{% endblock %}</title>
   </head>
-   <body class="bg-light">
+   <body class="bg-light" style="margin-top:70px">
 
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="javascript:void(0)">Prefeitura Municipal de Salvador</a>
+        <a class="navbar-brand" href="javascript:void(0)"><img src="{% static "img/logo-prefeitura-salvador.png" %}" alt="My image"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -65,19 +66,19 @@
                             <a href="{% url 'login' %}" class="nav-link btn btn-dark"><i class="fa fa-sign-out-alt"></i></a>
                   </form>
                 </nav>
+             <div class="inset">
+                  <img src="http://rs775.pbsrc.com/albums/yy35/PhoenyxStar/link-1.jpg~c200"  height="42" width="42" border="1">
+                </div>
 
 
           </ul>
       </nav>
 
-      <div class="container-fluid" style="margin-top:100px">
-       <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'perfil' %}"><i class="fa fa-user"></i></a></li>
-                    <li class="breadcrumb-item"> <a href="javascript:history.back()"><i class="fa fa-undo-alt"></i></a></li>
-          </ol>
-       </nav>
+      {% block barra-tarefas %}
+          {% include 'barra_tarefas.html' %}
+      {% endblock %}
+      <div class="container-fluid" style="margin-top:50px">
+
           {% block container %}
             {% endblock %}
       </div>

@@ -27,8 +27,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['sispms.herokuapp.com']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['sispms.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -122,6 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    'static',
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_URL = '/usuario/'
 LOGIN_REDIRECT_URL = '/usuario/perfil/'

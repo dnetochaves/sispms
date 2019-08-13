@@ -1,0 +1,55 @@
+{% extends 'base_setor.html' %}
+
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<form action="">
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Pesquisar">
+  <div class="input-group-append">
+    <button class="btn btn-success" type="submit" id="pesquisa" name="pesquisa">Pesquisar</button>
+  </div>
+</div>
+</form>
+
+<table class="table table-striped"">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Telefone1</th>
+      <th scope="col">Cep</th>
+       <th scope="col">Bairro</th>
+         <th scope="col">Logradouro</th>
+       <th scope="col">Numero</th>
+        <th scope="col">Latitude</th>
+        <th scope="col">Longitude</th>
+        <th scope="col">Gestor</th>
+        <th scope="col">Descricao</th>
+         <th scope="col">Comandos</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for setor in setor %}
+    <tr>
+          <th scope="row">{{ setor.id }}</th>
+          <td>{{ setor.Nome }}</td>
+          <td>{{ setor.Telefone1 }}</td>
+          <td>{{ setor.Cep }}</td>
+           <td>{{ setor.Bairro }}</td>
+         <td>{{ setor.Logradouro }}</td>
+         <td>{{ setor.Numero }}</td>
+         <td>{{ setor.Latitude }}</td>
+         <td>{{ setor.Longitude }}</td>
+         <td>{{ setor.Gestor }}</td>
+         <td>{{ setor.Descricao }}</td>
+      <td>
+        <a href="{% url 'update_setor' setor.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+      </td>
+    </tr>
+ {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

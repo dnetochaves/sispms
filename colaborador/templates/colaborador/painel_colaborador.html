@@ -1,0 +1,24 @@
+{% extends 'base_colaborador.html' %}
+
+{% block title %}
+    Painel Colaborador
+{% endblock %}
+
+{% block container %}
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-users"></i> Colaborador</h5>
+        <p class="card-text"><i class="fa fa-lock-open"></i><small class="text-danger"> Acesso liberado parcialmente para usuários</small></p>
+          <a href="{% url 'add_colaborador' %}" class="btn btn-primary">Add Novo</a> |
+          <a href="{% url 'list_colaborador' %}" class="btn btn-primary">Relação</a> |
+          <a href="{% url 'construction' %}" class="btn btn-danger">Excluir</a> |
+          <a href="#" class="btn btn-primary">Relatório para Impressão</a>
+      </div>
+  </div>
+ </div>
+</div>
+
+{% endblock %}

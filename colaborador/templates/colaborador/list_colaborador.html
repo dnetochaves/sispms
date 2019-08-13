@@ -27,7 +27,7 @@
   <tbody>
    {% for colaborador in colaborador %}
     <tr>
-      <th scope="row">{{ colaborador.id }}</th>
+      <th scope="row"><a href="{% url 'update_colaborador' colaborador.id %}" class="btn btn-info"><i class="fa fa-info-circle"></i></a></th>
       <td>{{ colaborador.Nome }}</td>
       <td>{{ colaborador.Cpf }}</td>
       <td>{{ colaborador.Telefone }}</td>

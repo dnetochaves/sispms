@@ -1,0 +1,52 @@
+{% extends 'base_usuario.html' %}
+
+{% block title %}
+    Perfil
+{% endblock %}
+
+{% block container %}
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Configurações de Usuário</h5>
+        <p class="card-text"><i class="fa fa-lock-open"></i><small class="text-danger"> Acesso liberado parcialmente para usuários</small></p>
+        <a href="#" class="btn btn-primary">Acessar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Configurações de Setor</h5>
+        <p class="card-text"><i class="fa fa-lock"></i> <small class="text-danger"> Acesso restrito para Administradores</small></p>
+        <a href="{% url 'painel_setor' %}" class="btn btn-primary">Acessar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-tags"></i> Tags</h5>
+        <p class="card-text"><i class="fa fa-lock-open"></i><small class="text-danger"> Acesso liberado parcialmente para usuários</small></p>
+          <a href="{% url 'tags_colaborador' %}" class="btn btn-primary">Add Novo</a> |
+          <a href="{% url 'list_tags' %}" class="btn btn-primary">Relação</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Configurações do Sistema</h5>
+         <p class="card-text"><i class="fa fa-lock"></i> <small class="text-danger"> Acesso restrito para Administradores</small></p>
+        <a href="#" class="btn btn-primary">Acessar</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

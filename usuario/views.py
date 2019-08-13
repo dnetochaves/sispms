@@ -10,6 +10,9 @@ def hello(request):
     #return HttpResponse('Ola Mundo')
     return render(request, 'usuario/index.html')
 
+def painel_configuracao(request):
+    return render(request, 'usuario/painel_configuracao.html')
+
 @login_required()
 def perfil(request):
     return render(request, 'usuario/perfil.html')

@@ -1,4 +1,5 @@
 {% load bootstrap %}
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,25 +11,80 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<style>
+    html,
+body {
+  height: 100%;
+}
 
+label {
+	cursor: pointer;
+	color: #ffffff;
+	display: block;
+	padding: 10px;
+	margin: 3px;
+}
+
+body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #3a403c;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
 </head>
-<body class="bg-dark">
-<div class="container-fluid" style="margin-top:60px">
-<section class="row">
-    <div class="col bg-dark"></div>
-    <div class="col bg-light border border-dark">
-         <h2>Login</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form|bootstrap_horizontal }}
-                <button type="submit" class="btn btn-outline-secondary btn-block">Login</button>
-            </form>
-    </div>
-    <div class="col bg-dark"></div>
-</section>
-</div>
-
-</body>
+<body class="text-center">
+    <form class="form-signin" method="post">
+         {% csrf_token %}
+      <img src="{% static "img/logo-prefeitura-salvador.png" %}" alt="My image"></a>
+      {{ form|bootstrap }}
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Entre</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+  </body>
 </html>
 
 

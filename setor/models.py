@@ -11,6 +11,14 @@ class Setor(models.Model):
     Longitude = models.CharField(max_length=50)
     Gestor = models.CharField(max_length=50)
     Descricao = models.CharField(max_length=100)
+    grupo = models.ManyToManyField('Grupo', null=True)
+
+    def __str__(self):
+        return self.Nome
+
+class Grupo(models.Model):
+    Nome = models.CharField(max_length=50)
+    Observacao = models.CharField(max_length=50)
 
     def __str__(self):
         return self.Nome

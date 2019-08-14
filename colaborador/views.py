@@ -49,8 +49,7 @@ def tags_colaborador(request):
     form = TagsForm(request.POST or None)
     if form.is_valid():
         form.save()
-        # TODO: Resolver problema no redirect
-        return redirect('/colaborador/lista_tags.html')
+        return redirect('/colaborador/list_colaborador')
     return render(request, 'colaborador/add_tags.html', {'form': form})
 
 @login_required()

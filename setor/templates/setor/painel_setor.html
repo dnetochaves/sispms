@@ -1,16 +1,17 @@
-{% extends 'base_setor.html' %}
+{% extends 'base.html' %}
 
 {% block title %} Setor {% endblock %}
 
 {% block container %}
  <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title"><i class="fa fa-bezier-curve"></i> Setor</h5>
         <p class="card-text"><i class="fa fa-lock"></i><small class="text-danger"> Acesso restrito para Administradores do Sistema</small></p>
-          <a href="{% url 'add_setor' %}" class="btn btn-primary">Add Novo</a> |
+          <a href="{% url 'add_setor' %}" class="btn btn-primary">Add Novo Setor</a> |
           <a href="{% url 'list_setor' %}" class="btn btn-primary">Relação</a> |
+           <a href="{% url 'list_setor' %}" class="btn btn-primary">Add Novo Grupo</a> |
           <a href="#" class="btn btn-primary">Relatório para Impressão</a>
       </div>
     </div>

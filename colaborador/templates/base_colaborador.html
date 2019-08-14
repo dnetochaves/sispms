@@ -21,26 +21,6 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
           <ul class="navbar-nav">
-           <!-- <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-plus"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>-->
           </ul>
         </div>
        <ul class="nav navbar-nav ml-auto">
@@ -64,10 +44,11 @@
       </nav>
         {% block barra-tarefas %}
           {% include 'barra_tarefas.html' %}
-      {% endblock %}
+        {% endblock %}
     <div class="container-fluid" style="margin-top:70px">
         {% block container %}
             {% endblock %}
+
 
     </div>
 
@@ -75,6 +56,9 @@
 
 
 
+      {% block footer %}
+          {% include 'footer.html' %}
+      {% endblock %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

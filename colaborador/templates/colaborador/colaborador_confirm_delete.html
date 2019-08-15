@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+<div class="card">
+      <div class="card-header">
+          Excluir Registro
+
+      </div>
+      <div class="card-body">
+          <form method="post">
+              {% csrf_token %}
+              <div class="alert alert-warning" role="alert">
+                  Tem certeza que deseja excluir o registro !! <h3>{{ object.Nome }}</h3>
+              </div>
+              <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+              <a href="{% url 'grupo_list_cbv' %}" class="btn btn-primary btn-sm">Voltar</a>
+          </form>
+      </div>
+</div>
+{% endblock %}

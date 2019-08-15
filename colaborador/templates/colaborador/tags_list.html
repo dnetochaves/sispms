@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<div class="card">
+    <div class="card-header">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend" id="button-addon3">
+                <a href="{% url 'tag_create_cbv'%}" class="btn btn-outline-secondary" type="button">Nova Tag</a>
+                <a href="#" class="btn btn-outline-secondary" type="button">Pesquisar</a>
+            </div>
+            <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                   aria-describedby="button-addon3">
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Observacao</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tag in object_list %}
+            <tr>
+                <td>{{ tag.Nome }}</td>
+                <td>{{ tag.Observacao }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'tag_update_cbv' tag.id %}" class="btn btn-success">Atualizar</a>
+                        <a href="{% url 'tag_detail_cbv' tag.id %}" class="btn btn-info">Detalhes</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -4,10 +4,17 @@
 
 {% block container %}
 
-
 <div class="card">
     <div class="card-header">
-        <a href="{% url 'add_setor' %}" class="btn btn-primary btn-sm">Novo Setor</a>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend" id="button-addon3">
+                <a href="{% url 'setor_create_cbv' %}" class="btn btn-outline-secondary" type="button">Novo
+                    Setor</a>
+                <a href="#" class="btn btn-outline-secondary" type="button">Pesquisar</a>
+            </div>
+            <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                   aria-describedby="button-addon3">
+        </div>
     </div>
     <div class="card-body">
         <table class="table table-hover table-sm table-bordered">
@@ -28,7 +35,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for setor in setor %}
+            {% for setor in object_list %}
             <tr>
                 <th scope="row">{{ setor.id }}</th>
                 <td>{{ setor.Nome }}</td>
@@ -43,7 +50,8 @@
                 <td>{{ setor.Descricao }}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <a href="{% url 'update_setor' setor.id %}" class="btn btn-success">Atualizar</a>
+                        <a href="{% url 'setor_detail_cbv' setor.id %}" class="btn btn-info">Detalhe</a>
+                         <a href="{% url 'setor_update_cbv' setor.id %}" class="btn btn-success">Atualizar</a>
                     </div>
                 </td>
             </tr>
@@ -52,4 +60,6 @@
         </table>
     </div>
 </div>
+
+
 {% endblock %}

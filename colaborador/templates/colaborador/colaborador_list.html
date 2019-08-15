@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<div class="card">
+    <div class="card-header">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend" id="button-addon3">
+                <a href="{% url 'colaborador_create_cbv' %}" class="btn btn-outline-secondary" type="button">Novo
+                    Colaborador</a>
+                <a href="#" class="btn btn-outline-secondary" type="button">Pesquisar</a>
+            </div>
+            <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                   aria-describedby="button-addon3">
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cpf</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Setor</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for colaborador in object_list %}
+            <tr>
+                <td>{{ colaborador.Nome }}</td>
+                <td>{{ colaborador.Cpf }}</td>
+                <td>{{ colaborador.Telefone }}</td>
+                <td>{{ colaborador.SetorColaborador }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'colaborador_update_cbv' colaborador.id %}"
+                           class="btn btn-success">Atualizar</a>
+                        <a href="{% url 'colaborador_detail_cbv' colaborador.id %}" class="btn btn-info">Detalhes</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

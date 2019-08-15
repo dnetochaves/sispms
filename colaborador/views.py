@@ -3,12 +3,21 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Colaborador, Tags
 from .forms import ColaboradorForm, TagsForm
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
 
 # Create your views here.
+
 @login_required()
 def painel_colaborador(request):
     return render(request, 'colaborador/painel_colaborador.html')
 
+
+# TODO: Refatorado para utilizar CBV remover posteriormente
+'''
 @login_required()
 def a4(request):
     return render(request, 'colaborador/a4.html')
@@ -66,3 +75,53 @@ def update_tags(request, id):
         form.save()
         return redirect('/colaborador/lista_tags.html')
     return render(request, 'colaborador/add_tags.html', {'form': form})
+'''
+
+
+# Crud Colaborador CBV
+class ListaColaborador(ListView):
+    model = Colaborador
+    template_name = 'colaborador_list.html'
+
+
+class DetailColaborador(DetailView):
+    model = Colaborador
+
+
+class CreateColaborador(CreateView):
+    model = Colaborador
+    fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
+    success_url = reverse_lazy('colaborador_list_cbv')
+
+
+class UpdateColaborador(UpdateView):
+    model = Colaborador
+    fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
+    success_url = reverse_lazy('colaborador_list_cbv')
+
+
+class DeleteColaborador(DeleteView):
+    model = Colaborador
+    success_url = reverse_lazy('colaborador_list_cbv')
+
+
+# Crud Tags CBV
+class ListaTags(ListView):
+    model = Tags
+    template_name = 'tags_list.html'
+
+
+class DetailTag(DetailView):
+    model = Tags
+
+
+class CreateTag(CreateView):
+    model = Tags
+    fields = ['Nome', 'Observacao']
+    success_url = reverse_lazy('tag_list_cbv')
+
+
+class UpdateTag(UpdateView):
+    model = Tags
+    fields = ['Nome', 'Observacao']
+    success_url = reverse_lazy('tag_list_cbv')

@@ -7,7 +7,7 @@ class Usuario(models.Model):
     Nome = models.CharField(max_length=50)
     Email = models.CharField(max_length=50)
     Senha = models.CharField(max_length=50)
-    SetorUsuario = models.OneToOneField(Setor, on_delete=models.CASCADE, null=True, related_name='SetorUsuario')
+    SetorUsuario = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorUsuario')
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='profile')
     photo = models.ImageField(upload_to='user_photo', null=True, blank=True)
 

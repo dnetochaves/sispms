@@ -28,15 +28,15 @@
                   {% if user.is_authenticated %}
              <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 <img class="rounded-circle" src="http://rs775.pbsrc.com/albums/yy35/PhoenyxStar/link-1.jpg~c200"  width="42" height="42">
+                 <img class="rounded-circle" src="http://rs775.pbsrc.com/albums/yy35/PhoenyxStar/link-1.jpg~c200"
+                      width="42" height="42">
                </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'perfil' %}">Meu Perfil</a>
-                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
                   {% else %}
-                  <a href="{% url 'login' %}" class="nav-link btn btn-dark"><i class="fa fa-sign-in-alt"></i></a>
+                  <a href="{% url 'login' %}" class="nav-link btn btn-dark">Acessar</a>
                   {% endif %}
-                  <a class="dropdown-item" href="{% url 'login' %}">Sair</a>
                 </div>
               </li>
            </nav>

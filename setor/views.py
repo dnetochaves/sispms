@@ -13,10 +13,17 @@ from django.urls import reverse_lazy
 def painel_setor(request):
     return render(request, 'setor/painel_setor.html')
 
-'''
+
 @login_required()
 def list_setor(request):
-    setor = Setor.objects.all()
+    busca = request.GET.get('pesquisa', None)
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        setor = Setor.objects.filter(Nome__contains=busca)
+    else:
+        setor = Setor.objects.all()
+
     return render(request, 'setor/list_setor.html', {'setor': setor})
 
 @login_required()
@@ -35,8 +42,8 @@ def update_setor(request, id):
         form.save()
         return redirect('/setor/list_setor')
     return render(request, 'setor/add_setor.html', {'form': form})
-'''
 
+'''
 #***Setor CBV***
 class ListaSetor(ListView):
     model = Setor
@@ -75,3 +82,5 @@ class UpdateGrupo(UpdateView):
 class DeleteGrupo(DeleteView):
     model = Grupo
     success_url = reverse_lazy('grupo_list_cbv')
+
+'''

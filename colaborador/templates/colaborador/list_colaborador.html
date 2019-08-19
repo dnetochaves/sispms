@@ -1,47 +1,52 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %} Administracao {% endblock %}
 
 {% block container %}
 
-
-
-<form action="">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="pesquisar" aria-label="Recipient's username" aria-describedby="button-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2" name="pesquisa">Pesquisar</button>
-      </div>
+<div class="card">
+    <div class="card-header">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <a href="{% url 'add_colaborador' %}" class="btn btn-outline-secondary" type="button">Novo
+                        Colaborador</a>
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
     </div>
-</form>
-
-<table class="table table-sm table-dark table-hover table-borderless">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Cpf</th>
-      <th scope="col">Telefone</th>
-       <th scope="col">Setor</th>
-       <th scope="col">Comandos</th>
-    </tr>
-  </thead>
-  <tbody>
-   {% for colaborador in colaborador %}
-    <tr>
-      <th scope="row"><a href="{% url 'update_colaborador' colaborador.id %}" class="btn btn-info"><i class="fa fa-info-circle"></i></a></th>
-      <td>{{ colaborador.Nome }}</td>
-      <td>{{ colaborador.Cpf }}</td>
-      <td>{{ colaborador.Telefone }}</td>
-       <td>{{ colaborador.SetorColaborador }}</td>
-      <td>
-        <a href="{% url 'update_colaborador' colaborador.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-        <a href="{% url 'update_colaborador' colaborador.id %}" class="btn btn-info"><i class="fa fa-retweet"></i></a>
-          <a href="{% url 'update_colaborador' colaborador.id %}" class="btn btn-warning"><i class="fa fa-print"></i></a>
-      </td>
-    </tr>
- {% endfor %}
-  </tbody>
-</table>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cpf</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Setor</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for colaborador in colaborador %}
+            <tr>
+                <td>{{ colaborador.Nome }}</td>
+                <td>{{ colaborador.Cpf }}</td>
+                <td>{{ colaborador.Telefone }}</td>
+                <td>{{ colaborador.SetorColaborador }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_colaborador' colaborador.id %}"
+                           class="btn btn-success">Atualizar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock %}

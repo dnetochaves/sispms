@@ -6,15 +6,17 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend" id="button-addon3">
-                <a href="{% url 'colaborador_create_cbv' %}" class="btn btn-outline-secondary" type="button">Novo
-                    Colaborador</a>
-                <a href="#" class="btn btn-outline-secondary" type="button">Pesquisar</a>
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <a href="{% url 'colaborador_create_cbv' %}" class="btn btn-outline-secondary" type="button">Novo
+                        Colaborador</a>
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar2</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
             </div>
-            <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
-                   aria-describedby="button-addon3">
-        </div>
+        </form>
     </div>
     <div class="card-body">
         <table class="table table-hover table-sm table-bordered">
@@ -38,7 +40,10 @@
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <a href="{% url 'colaborador_update_cbv' colaborador.id %}"
                            class="btn btn-success">Atualizar</a>
-                        <a href="{% url 'colaborador_detail_cbv' colaborador.id %}" class="btn btn-info">Detalhes</a>
+                        <a href="{% url 'colaborador_detail_cbv' colaborador.id %}"
+                           class="btn btn-info">Hitórico</a>
+                        <a href="{% url 'colaborador_detail_cbv' colaborador.id %}"
+                           class="btn btn-warning">Remanejar</a>
                     </div>
                 </td>
             </tr>

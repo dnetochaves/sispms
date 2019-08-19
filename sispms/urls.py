@@ -20,6 +20,8 @@ from home import urls as home_urls
 from colaborador import urls as colaborador_urls
 from setor import urls as setor_urls
 from django.contrib.auth.views import LoginView, LogoutView
+from django.conf import settings
+from django .conf.urls.static import static
 
 urlpatterns = [
     path('', include(home_urls)),
@@ -29,4 +31,8 @@ urlpatterns = [
     path('colaborador/', include(colaborador_urls)),
     path('setor/', include(setor_urls)),
     path('admin/', admin.site.urls),
-]
+] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.sites.site.site_header = 'SisPms'
+admin.site.index_title = 'Administação'
+admin.site.site_title = 'v.3.2.5 - Release'

@@ -17,7 +17,7 @@ def painel_colaborador(request):
 
 
 # TODO: Refatorado para utilizar CBV remover posteriormente
-'''
+
 @login_required()
 def a4(request):
     return render(request, 'colaborador/a4.html')
@@ -31,18 +31,20 @@ def add_colaborador(request):
         return redirect('/colaborador/list_colaborador')
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
 
-# TODO: Corrigir erro no filtro valor não está chegando na view
+
 @login_required()
 def list_colaborador(request):
     busca = request.GET.get('pesquisa', None)
 
     if busca:
-        cols = Colaborador.objects.all()
-        cols = cols.filter(Nome=busca)
+        # usuarios = Usuario.objects.all()
+        col = Colaborador.objects.filter(Nome__contains=busca)
     else:
-        cols = Colaborador.objects.all()
-    return render(
-        request, 'colaborador/list_colaborador.html', {'colaborador': cols})
+        col = Colaborador.objects.all()
+
+    return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
+
+
 
 def update_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
@@ -52,13 +54,16 @@ def update_colaborador(request, id):
         return redirect('/colaborador/list_colaborador')
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
 
+
+
 #Functions Tags
 @login_required()
 def tags_colaborador(request):
     form = TagsForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect('/colaborador/list_colaborador')
+        # TODO: Resover redirect
+        return redirect('/colaborador/lista_tags.html')
     return render(request, 'colaborador/add_tags.html', {'form': form})
 
 @login_required()
@@ -73,11 +78,12 @@ def update_tags(request, id):
     form = TagsForm(request.POST or None, instance=tags)
     if form.is_valid():
         form.save()
+        # TODO: Resover redirect
         return redirect('/colaborador/lista_tags.html')
     return render(request, 'colaborador/add_tags.html', {'form': form})
+
+
 '''
-
-
 # Crud Colaborador CBV
 class ListaColaborador(ListView):
     model = Colaborador
@@ -90,7 +96,7 @@ class DetailColaborador(DetailView):
 
 class CreateColaborador(CreateView):
     model = Colaborador
-    fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
+    fields = ['Nome', 'Cpf',  'Telefone', 'tags', 'SetorColaborador']
     success_url = reverse_lazy('colaborador_list_cbv')
 
 
@@ -125,3 +131,5 @@ class UpdateTag(UpdateView):
     model = Tags
     fields = ['Nome', 'Observacao']
     success_url = reverse_lazy('tag_list_cbv')
+
+'''

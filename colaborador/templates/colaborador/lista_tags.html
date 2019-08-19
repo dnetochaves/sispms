@@ -1,31 +1,48 @@
 {% extends 'base.html' %}
-
-{% block title %} Administracao {% endblock %}
+{% load static %}
+{% block title %} Tags {% endblock %}
 
 {% block container %}
 
-
-<table class="table table-striped"">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Observação</th>
-      <th scope="col">Comandos</th>
+<div class="card">
+    <div class="card-header">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <a href="{% url 'tags_colaborador' %}" class="btn btn-outline-secondary" type="button">Nova
+                        Tag</a>
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tags in tags %}
+            <tr>
+                <td>{{ tags.Nome }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_tags' tags.id %}"
+                           class="btn btn-success">Atualizar</a>
+                    </div>
+                </td>
+    </div>
+    </td>
     </tr>
-  </thead>
-  <tbody>
-   {% for tags in tags %}
-    <tr>
-      <th scope="row">{{ tags.id }}</th>
-      <td>{{ tags.Nome }}</td>
-      <td>{{ tags.Observacao }}</td>
-      <td>
-        <a href="{% url 'update_tags' tags.id %}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-      </td>
-    </tr>
- {% endfor %}
-  </tbody>
-</table>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+</div>
 
 {% endblock %}

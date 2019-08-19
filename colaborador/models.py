@@ -21,8 +21,9 @@ class Tags(models.Model):
 
     def __str__(self):
         return self.Nome
-
-
-from django.db import models
-
-# Create your models here.
+'''
+class HistoricoRemanejamento(models.Model):
+    Colaborador = models.ForeignKey(Colaborador, on_delete=models.CASCADE, null=True, blank=True, related_name='colaborador_historico')
+    SetorAnterior = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, blank=True, related_name='setor_anterior_historico')
+    SetorAtual = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, blank=True, related_name='setor_atual_historico')
+'''

@@ -1,25 +1,57 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %} Administracao {% endblock %}
 
 {% block container %}
 
+<div class="card">
+    <div class="card-header">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <a href="{% url 'new_usuario' %}" class="btn btn-outline-secondary" type="button">Novo
+                        usuário</a>
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Senha</th>
+                <th scope="col">SetorUsuario</th>
+                <th scope="col">Usuário Relacionado</th>
+                <th scope="col">Foto</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for usu in usu %}
+            <tr>
+                <td>{{ usu.Nome }}</td>
+                <td>{{ usu.Email }}</td>
+                <td>{{ usu.Senha }}</td>
+                <td>{{ usu.SetorUsuario }}</td>
+                <td>{{ usu.user }}</td>
+                <td><img src="{% static "user_photo/download.png" %}" alt="My image" width="42" height="42"></td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_usuario' usu.id %}"
+                           class="btn btn-success">Atualizar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Nome</th>
-         <th scope="col">Operações</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for usu in usu %}
-    <tr>
-      <th scope="row">{{ usu.Nome }}</th>
-         <th scope="col"> <a href="{% url 'delete_usuario' usu.id %}">Deletar</a></th>
-    </tr>
-  {% endfor %}
-  </tbody>
 
-</table>
 {% endblock %}

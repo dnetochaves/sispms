@@ -24,8 +24,8 @@ from django.conf import settings
 from django .conf.urls.static import static
 
 urlpatterns = [
-    path('', include(home_urls)),
-    path('login/', LoginView.as_view(), name="login"),
+    path('home', include(home_urls)),
+    path('', LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path('usuario/', include(usuario_urls)),
     path('colaborador/', include(colaborador_urls)),

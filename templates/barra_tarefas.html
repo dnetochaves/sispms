@@ -1,11 +1,12 @@
- <div class="nav-scroller bg-white shadow-sm">
-          <nav class="nav nav-underline">
-            <a class="nav-link active" href="{% url 'home' %}"><i class="fa fa-home"></i></a>
-            <a class="nav-link active" href="{% url 'perfil' %}"><i class="fa fa-id-card"></i></a>
-            <a class="nav-link active" href="{% url 'painel_colaborador' %}"><i class="fa fa-user-plus"></i></a>
-            <a class="nav-link active" href="{% url 'painel_configuracao' %}"><i class="fa fa-cogs"></i></a>
-            <a class="nav-link active" href="javascript:history.back()"><i class="fa fa-undo-alt"></i></a>
+<div class="nav-scroller bg-white shadow-sm">
+    <nav class="nav nav-underline">
+        <a class="nav-link" data-toggle="tooltip" title="Feeds" href="{% url 'feed' %}"><i class="fa fa-rss"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Perfil" href="{% url 'perfil' %}"><i class="fa fa-id-card"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Colaboradores" href="{% url 'painel_colaborador' %}"><i class="fa fa-user-plus"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Manutenção" href="{% url 'painel_colaborador' %}"><i class="fa fa-tools"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Configurações" href="{% url 'painel_configuracao' %}"><i class="fa fa-cogs"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Voltar"href="javascript:history.back()"><i class="fa fa-undo-alt"></i></a>
 
-          </nav>
- </div>
+    </nav>
+</div>
 

@@ -21,17 +21,19 @@ from colaborador import urls as colaborador_urls
 from setor import urls as setor_urls
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
-from django .conf.urls.static import static
+from django.conf.urls.static import static
+from django.contrib.auth import urls
 
 urlpatterns = [
-    path('home', include(home_urls)),
     path('', LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
+    path('home/', include(home_urls)),
     path('usuario/', include(usuario_urls)),
     path('colaborador/', include(colaborador_urls)),
     path('setor/', include(setor_urls)),
     path('admin/', admin.site.urls),
-] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', include('django.contrib.auth.urls')),
+]  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.sites.site.site_header = 'SisPms'
 admin.site.index_title = 'Administação'

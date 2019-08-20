@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Colaborador, Tags
-from .forms import ColaboradorForm, TagsForm
+from .models import Colaborador, Tags, HistoricoRemanejamento, Setor
+from .forms import ColaboradorForm, TagsForm, HistoricoRemanejamentoForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -33,6 +33,30 @@ def add_colaborador(request):
 
 
 @login_required()
+def add_colaborador_remanejamento(request):
+    form = HistoricoRemanejamentoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('/colaborador/list_colaborador')
+    return render(request, 'colaborador/add_historico_colaborador.html', {'form': form})
+
+
+@login_required()
+def update_colaborador_remanejamento(request, id):
+    id_col = id
+
+    if id_col:
+        col1 = Colaborador.objects.filter(pk=id_col)
+        setor = Setor.objects.all()
+        #return HttpResponse(id_setor_atu)
+
+    else:
+        return render(request, 'colaborador/update_colaborador_remanejamento.html')
+
+    return render(request, 'colaborador/update_colaborador_remanejamento.html', {'colaborador': col1}, {'setor': setor})
+
+
+@login_required()
 def list_colaborador(request):
     busca = request.GET.get('pesquisa', None)
 
@@ -45,7 +69,6 @@ def list_colaborador(request):
     return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
 
 
-
 def update_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
     form = ColaboradorForm(request.POST or None, instance=colaborador)
@@ -55,8 +78,7 @@ def update_colaborador(request, id):
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
 
 
-
-#Functions Tags
+# Functions Tags
 @login_required()
 def tags_colaborador(request):
     form = TagsForm(request.POST or None)
@@ -65,6 +87,7 @@ def tags_colaborador(request):
         # TODO: Resover redirect
         return redirect('/colaborador/lista_tags.html')
     return render(request, 'colaborador/add_tags.html', {'form': form})
+
 
 @login_required()
 def list_tags(request):

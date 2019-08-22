@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from setor.models import Setor
 
+
 # Create your models here.
 class Usuario(models.Model):
     Nome = models.CharField(max_length=50)
@@ -13,3 +14,10 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.Nome
+
+
+class Nota(models.Model):
+    Titulo = models.CharField(max_length=50)
+    Descricao = models.CharField(max_length=255)
+    UsuarioNota = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='UsuarioNota')
+    DataRegistro = models.DateTimeField('Data', auto_now_add=True)

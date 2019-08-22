@@ -2,11 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Setor, Grupo
-from .forms import SetorForm
+from .forms import SetorForm, GrupoForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+
 
 # Create your views here.
 @login_required()
@@ -26,6 +27,7 @@ def list_setor(request):
 
     return render(request, 'setor/list_setor.html', {'setor': setor})
 
+
 @login_required()
 def add_setor(request):
     form = SetorForm(request.POST or None)
@@ -33,6 +35,7 @@ def add_setor(request):
         form.save()
         return redirect('/setor/list_setor')
     return render(request, 'setor/add_setor.html', {'form': form})
+
 
 @login_required()
 def update_setor(request, id):
@@ -42,6 +45,40 @@ def update_setor(request, id):
         form.save()
         return redirect('/setor/list_setor')
     return render(request, 'setor/add_setor.html', {'form': form})
+
+
+# FBV Grupo
+@login_required()
+def list_grupo(request):
+    busca = request.GET.get('pesquisa', None)
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        grupo = Grupo.objects.filter(Nome__contains=busca)
+    else:
+        grupo = Grupo.objects.all()
+
+    return render(request, 'setor/list_grupo.html', {'grupo': grupo})
+
+
+@login_required()
+def add_grupo(request):
+    form = GrupoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('/setor/list_grupo')
+    return render(request, 'setor/add_grupo.html', {'form': form})
+
+
+@login_required()
+def update_grupo(request, id):
+    grupo = get_object_or_404(Grupo, pk=id)
+    form = GrupoForm(request.POST or None, instance=grupo)
+    if form.is_valid():
+        form.save()
+        return redirect('/setor/list_grupo')
+    return render(request, 'setor/add_grupo.html', {'form': form})
+
 
 '''
 #***Setor CBV***

@@ -48,7 +48,7 @@ def update_colaborador_remanejamento(request, id):
     if id_col:
         col1 = Colaborador.objects.filter(pk=id_col)
         setor = Setor.objects.all()
-        #return HttpResponse(id_setor_atu)
+        # return HttpResponse(id_setor_atu)
 
     else:
         return render(request, 'colaborador/update_colaborador_remanejamento.html')

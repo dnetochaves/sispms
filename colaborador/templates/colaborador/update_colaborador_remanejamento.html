@@ -29,31 +29,6 @@
 
 <hr>
 
-<div class="card">
-    <div class="card-header">
-    </div>
-    <div class="card-body">
-        <table class="table table-hover table-sm table-bordered">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Nome</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for setor in setor %}
-            <tr>
-                <td>{{ setor.Nome }}</td>
-                <td>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <a href="#"
-                           class="btn btn-warning">Confirmar Remanejamento</a>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-
+{% for colaborador in colaborador %}
+{% endfor %}
 {% endblock %}

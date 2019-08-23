@@ -22,8 +22,7 @@ def painel_usuario(request):
 
 @login_required()
 def perfil(request):
-    nota = Nota.objects.all()
-    return render(request, 'usuario/perfil.html', {'nota': nota})
+    return render(request, 'usuario/perfil.html')
 
 
 @login_required()
@@ -75,7 +74,7 @@ def add_nota(request):
     form = NotaForm(request.POST, request.FILES or None)
     if form.is_valid():
         form.save()
-        return redirect('/usuario/perfil/')
+        return redirect('/usuario/list_nota')
     return render(request, 'usuario/nota_form.html', {'form': form})
 
 
@@ -84,5 +83,17 @@ def update_nota(request, id):
     form = NotaForm(request.POST or None, instance=nota)
     if form.is_valid():
         form.save()
-        return redirect('/usuario/perfil/')
+        return redirect('/usuario/list_nota')
     return render(request, 'usuario/nota_form.html', {'form': form})
+
+@login_required()
+def list_nota(request):
+    busca = request.GET.get('pesquisa', None)
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        nota = Nota.objects.filter(Titulo__contains=busca)
+    else:
+        nota = Nota.objects.all()
+
+    return render(request, 'usuario/list_nota.html', {'nota': nota})

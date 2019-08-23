@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<div class="row">
+    <div class="col">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+        <a href="{% url 'add_nota' %}" class="btn btn-secondary btn-lg btn-block">Add Nota</a>
+    </div>
+    <div class="col-10">
+        {% for nota in nota %}
+        <div class="card text-center">
+            <div class="card-header">
+                {{ nota.Titulo }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text">{{ nota.Descricao }}</p>
+                <a href="{% url 'update_nota' nota.id %}" class="btn btn-primary btn-sm">Editar Nota</a>
+                <a href="{% url 'update_nota' nota.id %}" class="btn btn-danger btn-sm">Excluir Nota</a>
+            </div>
+            <div class="card-footer text-muted">
+                {{ nota.DataRegistro }}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}

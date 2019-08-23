@@ -8,11 +8,13 @@ from .views import perfil
 from .views import painel_configuracao
 from .views import add_nota
 from .views import update_nota
+from .views import list_nota
 
 urlpatterns = [
     path('hello/', hello, name="hello"),
     path('perfil/', perfil, name="perfil"),
     path('list_usuario/', list_usuario, name="list_usuario"),
+    path('list_nota/', list_nota, name="list_nota"),
     path('new_usuario/', new_usuario, name="new_usuario"),
     path('add_nota/', add_nota, name="add_nota"),
     path('update_nota/<int:id>/', update_nota, name="update_nota"),

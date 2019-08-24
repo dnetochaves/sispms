@@ -9,6 +9,7 @@ from .views import painel_configuracao
 from .views import add_nota
 from .views import update_nota
 from .views import list_nota
+from .views import delete_nota
 
 urlpatterns = [
     path('hello/', hello, name="hello"),
@@ -20,5 +21,6 @@ urlpatterns = [
     path('update_nota/<int:id>/', update_nota, name="update_nota"),
     path('update_usuario/<int:id>/', update_usuario, name="update_usuario"),
     path('delete_usuario/<int:id>/', delete_usuario, name="delete_usuario"),
+    path('delete_nota/<int:id>/', delete_nota, name="delete_nota"),
     path('painel_configuracao', painel_configuracao, name="painel_configuracao"),
 ]

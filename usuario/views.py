@@ -86,14 +86,26 @@ def update_nota(request, id):
         return redirect('/usuario/list_nota')
     return render(request, 'usuario/nota_form.html', {'form': form})
 
+
 @login_required()
 def list_nota(request):
     busca = request.GET.get('pesquisa', None)
+    user = request.user.id
 
     if busca:
         # usuarios = Usuario.objects.all()
-        nota = Nota.objects.filter(Titulo__contains=busca)
+        nota = Nota.objects.filter(Titulo__contains=busca, id=user)
     else:
-        nota = Nota.objects.all()
+        nota = Nota.objects.filter(id=user)
 
     return render(request, 'usuario/list_nota.html', {'nota': nota})
+
+
+def delete_nota(request, id):
+    nota = get_object_or_404(Nota, pk=id)
+
+    if request.method == 'POST':
+        nota.delete()
+        return redirect('/usuario/list_nota')
+
+    return render(request, 'usuario/nota_delete_confirm.html', {'nota': nota})

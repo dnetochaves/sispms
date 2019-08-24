@@ -32,7 +32,7 @@
                 <h5 class="card-title"></h5>
                 <p class="card-text">{{ nota.Descricao }}</p>
                 <a href="{% url 'update_nota' nota.id %}" class="btn btn-primary btn-sm">Editar Nota</a>
-                <a href="{% url 'update_nota' nota.id %}" class="btn btn-danger btn-sm">Excluir Nota</a>
+                <a href="{% url 'delete_nota' nota.id %}" class="btn btn-danger btn-sm">Excluir Nota</a>
             </div>
             <div class="card-footer text-muted">
                 {{ nota.DataRegistro }}

@@ -19,5 +19,5 @@ class Usuario(models.Model):
 class Nota(models.Model):
     Titulo = models.CharField(max_length=50)
     Descricao = models.CharField(max_length=255)
-    UsuarioNota = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='UsuarioNota')
+    UsuarioNota = models.ForeignKey(User, on_delete=models.CASCADE, related_name='UsuarioNota')
     DataRegistro = models.DateTimeField('Data', auto_now_add=True)

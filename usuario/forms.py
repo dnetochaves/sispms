@@ -10,4 +10,4 @@ class UsuarioForm(ModelForm):
 class NotaForm(ModelForm):
     class Meta:
         model = Nota
-        fields = ['Titulo', 'Descricao', 'UsuarioNota']
+        fields = ['Titulo', 'Descricao']

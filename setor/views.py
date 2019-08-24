@@ -15,6 +15,12 @@ def painel_setor(request):
     return render(request, 'setor/painel_setor.html')
 
 
+def teste(request):
+    setor = Setor.objects.all()
+
+    return render(request, 'setor/list_setor.html', {'setor': setor})
+
+
 @login_required()
 def list_setor(request):
     busca = request.GET.get('pesquisa', None)

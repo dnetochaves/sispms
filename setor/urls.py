@@ -6,6 +6,7 @@ from .views import update_setor
 from .views import list_grupo
 from .views import add_grupo
 from .views import update_grupo
+from .views import teste
 
 # from .views import ListaGrupo
 # from .views import DetailGrupo
@@ -23,6 +24,7 @@ urlpatterns = [
     path('add_grupo/', add_grupo, name="add_grupo"),
     path('update_setor/<int:id>/', update_setor, name="update_setor"),
     path('update_grupo/<int:id>/', update_grupo, name="update_grupo"),
+    path('teste/', teste, name="teste"),
 
     # path('grupo_list', ListaGrupo.as_view(), name='grupo_list_cbv'),
     # path('grupo_detail/<int:pk>/', DetailGrupo.as_view(), name='grupo_detail_cbv'),

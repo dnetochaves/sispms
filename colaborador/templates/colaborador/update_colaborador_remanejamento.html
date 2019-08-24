@@ -28,7 +28,9 @@
 </div>
 
 <hr>
-
+{% for setor in setores %}
+<p>{{ setores.Nome }}</p>
+{% endfor %}
 {% for colaborador in colaborador %}
 {% endfor %}
 {% endblock %}

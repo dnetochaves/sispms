@@ -71,11 +71,19 @@ def delete_usuario(request, id):
 @login_required()
 # TODO: O campo UsuarioNota não pode ser um campo selecionavel, tem que pegar o usuario logado no sistema
 def add_nota(request):
-    form = NotaForm(request.POST, request.FILES or None)
-    if form.is_valid():
-        form.save()
-        return redirect('/usuario/list_nota')
-    return render(request, 'usuario/nota_form.html', {'form': form})
+    if request.method == 'POST':
+        form = NotaForm(request.POST)
+
+        if form.is_valid():
+            formulario = form.save(commit=False)
+            formulario.UsuarioNota = request.user
+            formulario.save()
+            return redirect('/usuario/list_nota/')
+    else:
+        form = NotaForm()
+        return render(request, 'usuario/nota_form.html', {'form': form})
+
+
 
 
 def update_nota(request, id):
@@ -90,13 +98,12 @@ def update_nota(request, id):
 @login_required()
 def list_nota(request):
     busca = request.GET.get('pesquisa', None)
-    user = request.user.id
 
     if busca:
         # usuarios = Usuario.objects.all()
-        nota = Nota.objects.filter(Titulo__contains=busca, id=user)
+        nota = Nota.objects.filter(Titulo__contains=busca, UsuarioNota=request.user)
     else:
-        nota = Nota.objects.filter(id=user)
+        nota = Nota.objects.filter(UsuarioNota=request.user)
 
     return render(request, 'usuario/list_nota.html', {'nota': nota})
 

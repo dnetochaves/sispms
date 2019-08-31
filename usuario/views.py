@@ -69,7 +69,6 @@ def delete_usuario(request, id):
 
 # Nota
 @login_required()
-# TODO: O campo UsuarioNota não pode ser um campo selecionavel, tem que pegar o usuario logado no sistema
 def add_nota(request):
     if request.method == 'POST':
         form = NotaForm(request.POST)
@@ -82,8 +81,6 @@ def add_nota(request):
     else:
         form = NotaForm()
         return render(request, 'usuario/nota_form.html', {'form': form})
-
-
 
 
 def update_nota(request, id):

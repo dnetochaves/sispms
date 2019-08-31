@@ -16,6 +16,7 @@ class Usuario(models.Model):
         return self.Nome
 
 
+
 class Nota(models.Model):
     Titulo = models.CharField(max_length=50)
     Descricao = models.CharField(max_length=255)

@@ -4,7 +4,7 @@ from .models import Feed
 class FeedForm(ModelForm):
     class Meta:
         model = Feed
-        fields = ['Titulo', 'Descricao', 'SetorFeed', 'UsuarioFeed']
+        fields = ['Titulo', 'Descricao']
 
 
 

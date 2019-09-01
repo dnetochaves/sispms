@@ -11,6 +11,12 @@ from .views import painel_demandas
 from .views import add_item
 from .views import list_item
 from .views import update_item
+from .views import list_tag
+from .views import add_tag
+from .views import update_tag
+from .views import list_demandas
+from .views import add_demanda
+from .views import update_demanda
 
 # from .views import ListaGrupo
 # from .views import DetailGrupo
@@ -29,6 +35,12 @@ urlpatterns = [
     path('add_grupo/', add_grupo, name="add_grupo"),
     path('add_item/', add_item, name="add_item"),
     path('list_item/', list_item, name="list_item"),
+    path('list_tag/', list_tag, name="list_tag"),
+    path('add_tag/', add_tag, name="add_tag"),
+    path('list_demandas/', list_demandas, name="list_demandas"),
+    path('add_demanda/', add_demanda, name="add_demanda"),
+    path('update_demanda/<int:id>/', update_demanda, name="update_demanda"),
+    path('update_tag/<int:id>/', update_tag, name="update_tag"),
     path('update_item/<int:id>/', update_item, name="update_item"),
     path('update_setor/<int:id>/', update_setor, name="update_setor"),
     path('update_grupo/<int:id>/', update_grupo, name="update_grupo"),

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<div class="card">
+    <div class="card-header">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <a href="{% url 'add_demanda' %}" class="btn btn-outline-secondary" type="button">Novas
+                        Demandas</a>
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">ItemDemanda</th>
+                <th scope="col">Observacao</th>
+                <th scope="col">SetorDemanda</th>
+                <th scope="col">DataRegistro</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for demandas in demanda %}
+            <tr>
+                <td>{{ demandas.ItemDemanda }}</td>
+                <td>{{ demandas.Observacao }}</td>
+                <td>{{ demandas.SetorDemanda }}</td>
+                <td>{{ demandas.DataRegistro }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_demanda' demandas.id %}"
+                           class="btn btn-success">Atualizar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

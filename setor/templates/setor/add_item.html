@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
-{% block title %} Administracao {% endblock %}
+{% block title %} Item {% endblock %}
 
 {% block container %}
 <section class="container">
@@ -8,12 +8,12 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"><i class="fa fa-check-circle"></i> Grupo</h5>
+                    <h5 class="card-title"><i class="fa fa-check-circle"></i> Item</h5>
                     <form method="post">
                         <div class="form-group">
                             {% csrf_token %}
                             {{ form|bootstrap }}
-                            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
                     </form>
                 </div>

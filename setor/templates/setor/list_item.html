@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<div class="card">
+    <div class="card-header">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <a href="{% url 'add_item' %}" class="btn btn-outline-secondary" type="button">Novo
+                        Item</a>
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Observação</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for itens in item %}
+            <tr>
+                <td>{{ itens.Nome }}</td>
+                <td>{{ itens.Observacao }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_item' itens.id %}"
+                           class="btn btn-success">Atualizar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Setor, Grupo
-from .forms import SetorForm, GrupoForm
+from .models import Setor, Grupo, Item
+from .forms import SetorForm, GrupoForm, ItemForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -13,6 +13,11 @@ from django.urls import reverse_lazy
 @login_required()
 def painel_setor(request):
     return render(request, 'setor/painel_setor.html')
+
+
+@login_required()
+def painel_demandas(request):
+    return render(request, 'setor/painel_demandas.html')
 
 
 def teste(request):
@@ -86,6 +91,41 @@ def update_grupo(request, id):
     return render(request, 'setor/add_grupo.html', {'form': form})
 
 
+'''Funções Item'''
+
+
+@login_required()
+def add_item(request):
+    form = ItemForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('/setor/list_item')
+    return render(request, 'setor/add_item.html', {'form': form})
+
+
+@login_required()
+def list_item(request):
+    busca = request.GET.get('pesquisa', None)
+
+    if busca:
+        item = Item.objects.filter(Nome__contains=busca)
+    else:
+        item = Item.objects.all()
+
+    return render(request, 'setor/list_item.html', {'item': item})
+
+
+@login_required()
+def update_item(request, id):
+    item = get_object_or_404(Item, pk=id)
+    form = ItemForm(request.POST or None, instance=item)
+    if form.is_valid():
+        form.save()
+        return redirect('/setor/list_item')
+    return render(request, 'setor/add_item.html', {'form': form})
+
+
+'''Fim'''
 '''
 #***Setor CBV***
 class ListaSetor(ListView):

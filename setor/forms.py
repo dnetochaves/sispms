@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Setor, Grupo
+from .models import Setor, Grupo, Item
 
 class SetorForm(ModelForm):
     class Meta:
@@ -9,4 +9,9 @@ class SetorForm(ModelForm):
 class GrupoForm(ModelForm):
     class Meta:
         model = Grupo
+        fields = ['Nome', 'Observacao']
+
+class ItemForm(ModelForm):
+    class Meta:
+        model = Item
         fields = ['Nome', 'Observacao']

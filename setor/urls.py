@@ -7,6 +7,10 @@ from .views import list_grupo
 from .views import add_grupo
 from .views import update_grupo
 from .views import teste
+from .views import painel_demandas
+from .views import add_item
+from .views import list_item
+from .views import update_item
 
 # from .views import ListaGrupo
 # from .views import DetailGrupo
@@ -18,10 +22,14 @@ from .views import teste
 
 urlpatterns = [
     path('painel_setor/', painel_setor, name="painel_setor"),
+    path('painel_demandas/', painel_demandas, name="painel_demandas"),
     path('list_setor/', list_setor, name="list_setor"),
     path('list_grupo/', list_grupo, name="list_grupo"),
     path('add_setor/', add_setor, name="add_setor"),
     path('add_grupo/', add_grupo, name="add_grupo"),
+    path('add_item/', add_item, name="add_item"),
+    path('list_item/', list_item, name="list_item"),
+    path('update_item/<int:id>/', update_item, name="update_item"),
     path('update_setor/<int:id>/', update_setor, name="update_setor"),
     path('update_grupo/<int:id>/', update_grupo, name="update_grupo"),
     path('teste/', teste, name="teste"),

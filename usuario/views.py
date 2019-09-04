@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Usuario, Nota
 from .forms import UsuarioForm, NotaForm
+from colaborador.models import Colaborador
+from django.db.models import Count, Avg
 
 
 # Create your views here.
@@ -22,7 +24,9 @@ def painel_usuario(request):
 
 @login_required()
 def perfil(request):
-    return render(request, 'usuario/perfil.html')
+    a = Colaborador.objects.all().aggregate(Count('Nome'))['Nome__count']
+    b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
+    return render(request, 'usuario/perfil.html', {'a': a, 'b': b})
 
 
 @login_required()

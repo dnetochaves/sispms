@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from usuario.models import Usuario
 
 
 # Create your views here.
@@ -49,7 +50,8 @@ def update_colaborador_remanejamento(request, id):
         col1 = Colaborador.objects.filter(pk=id_col)
         setor = Setor.objects.all()
         # return HttpResponse(id_setor_atu)
-        return render(request, 'colaborador/update_colaborador_remanejamento.html', {'colaborador': col1, 'setor': setor})
+        return render(request, 'colaborador/update_colaborador_remanejamento.html',
+                      {'colaborador': col1, 'setor': setor})
 
     else:
         return render(request, 'colaborador/update_colaborador_remanejamento.html')
@@ -82,17 +84,30 @@ def update_colaborador(request, id):
 # Functions Tags
 @login_required()
 def tags_colaborador(request):
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
     form = TagsForm(request.POST or None)
     if form.is_valid():
+        formulario = form.save(commit=False)
+        formulario.ColaboradorTag_id = id_setor
         form.save()
-        # TODO: Resover redirect
-        return redirect('/colaborador/lista_tags.html')
+        return redirect('/colaborador/list_tags')
     return render(request, 'colaborador/add_tags.html', {'form': form})
 
 
 @login_required()
 def list_tags(request):
-    tags = Tags.objects.all()
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
+    tags = Tags.objects.filter(ColaboradorTag=id_setor)
     return render(request, 'colaborador/lista_tags.html', {'tags': tags})
 
 
@@ -102,8 +117,7 @@ def update_tags(request, id):
     form = TagsForm(request.POST or None, instance=tags)
     if form.is_valid():
         form.save()
-        # TODO: Resover redirect
-        return redirect('/colaborador/lista_tags.html')
+        return redirect('/colaborador/list_tags')
     return render(request, 'colaborador/add_tags.html', {'form': form})
 
 

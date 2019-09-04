@@ -1,12 +1,69 @@
+<!--
 <div class="nav-scroller bg-white shadow-sm">
     <nav class="nav nav-underline">
         <a class="nav-link" data-toggle="tooltip" title="Feeds" href="{% url 'feed' %}"><i class="fa fa-rss"></i></a>
         <a class="nav-link" data-toggle="tooltip" title="Perfil" href="{% url 'perfil' %}"><i class="fa fa-id-card"></i></a>
-        <a class="nav-link" data-toggle="tooltip" title="Colaboradores" href="{% url 'painel_colaborador' %}"><i class="fa fa-user-plus"></i></a>
-        <a class="nav-link" data-toggle="tooltip" title="Manutenção" href="{% url 'painel_demandas' %}"><i class="fa fa-tools"></i></a>
-        <a class="nav-link" data-toggle="tooltip" title="Configurações" href="{% url 'painel_configuracao' %}"><i class="fa fa-cogs"></i></a>
-        <a class="nav-link" data-toggle="tooltip" title="Voltar"href="javascript:history.back()"><i class="fa fa-undo-alt"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Colaboradores" href="{% url 'painel_colaborador' %}"><i
+                class="fa fa-user-plus"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Manutenção" href="{% url 'painel_demandas' %}"><i
+                class="fa fa-tools"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Configurações" href="{% url 'painel_configuracao' %}"><i
+                class="fa fa-cogs"></i></a>
+        <a class="nav-link" data-toggle="tooltip" title="Voltar" href="javascript:history.back()"><i
+                class="fa fa-undo-alt"></i></a>
 
     </nav>
 </div>
 
+-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'feed' %}"><i class="fa fa-rss"></i> Feed<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'perfil' %}"><i class="fa fa-id-card"></i> Perfil</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-plus"></i> Colaborador
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'list_colaborador' %}">Novo</a>
+                    <a class="dropdown-item" href="{% url 'list_tags' %}">Tags</a>
+                </div>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-tools"></i> Demandas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'list_item' %}">Item</a>
+                    <a class="dropdown-item" href="{% url 'list_tag' %}">Tegs</a>
+                    <a class="dropdown-item" href="#">Gerar Demandas de Setor</a>
+                    <a class="dropdown-item" href="#">Gerar Demandas de Grupo</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <a class="dropdown-item" href="{% url 'list_nota' %}">Notas</a>
+                    <a class="dropdown-item" href="#">Tarefas</a>
+                    <a class="dropdown-item" href="#">Mensagens</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

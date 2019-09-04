@@ -30,4 +30,4 @@ class TagForm(ModelForm):
 class DemandaForm(ModelForm):
     class Meta:
         model = Demandas
-        fields = ['ItemDemanda', 'Observacao', 'TagsDemandas']
+        fields = ['ItemDemanda', 'Observacao', 'TagsDemandas', 'SetorDemanda']

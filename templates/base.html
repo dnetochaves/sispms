@@ -25,16 +25,7 @@
         </div>
        <ul class="nav navbar-nav ml-auto">
            <nav class="navbar navbar-dark bg-darkt">
-                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-plus"></i>
-                    </a>
-                       <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                           <a class="dropdown-item" href="{% url 'list_nota' %}">Notas</a>
-                           <a class="dropdown-item" href="#">Tarefas</a>
-                           <a class="dropdown-item" href="#">Mensagens</a>
-                       </div>
-                   </li>
+
                   {% if user.is_authenticated %}
              <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -25,8 +25,8 @@ def painel_usuario(request):
 @login_required()
 def perfil(request):
     a = Colaborador.objects.all().aggregate(Count('Nome'))['Nome__count']
-    b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
-    return render(request, 'usuario/perfil.html', {'a': a, 'b': b})
+    #b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
+    return render(request, 'usuario/perfil.html', {'a': a})
 
 
 @login_required()

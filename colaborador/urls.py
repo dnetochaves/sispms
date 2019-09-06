@@ -10,6 +10,7 @@ from .views import update_colaborador_remanejamento
 
 from .views import list_tags
 from .views import update_tags
+from .views import info_tags
 
 # from .views import ListaColaborador, DetailColaborador, CreateColaborador, UpdateColaborador, DeleteColaborador
 # from .views import ListaTags, DetailTag, CreateTag, UpdateTag
@@ -28,6 +29,7 @@ urlpatterns = [
 
     path('tags_colaborador/', tags_colaborador, name="tags_colaborador"),
     path('list_tags/', list_tags, name="list_tags"),
+    path('info_tags/<int:id>/', info_tags, name="info_tags"),
     path('update_tags/<int:id>/', update_tags, name="update_tags"),
 
     # path('colaborador_list', ListaColaborador.as_view(), name='colaborador_list_cbv'),

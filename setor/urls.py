@@ -13,6 +13,7 @@ from .views import list_item
 from .views import update_item
 from .views import list_tag
 from .views import add_tag
+from .views import info_tag
 from .views import update_tag
 from .views import list_demandas
 from .views import add_demanda
@@ -37,6 +38,7 @@ urlpatterns = [
     path('list_item/', list_item, name="list_item"),
     path('list_tag/', list_tag, name="list_tag"),
     path('add_tag/', add_tag, name="add_tag"),
+    path('info_tag/<int:id>/', info_tag, name="info_tag"),
     path('list_demandas/', list_demandas, name="list_demandas"),
     path('add_demanda/', add_demanda, name="add_demanda"),
     path('update_demanda/<int:id>/', update_demanda, name="update_demanda"),

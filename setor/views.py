@@ -97,8 +97,16 @@ def update_grupo(request, id):
 
 @login_required()
 def add_item(request):
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
     form = ItemForm(request.POST or None)
     if form.is_valid():
+        formulario = form.save(commit=False)
+        formulario.SetorItem_id = id_setor
         form.save()
         return redirect('/setor/list_item')
     return render(request, 'setor/add_item.html', {'form': form})
@@ -106,12 +114,18 @@ def add_item(request):
 
 @login_required()
 def list_item(request):
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
     busca = request.GET.get('pesquisa', None)
 
     if busca:
-        item = Item.objects.filter(Nome__contains=busca)
+        item = Item.objects.filter(SetorItem=id_setor)
     else:
-        item = Item.objects.all()
+        item = Item.objects.filter(SetorItem=id_setor)
 
     return render(request, 'setor/list_item.html', {'item': item})
 
@@ -165,6 +179,17 @@ def add_tag(request):
         return redirect('/setor/list_tag')
     return render(request, 'setor/add_tag.html', {'form': form})
 
+@login_required()
+def info_tag(request, id):
+    busca = request.GET.get('pesquisa', None)
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        tags = Demandas.objects.filter(TagsDemandas=id)
+    else:
+        tags = Demandas.objects.filter(TagsDemandas=id)
+
+    return render(request, 'setor/info_tags.html', {'tags': tags})
 
 @login_required()
 def update_tag(request, id):

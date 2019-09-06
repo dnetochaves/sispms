@@ -120,7 +120,17 @@ def update_tags(request, id):
         return redirect('/colaborador/list_tags')
     return render(request, 'colaborador/add_tags.html', {'form': form})
 
+@login_required()
+def info_tags(request, id):
+    busca = request.GET.get('pesquisa', None)
 
+    if busca:
+        # usuarios = Usuario.objects.all()
+        tags = Colaborador.objects.filter(tags=id)
+    else:
+        tags = Colaborador.objects.filter(tags=id)
+
+    return render(request, 'colaborador/info_tags.html', {'colaborador': tags})
 '''
 # Crud Colaborador CBV
 class ListaColaborador(ListView):

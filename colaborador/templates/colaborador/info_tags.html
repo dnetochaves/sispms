@@ -9,8 +9,8 @@
         <form>
             <div class="input-group mb-3">
                 <div class="input-group-prepend" id="button-addon3">
-                    <a href="{% url 'add_tag' %}" class="btn btn-outline-secondary" type="button">Nova
-                        Tag</a>
+                    <a href="{% url 'add_colaborador' %}" class="btn btn-outline-secondary" type="button">Novo
+                        Colaborador</a>
                     <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
                 </div>
                 <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
@@ -23,23 +23,25 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col">Nome</th>
-                <th scope="col">Observação</th>
+                <th scope="col">Cpf</th>
+                <th scope="col">Telefone</th>
                 <th scope="col">Setor</th>
                 <th scope="col">Comandos</th>
             </tr>
             </thead>
             <tbody>
-            {% for tags in tag %}
+            {% for colaborador in colaborador %}
             <tr>
-                <td>{{ tags.Nome }}</td>
-                <td>{{ tags.Observacao }}</td>
-                <td>{{ tags.SetorTag }}</td>
+                <td>{{ colaborador.Nome }}</td>
+                <td>{{ colaborador.Cpf }}</td>
+                <td>{{ colaborador.Telefone }}</td>
+                <td>{{ colaborador.SetorColaborador }}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <a href="{% url 'update_tag' tags.id %}"
+                        <a href="{% url 'update_colaborador' colaborador.id %}"
                            class="btn btn-success">Atualizar</a>
-                        <a href="{% url 'info_tag' tags.id %}"
-                           class="btn btn-info">Informação relacionada</a>
+                          <a href="{% url 'update_colaborador_remanejamento' colaborador.id %}"
+                           class="btn btn-warning">Remanejar</a>
                     </div>
                 </td>
             </tr>

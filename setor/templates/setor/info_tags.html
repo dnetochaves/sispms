@@ -9,8 +9,8 @@
         <form>
             <div class="input-group mb-3">
                 <div class="input-group-prepend" id="button-addon3">
-                    <a href="{% url 'add_tag' %}" class="btn btn-outline-secondary" type="button">Nova
-                        Tag</a>
+                    <a href="{% url 'add_demanda' %}" class="btn btn-outline-secondary" type="button">Novas
+                        Demandas</a>
                     <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
                 </div>
                 <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
@@ -22,24 +22,24 @@
         <table class="table table-hover table-sm table-bordered">
             <thead class="thead-light">
             <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Observação</th>
-                <th scope="col">Setor</th>
+                <th scope="col">ItemDemanda</th>
+                <th scope="col">Observacao</th>
+                <th scope="col">SetorDemanda</th>
+                <th scope="col">DataRegistro</th>
                 <th scope="col">Comandos</th>
             </tr>
             </thead>
             <tbody>
-            {% for tags in tag %}
+            {% for demandas in tags %}
             <tr>
-                <td>{{ tags.Nome }}</td>
-                <td>{{ tags.Observacao }}</td>
-                <td>{{ tags.SetorTag }}</td>
+                <td>{{ demandas.ItemDemanda }}</td>
+                <td>{{ demandas.Observacao }}</td>
+                <td>{{ demandas.SetorDemanda }}</td>
+                <td>{{ demandas.DataRegistro }}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <a href="{% url 'update_tag' tags.id %}"
+                        <a href="{% url 'update_demanda' demandas.id %}"
                            class="btn btn-success">Atualizar</a>
-                        <a href="{% url 'info_tag' tags.id %}"
-                           class="btn btn-info">Informação relacionada</a>
                     </div>
                 </td>
             </tr>

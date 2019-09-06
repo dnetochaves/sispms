@@ -29,6 +29,7 @@ class Grupo(models.Model):
 class Item(models.Model):
     Nome = models.CharField(max_length=50)
     Observacao = models.CharField(max_length=100)
+    SetorItem = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorItem')
 
     def __str__(self):
         return self.Nome

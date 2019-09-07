@@ -7,6 +7,8 @@ from .views import update_colaborador
 from .views import tags_colaborador
 from .views import add_colaborador_remanejamento
 from .views import update_colaborador_remanejamento
+from .views import list_historico_remanejamento
+from .views import carta_encaminhamento_colaborador
 
 from .views import list_tags
 from .views import update_tags
@@ -23,7 +25,10 @@ urlpatterns = [
     path('add_colaborador/', add_colaborador, name="add_colaborador"),
     path('add_colaborador_remanejamento/', add_colaborador_remanejamento, name="add_colaborador_remanejamento"),
     path('list_colaborador/', list_colaborador, name="list_colaborador"),
+    path('list_historico_remanejamento/<int:id>/', list_historico_remanejamento, name="list_historico_remanejamento"),
     path('update_colaborador/<int:id>/', update_colaborador, name="update_colaborador"),
+    path('carta_encaminhamento_colaborador/<int:id>/', carta_encaminhamento_colaborador,
+         name="carta_encaminhamento_colaborador"),
     path('update_colaborador_remanejamento/<int:id>/', update_colaborador_remanejamento,
          name="update_colaborador_remanejamento"),
 

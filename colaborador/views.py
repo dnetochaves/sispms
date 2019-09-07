@@ -73,6 +73,25 @@ def list_colaborador(request):
 
     return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
 
+@login_required()
+def list_historico_remanejamento(request, id):
+    busca = request.GET.get('pesquisa', None)
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        col = HistoricoRemanejamento.objects.filter(ColaboradorHistorico_id=id)
+    else:
+        col = HistoricoRemanejamento.objects.filter(ColaboradorHistorico_id=id)
+
+    return render(request, 'colaborador/list_historico_remanejamento.html', {'colaborador': col})
+
+@login_required()
+def carta_encaminhamento_colaborador(request, id):
+
+    col = Colaborador.objects.filter(id=id).select_related()
+
+    return render(request, 'colaborador/carta_encaminhamento_colaborador.html', {'colaborador': col})
+
 
 def update_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)

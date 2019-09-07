@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+<style>
+body {
+  background: rgb(204,204,204);
+}
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+page[size="A4"] {
+  width: 21cm;
+  height: 29.7cm;
+}
+page[size="A4"][layout="landscape"] {
+  width: 29.7cm;
+  height: 21cm;
+}
+page[size="A3"] {
+  width: 29.7cm;
+  height: 42cm;
+}
+page[size="A3"][layout="landscape"] {
+  width: 42cm;
+  height: 29.7cm;
+}
+page[size="A5"] {
+  width: 14.8cm;
+  height: 21cm;
+}
+page[size="A5"][layout="landscape"] {
+  width: 21cm;
+  height: 14.8cm;
+}
+@media print {
+  body, page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+
+
+
+
+</style>
+<input type="button" onclick="cont();" value="Imprimir Div separadamente">
+<div id="print" class="conteudo">
+    <page size="A4">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cpf</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Setor</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for colaborador in colaborador %}
+            <tr>
+                <td>{{ colaborador.Nome }}</td>
+                <td>{{ colaborador.Cpf }}</td>
+                <td>{{ colaborador.Telefone }}</td>
+                <td>{{ colaborador.SetorColaborador }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </page>
+</div>
+
+<hr/>
+
+<script>
+function cont(){
+   var conteudo = document.getElementById('print').innerHTML;
+   tela_impressao = window.open('about:blank');
+   tela_impressao.document.write(conteudo);
+   tela_impressao.window.print();
+   tela_impressao.window.close();
+}
+</script>
+{% endblock %}

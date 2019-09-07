@@ -10,6 +10,7 @@ class Colaborador(models.Model):
     Telefone = models.CharField(max_length=50)
     tags = models.ManyToManyField('Tags')
     SetorColaborador = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='setor')
+    SetorAnterior = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorAnterior')
 
     def __str__(self):
         return self.Nome

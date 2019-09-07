@@ -220,15 +220,15 @@ def list_demandas(request):
 @login_required()
 def add_demanda(request):
     # TODO: Codigo duplicado melhorar o quanto antes
-    #busca_setor = Usuario.objects.filter(user_id=request.user.id)
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
 
-    #for id in busca_setor:
-        #id_setor = id.SetorUsuario.id
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
 
     form = DemandaForm(request.POST or None)
     if form.is_valid():
-        #formulario = form.save(commit=False)
-        #formulario.SetorDemanda_id = id_setor
+        formulario = form.save(commit=False)
+        formulario.SetorDemanda_id = id_setor
         form.save()
         return redirect('/setor/list_demandas')
     return render(request, 'setor/add_demanda.html', {'form': form})

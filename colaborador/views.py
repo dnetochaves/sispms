@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Colaborador, Tags, HistoricoRemanejamento, Setor
-from .forms import ColaboradorForm, TagsForm, HistoricoRemanejamentoForm
+from .forms import ColaboradorForm, TagsForm, HistoricoRemanejamentoForm, ColaboradorRemanejamentoForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -44,19 +44,21 @@ def add_colaborador_remanejamento(request):
 
 @login_required()
 def update_colaborador_remanejamento(request, id):
-    id_col = id
 
-    if id_col:
-        col1 = Colaborador.objects.filter(pk=id_col)
-        setor = Setor.objects.all()
-        # return HttpResponse(id_setor_atu)
-        return render(request, 'colaborador/update_colaborador_remanejamento.html',
-                      {'colaborador': col1, 'setor': setor})
+    colaborador = get_object_or_404(Colaborador, pk=id)
+    form = ColaboradorRemanejamentoForm(request.POST or None, instance=colaborador)
 
-    else:
-        return render(request, 'colaborador/update_colaborador_remanejamento.html')
 
-    return render(request, 'colaborador/update_colaborador_remanejamento.html', {'colaborador': col1}, {'setor': setor})
+    if form.is_valid():
+        form.save()
+        if request.method == 'POST':
+            setor_id = Colaborador.objects.filter(id=id)
+            for setores in setor_id:
+                id_setor = setores.SetorColaborador_id
+                id_anterior = setores.SetorAnterior_id
+            salvar = HistoricoRemanejamento.objects.create(SetorAtual_id=id_setor, SetorAnterior_id=id_anterior, ColaboradorHistorico_id=id)
+        return redirect('/colaborador/list_colaborador')
+    return render(request, 'colaborador/add_colaborador.html', {'form': form})
 
 
 @login_required()
@@ -120,6 +122,7 @@ def update_tags(request, id):
         return redirect('/colaborador/list_tags')
     return render(request, 'colaborador/add_tags.html', {'form': form})
 
+
 @login_required()
 def info_tags(request, id):
     busca = request.GET.get('pesquisa', None)
@@ -131,6 +134,8 @@ def info_tags(request, id):
         tags = Colaborador.objects.filter(tags=id)
 
     return render(request, 'colaborador/info_tags.html', {'colaborador': tags})
+
+
 '''
 # Crud Colaborador CBV
 class ListaColaborador(ListView):

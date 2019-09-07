@@ -7,7 +7,12 @@ from .models import HistoricoRemanejamento
 class ColaboradorForm(ModelForm):
     class Meta:
         model = Colaborador
-        fields = ['Nome', 'Cpf', 'Telefone', 'tags']
+        fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
+
+class ColaboradorRemanejamentoForm(ModelForm):
+    class Meta:
+        model = Colaborador
+        fields = ['SetorColaborador', 'SetorAnterior']
 
 
 class TagsForm(ModelForm):

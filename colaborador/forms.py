@@ -13,6 +13,7 @@ class ColaboradorRemanejamentoForm(ModelForm):
     class Meta:
         model = Colaborador
         fields = ['SetorColaborador', 'SetorAnterior']
+        labels = {'SetorColaborador': 'Setor Atual', 'SetorAnterior': 'Setor Anterior'}
 
 
 class TagsForm(ModelForm):

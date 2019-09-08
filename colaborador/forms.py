@@ -9,11 +9,18 @@ class ColaboradorForm(ModelForm):
         model = Colaborador
         fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
 
+
 class ColaboradorRemanejamentoForm(ModelForm):
     class Meta:
         model = Colaborador
         fields = ['SetorColaborador', 'SetorAnterior']
         labels = {'SetorColaborador': 'Setor Atual', 'SetorAnterior': 'Setor Anterior'}
+
+
+class ObservacaoColaboradorForm(ModelForm):
+    class Meta:
+        model = Colaborador
+        fields = ['Observacao']
 
 
 class TagsForm(ModelForm):

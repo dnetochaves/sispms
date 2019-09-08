@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Colaborador, Tags, HistoricoRemanejamento, Setor
-from .forms import ColaboradorForm, TagsForm, HistoricoRemanejamentoForm, ColaboradorRemanejamentoForm
+from .forms import ColaboradorForm, TagsForm, HistoricoRemanejamentoForm, ColaboradorRemanejamentoForm, \
+    ObservacaoColaboradorForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -44,10 +45,8 @@ def add_colaborador_remanejamento(request):
 
 @login_required()
 def update_colaborador_remanejamento(request, id):
-
     colaborador = get_object_or_404(Colaborador, pk=id)
     form = ColaboradorRemanejamentoForm(request.POST or None, instance=colaborador)
-
 
     if form.is_valid():
         form.save()
@@ -56,7 +55,8 @@ def update_colaborador_remanejamento(request, id):
             for setores in setor_id:
                 id_setor = setores.SetorColaborador_id
                 id_anterior = setores.SetorAnterior_id
-            salvar = HistoricoRemanejamento.objects.create(SetorAtual_id=id_setor, SetorAnterior_id=id_anterior, ColaboradorHistorico_id=id)
+            salvar = HistoricoRemanejamento.objects.create(SetorAtual_id=id_setor, SetorAnterior_id=id_anterior,
+                                                           ColaboradorHistorico_id=id)
         return redirect('/colaborador/list_colaborador')
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
 
@@ -73,6 +73,7 @@ def list_colaborador(request):
 
     return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
 
+
 @login_required()
 def list_historico_remanejamento(request, id):
     busca = request.GET.get('pesquisa', None)
@@ -85,9 +86,9 @@ def list_historico_remanejamento(request, id):
 
     return render(request, 'colaborador/list_historico_remanejamento.html', {'colaborador': col})
 
+
 @login_required()
 def carta_encaminhamento_colaborador(request, id):
-
     col = Colaborador.objects.filter(id=id).select_related()
 
     return render(request, 'colaborador/carta_encaminhamento_colaborador.html', {'colaborador': col})
@@ -96,6 +97,15 @@ def carta_encaminhamento_colaborador(request, id):
 def update_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
     form = ColaboradorForm(request.POST or None, instance=colaborador)
+    if form.is_valid():
+        form.save()
+        return redirect('/colaborador/list_colaborador')
+    return render(request, 'colaborador/add_colaborador.html', {'form': form})
+
+
+def observacao_colaborador(request, id):
+    colaborador = get_object_or_404(Colaborador, pk=id)
+    form = ObservacaoColaboradorForm(request.POST or None, instance=colaborador)
     if form.is_valid():
         form.save()
         return redirect('/colaborador/list_colaborador')

@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Setor(models.Model):
-    Nome = models.CharField(max_length=50)
+    Nome = models.CharField(max_length=100)
     Telefone1 = models.CharField(max_length=50)
     Cep = models.CharField(max_length=50)
     Bairro = models.CharField(max_length=50)

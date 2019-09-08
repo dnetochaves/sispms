@@ -48,35 +48,70 @@ page[size="A5"][layout="landscape"] {
 
 
 
+
+
 </style>
-<input type="button" onclick="cont();" value="Imprimir Div separadamente">
+{% for colaborador in colaborador %}
+<hr>
+<div class="row">
+    <div class="col">
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="cont();">Imprimir</button>
+    </div>
+    <div class="col"><a href="{% url 'observacao_colaborador' colaborador.id %}"
+                        class="btn btn-warning btn-lg btn-block">Editar</a></div>
+</div>
+<hr>
 <div id="print" class="conteudo">
     <page size="A4">
-        <table class="table table-hover table-sm table-bordered">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Cpf</th>
-                <th scope="col">Telefone</th>
-                <th scope="col">Setor</th>
+        <table class="table" width="100%" border="1">
+            <thead>
+            <tr style="background-color: #3262a8;">
+                <th scope="col">
+                    <h1>
+                        <center><img src="{% static "img/logo-prefeitura-salvador.png" %}" alt="My image"></a></center>
+                    </h1>
+                </th>
+            <tr style="background-color: #3262a8;">
+                <th scope="col">
+                    <h1  class="text-white">
+                        <center>Carta de Encaminhamento</center>
+                    </h1>
+                </th>
             </tr>
             </thead>
             <tbody>
-            {% for colaborador in colaborador %}
+
+            <tr height="300px">
+                <th scope="row">
+                    <p class="lead">
+                       {{ colaborador.Observacao }}
+                    </p>
+                </th>
+            </tr>
+            <th scope="row">
+                 <p class="lead">
+                Dados:<br>
+                Nome :{{ colaborador.Nome }} | Cpf: {{ colaborador.Cpf }} | Telefone: {{ colaborador.Telefone }}
+                 </p>
+            </th>
+            </tr>
+            <tr height="200px">
+                <th scope="row">
+                     <p class="lead">
+                    Setor:<br>
+                    {{ colaborador.SetorColaborador }}
+                     </p>
+                </th>
+            </tr>
             <tr>
-                <td>{{ colaborador.Nome }}</td>
-                <td>{{ colaborador.Cpf }}</td>
-                <td>{{ colaborador.Telefone }}</td>
-                <td>{{ colaborador.SetorColaborador }}</td>
+                <th scope="row">Fim:</th>
             </tr>
             {% endfor %}
             </tbody>
         </table>
     </page>
 </div>
-
-<hr/>
-
+<br><br>
 <script>
 function cont(){
    var conteudo = document.getElementById('print').innerHTML;
@@ -85,5 +120,8 @@ function cont(){
    tela_impressao.window.print();
    tela_impressao.window.close();
 }
+
+
+
 </script>
 {% endblock %}

@@ -9,6 +9,7 @@ from .views import add_colaborador_remanejamento
 from .views import update_colaborador_remanejamento
 from .views import list_historico_remanejamento
 from .views import carta_encaminhamento_colaborador
+from .views import observacao_colaborador
 
 from .views import list_tags
 from .views import update_tags
@@ -31,6 +32,8 @@ urlpatterns = [
          name="carta_encaminhamento_colaborador"),
     path('update_colaborador_remanejamento/<int:id>/', update_colaborador_remanejamento,
          name="update_colaborador_remanejamento"),
+    path('observacao_colaborador/<int:id>/', observacao_colaborador,
+         name="observacao_colaborador"),
 
     path('tags_colaborador/', tags_colaborador, name="tags_colaborador"),
     path('list_tags/', list_tags, name="list_tags"),

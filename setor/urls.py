@@ -18,6 +18,7 @@ from .views import update_tag
 from .views import list_demandas
 from .views import add_demanda
 from .views import update_demanda
+from .views import list_grupo_setor
 
 # from .views import ListaGrupo
 # from .views import DetailGrupo
@@ -46,6 +47,7 @@ urlpatterns = [
     path('update_item/<int:id>/', update_item, name="update_item"),
     path('update_setor/<int:id>/', update_setor, name="update_setor"),
     path('update_grupo/<int:id>/', update_grupo, name="update_grupo"),
+    path('list_grupo_setor/', list_grupo_setor, name="list_grupo_setor"),
     path('teste/', teste, name="teste"),
 
     # path('grupo_list', ListaGrupo.as_view(), name='grupo_list_cbv'),

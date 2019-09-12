@@ -179,6 +179,7 @@ def add_tag(request):
         return redirect('/setor/list_tag')
     return render(request, 'setor/add_tag.html', {'form': form})
 
+
 @login_required()
 def info_tag(request, id):
     busca = request.GET.get('pesquisa', None)
@@ -190,6 +191,7 @@ def info_tag(request, id):
         tags = Demandas.objects.filter(TagsDemandas=id)
 
     return render(request, 'setor/info_tags.html', {'tags': tags})
+
 
 @login_required()
 def update_tag(request, id):
@@ -213,9 +215,29 @@ def list_demandas(request):
     for id in busca_setor:
         id_setor = id.SetorUsuario.id
 
-        demanda = Demandas.objects.filter(SetorDemanda_id=id_setor)
+        demanda = Demandas.objects.all()
 
     return render(request, 'setor/list_demanda.html', {'demanda': demanda})
+
+
+@login_required()
+def list_grupo_setor(request):
+    busca = request.GET.get('pesquisa', None)
+
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        grupo = Grupo.objects.filter(Nome__contains=busca, setor_id=id_setor)
+    else:
+        grupo = Grupo.objects.filter(id=id_setor)
+
+    return render(request, 'setor/list_grupo_setor.html', {'grupo': grupo})
+
 
 @login_required()
 def add_demanda(request):
@@ -242,6 +264,8 @@ def update_demanda(request, id):
         form.save()
         return redirect('/setor/list_demandas')
     return render(request, 'setor/add_demanda.html', {'form': form})
+
+
 '''Fim Demandas'''
 '''
 #***Setor CBV***

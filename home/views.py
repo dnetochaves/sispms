@@ -20,11 +20,11 @@ def teste_bootstrap(request):
 
 def feed(request):
     busca = request.GET.get('pesquisa', None)
-    # TODO: Remover codigo repetido
-    busca_feed = Feed.objects.filter(UsuarioFeed_id=request.user)
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
 
-    for feed in busca_feed:
-        id_setor = feed.SetorFeed.id
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
 
    # TODO: Correção a lista da erro quando não tem feed
     if busca:
@@ -37,11 +37,11 @@ def feed(request):
 
 @login_required
 def add_feed(request):
-    # TODO: Remover codigo repetido
-    busca_feed = Feed.objects.filter(UsuarioFeed_id=request.user)
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
 
-    for feed in busca_feed:
-        id_setor = feed.SetorFeed.id
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
 
     form = FeedForm(request.POST or None)
     if form.is_valid():

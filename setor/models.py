@@ -50,6 +50,7 @@ class Demandas(models.Model):
     SetorDemanda = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorDemanda')
     TagsDemandas = models.ManyToManyField('Tags')
     DataRegistro = models.DateTimeField('Data', auto_now_add=True)
+    PrazoConclsao = models.DateField('PrazodeConclusão', blank=True, null=True)
 
     def __str__(self):
         return self.Observacao

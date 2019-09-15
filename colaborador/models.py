@@ -11,7 +11,7 @@ class Colaborador(models.Model):
     tags = models.ManyToManyField('Tags')
     SetorColaborador = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='setor')
     SetorAnterior = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorAnterior')
-    Observacao = models.CharField(max_length=200, null=True, blank=True)
+    Observacao = models.TextField(max_length=500, null=True, blank=True, help_text='Texto a ser inserido na carta')
 
     def __str__(self):
         return self.Nome

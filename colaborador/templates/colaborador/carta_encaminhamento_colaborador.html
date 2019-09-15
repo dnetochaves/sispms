@@ -47,6 +47,9 @@ page[size="A5"][layout="landscape"] {
 
 
 
+
+
+
 </style>
 {% for colaborador in colaborador %}
 <hr>
@@ -60,93 +63,41 @@ page[size="A5"][layout="landscape"] {
 <hr>
 <div id="print" class="conteudo">
     <page size="A4">
-        <!--
-        <table class="table" width="100%" border="1">
-            <thead>
-            <tr style="background-color: #3262a8;">
-                <th scope="col">
-                    <h1>
-                        <center><img src="{% static "img/logo-prefeitura-salvador.png" %}" alt="My image"></a></center>
-                    </h1>
-                </th>
-            <tr style="background-color: #3262a8;">
-                <th scope="col">
-                    <h1 class="text-white">
-                        <center>Carta de Encaminhamento</center>
-                    </h1>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr height="300px">
-                <th scope="row">
-                    <p class="lead">
-                        {{ colaborador.Observacao }}
-                    </p>
-                </th>
-            </tr>
-            <th scope="row">
-                <p class="lead">
-                    Dados:<br>
-                    Nome :{{ colaborador.Nome }} | Cpf: {{ colaborador.Cpf }} | Telefone: {{ colaborador.Telefone }}
-                </p>
-            </th>
-            </tr>
-            <tr height="200px">
-                <th scope="row">
-                    <p class="lead">
-                        Setor:<br>
-                        {{ colaborador.SetorColaborador }}
-                    </p>
-                </th>
-            </tr>
+        <table>
             <tr>
-                <th scope="row">Fim:</th>
-            </tr>
-
-            </tbody>
-        </table>
-        -->
-        <table width="100%" border="1">
-            <tr class="bg-primary">
-                <th colspan="4">
-                    <center><img src="{% static "img/logo-prefeitura-salvador.png" %}" alt="My image"></a>
-                        <br><h4 class="display-4 text-white">Carta de Encaminhamento</h4>
-                    </center>
-                </th>
-            </tr>
-            <tr>
-                <td colspan="4" height="200px">
-                        {{ colaborador.Observacao }}
+                <td><img height="100px" width="130px" src="{% static "img/prefeitura-de-salvador.png" %}" alt="My
+                    image"></a></td>
+                <td>
+                    <h2>Carta de Encaminhamento <br>Gre Orla</h2>
                 </td>
+                <td></td>
             </tr>
-            <tr height="100px">
-                <td colspan="4">
-                    <p class="font-weight-bold">
-                        Nome: {{ colaborador.Nome }}
-                    </p>
-
+            <tr height="200">
+                <td colspan="3">
+                     {{ colaborador.Observacao }}
                 </td>
+                <td></td>
+                <td></td>
             </tr>
-            <tr height="50px">
-                <td colspan="2">
-                    <p class="font-weight-bold">
-                        Cpf: {{ colaborador.Cpf }}
-                    </p>
-                </td>
-                <td colspan="2">
-                   <p class="font-weight-bold">
-                         Telefone: {{ colaborador.Telefone }}
-                    </p>
-                </td>
+            <tr height="100">
+                <td colspan="3"><b><h3> Nome: {{ colaborador.Nome }} </h3></b></td>
+                <td></td>
+                <td></td>
             </tr>
-            <tr height="50px">
-                <td colspan="4">
-                     <p class="font-weight-bold">
-                         Setor: {{ colaborador.SetorColaborador }}
-                    </p>
-                </td>
+            <tr height="100">
+                <td><b><h4> Cpf: {{ colaborador.Cpf }}</h4></b></td>
+                <td><b><h4> Telefone: {{ colaborador.Telefone }} </h4></b></td>
+            </tr>
+            <tr height="100">
+                <td colspan="3"> <b><h4> Setor: {{ colaborador.SetorColaborador }} </h4></b></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr height="100">
+                <td colspan="3">_________________________________________________________________
+                    <br> <b><h4> Bruno Cardosp <br>Gerente Regional</h4></b>  </td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </page>
@@ -161,6 +112,9 @@ function cont(){
    tela_impressao.window.print();
    tela_impressao.window.close();
 }
+
+
+
 
 
 

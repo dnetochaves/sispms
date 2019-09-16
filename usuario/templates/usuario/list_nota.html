@@ -31,6 +31,10 @@
                 <a href="{% url 'delete_nota' nota.id %}" class="btn btn-danger btn-sm">Excluir</a>
             </div>
         </div>
+        {% empty %}
+        <div class="alert alert-info" role="alert">
+           Não há notas a serem exibidos
+        </div>
         {% endfor %}
 
     </div>

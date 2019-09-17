@@ -26,7 +26,8 @@
                 <th scope="col">Observacao</th>
                 <th scope="col">SetorDemanda</th>
                 <th scope="col">DataRegistro</th>
-                 <th scope="col">Prazo para Conclusão</th>
+                <th scope="col">Prazo para Conclusão</th>
+                <th scope="col">Os</th>
                 <th scope="col">Comandos</th>
             </tr>
             </thead>
@@ -38,6 +39,7 @@
                 <td>{{ demandas.SetorDemanda }}</td>
                 <td>{{ demandas.DataRegistro }}</td>
                 <td>{{ demandas.PrazoConclsao }}</td>
+                <td>{{ demandas.Os }}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <a href="{% url 'update_demanda' demandas.id %}"

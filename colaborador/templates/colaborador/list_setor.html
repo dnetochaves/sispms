@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<div class="card">
+    <div class="card-header">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone1</th>
+                <th scope="col">Email</th>
+                <th scope="col">Cep</th>
+                <th scope="col">Bairro</th>
+                <th scope="col">Logradouro</th>
+                <th scope="col">Numero</th>
+                <th scope="col">Latitude</th>
+                <th scope="col">Longitude</th>
+                <th scope="col">Gestor</th>
+                <th scope="col">Descricao</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+             {% for setor in setor %}
+            <tr>
+               <th scope="row">{{ setor.Codigo }}</th>
+                <td>{{ setor.Nome }}</td>
+                <td>{{ setor.Telefone1 }}</td>
+                <td>{{ setor.Email }}</td>
+                <td>{{ setor.Cep }}</td>
+                <td>{{ setor.Bairro }}</td>
+                <td>{{ setor.Logradouro }}</td>
+                <td>{{ setor.Numero }}</td>
+                <td>{{ setor.Latitude }}</td>
+                <td>{{ setor.Longitude }}</td>
+                <td>{{ setor.Gestor }}</td>
+                <td>{{ setor.Descricao }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'list_colaborador_por_setor' setor.id%}"
+                           class="btn btn-success">Filtrar</a>
+                        <a href="#"></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

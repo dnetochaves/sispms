@@ -9,6 +9,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from usuario.models import Usuario
+from setor.models import Setor
 
 
 # Create your views here.
@@ -17,8 +18,6 @@ from usuario.models import Usuario
 def painel_colaborador(request):
     return render(request, 'colaborador/painel_colaborador.html')
 
-
-# TODO: Refatorado para utilizar CBV remover posteriormente
 
 @login_required()
 def a4(request):
@@ -111,6 +110,31 @@ def observacao_colaborador(request, id):
         return redirect('/colaborador/list_colaborador')
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
 
+
+@login_required()
+def list_setor_colaborador(request):
+    busca = request.GET.get('pesquisa', None)
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        setor = Setor.objects.filter(Nome__contains=busca)
+    else:
+        setor = Setor.objects.all()
+
+    return render(request, 'colaborador/list_setor.html', {'setor': setor})
+
+@login_required()
+def list_colaborador_por_setor(request, id):
+    busca = request.GET.get('pesquisa', None)
+
+
+    if busca:
+        # usuarios = Usuario.objects.all()
+        col = Colaborador.objects.filter(Nome__contains=busca)
+    else:
+        col = Colaborador.objects.filter(SetorColaborador=id)
+
+    return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
 
 # Functions Tags
 @login_required()

@@ -3,6 +3,8 @@ from .views import painel_colaborador
 from .views import a4
 from .views import add_colaborador
 from .views import list_colaborador
+from .views import list_setor_colaborador
+from .views import list_colaborador_por_setor
 from .views import update_colaborador
 from .views import tags_colaborador
 from .views import add_colaborador_remanejamento
@@ -26,6 +28,8 @@ urlpatterns = [
     path('add_colaborador/', add_colaborador, name="add_colaborador"),
     path('add_colaborador_remanejamento/', add_colaborador_remanejamento, name="add_colaborador_remanejamento"),
     path('list_colaborador/', list_colaborador, name="list_colaborador"),
+    path('list_colaborador_por_setor/<int:id>/', list_colaborador_por_setor, name="list_colaborador_por_setor"),
+    path('list_setor_colaborador/', list_setor_colaborador, name="list_setor_colaborador"),
     path('list_historico_remanejamento/<int:id>/', list_historico_remanejamento, name="list_historico_remanejamento"),
     path('update_colaborador/<int:id>/', update_colaborador, name="update_colaborador"),
     path('carta_encaminhamento_colaborador/<int:id>/', carta_encaminhamento_colaborador,

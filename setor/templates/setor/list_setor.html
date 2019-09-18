@@ -22,9 +22,10 @@
         <table class="table table-hover table-sm table-bordered">
             <thead class="thead-light">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Codigo</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Telefone1</th>
+                <th scope="col">Email</th>
                 <th scope="col">Cep</th>
                 <th scope="col">Bairro</th>
                 <th scope="col">Logradouro</th>
@@ -39,9 +40,10 @@
             <tbody>
              {% for setor in setor %}
             <tr>
-               <th scope="row">{{ setor.id }}</th>
+               <th scope="row">{{ setor.Codigo }}</th>
                 <td>{{ setor.Nome }}</td>
                 <td>{{ setor.Telefone1 }}</td>
+                <td>{{ setor.Email }}</td>
                 <td>{{ setor.Cep }}</td>
                 <td>{{ setor.Bairro }}</td>
                 <td>{{ setor.Logradouro }}</td>

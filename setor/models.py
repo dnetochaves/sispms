@@ -13,6 +13,8 @@ class Setor(models.Model):
     Gestor = models.CharField(max_length=50)
     Descricao = models.CharField(max_length=100)
     grupo = models.ManyToManyField('Grupo', null=True)
+    Codigo = models.CharField('Codigo', max_length=100, null=True, blank=True)
+    Email = models.CharField('Email', max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.Nome

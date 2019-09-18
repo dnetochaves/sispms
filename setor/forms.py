@@ -6,7 +6,7 @@ class SetorForm(ModelForm):
     class Meta:
         model = Setor
         fields = ['Nome', 'Telefone1', 'Cep', 'Bairro', 'Logradouro', 'Numero', 'Latitude', 'Longitude', 'Gestor',
-                  'Descricao', 'grupo']
+                  'Descricao', 'grupo', 'Codigo', 'Email']
 
 
 class GrupoForm(ModelForm):

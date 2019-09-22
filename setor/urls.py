@@ -16,6 +16,8 @@ from .views import add_tag
 from .views import info_tag
 from .views import update_tag
 from .views import list_demandas
+from .views import list_status
+from .views import add_status
 from .views import add_demanda
 from .views import update_demanda
 from .views import list_grupo_setor
@@ -41,6 +43,8 @@ urlpatterns = [
     path('add_tag/', add_tag, name="add_tag"),
     path('info_tag/<int:id>/', info_tag, name="info_tag"),
     path('list_demandas/', list_demandas, name="list_demandas"),
+    path('list_status/', list_status, name="list_status"),
+    path('add_status/', add_status, name="add_status"),
     path('add_demanda/', add_demanda, name="add_demanda"),
     path('update_demanda/<int:id>/', update_demanda, name="update_demanda"),
     path('update_tag/<int:id>/', update_tag, name="update_tag"),

@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Setor, Grupo, Item, Tags, Demandas
-from .forms import SetorForm, GrupoForm, ItemForm, TagForm, DemandaForm
+from .models import Setor, Grupo, Item, Tags, Demandas, Status
+from .forms import SetorForm, GrupoForm, ItemForm, TagForm, DemandaForm, StatusForm
 from usuario.models import Usuario
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -244,13 +244,13 @@ def add_demanda(request):
     # TODO: Codigo duplicado melhorar o quanto antes
     busca_setor = Usuario.objects.filter(user_id=request.user.id)
 
-    #for id in busca_setor:
-        #id_setor = id.SetorUsuario.id
+    # for id in busca_setor:
+    # id_setor = id.SetorUsuario.id
 
     form = DemandaForm(request.POST or None)
     if form.is_valid():
-        #formulario = form.save(commit=False)
-        #formulario.SetorDemanda_id = id_setor
+        # formulario = form.save(commit=False)
+        # formulario.SetorDemanda_id = id_setor
         form.save()
         return redirect('/setor/list_demandas')
     return render(request, 'setor/add_demanda.html', {'form': form})
@@ -267,6 +267,46 @@ def update_demanda(request, id):
 
 
 '''Fim Demandas'''
+
+'''
+Funções Status
+'''
+
+
+@login_required()
+def list_status(request):
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
+        status = Status.objects.filter(SetoraStatus_id=id_setor)
+
+    return render(request, 'setor/list_status.html', {'status': status})
+
+
+@login_required()
+def add_status(request):
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
+    form = StatusForm(request.POST or None)
+    if form.is_valid():
+        formulario = form.save(commit=False)
+        formulario.SetoraStatus_id = id_setor
+        form.save()
+        return redirect('/setor/list_status')
+    return render(request, 'setor/add_status.html', {'form': form})
+
+
+'''
+Fim
+'''
+
 '''
 #***Setor CBV***
 class ListaSetor(ListView):

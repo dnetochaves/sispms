@@ -46,6 +46,15 @@ class Tags(models.Model):
         return self.Nome
 
 
+class Status(models.Model):
+    Nome = models.CharField(max_length=50)
+    Observacao = models.TextField(max_length=500)
+    SetoraStatus = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorStatus')
+
+    def __str__(self):
+        return self.Nome
+
+
 class Demandas(models.Model):
     ItemDemanda = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, related_name='ItemDemanda')
     Observacao = models.TextField(max_length=500, null=True, blank=True)
@@ -54,6 +63,7 @@ class Demandas(models.Model):
     DataRegistro = models.DateTimeField('Data', auto_now_add=True)
     PrazoConclsao = models.DateField('PrazodeConclusão', blank=True, null=True)
     Os = models.CharField(max_length=100, null=True, blank=True)
+    StatusDemanda = models.ForeignKey(Status, on_delete=models.CASCADE, null=True, related_name='StatusDemanda')
 
     def __str__(self):
         return self.Observacao

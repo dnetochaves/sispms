@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Setor, Grupo, Item, Tags, Demandas
+from .models import Setor, Grupo, Item, Tags, Demandas, Status
 
 
 class SetorForm(ModelForm):
@@ -21,6 +21,12 @@ class ItemForm(ModelForm):
         fields = ['Nome', 'Observacao']
 
 
+class StatusForm(ModelForm):
+    class Meta:
+        model = Status
+        fields = ['Nome', 'Observacao']
+
+
 class TagForm(ModelForm):
     class Meta:
         model = Tags
@@ -30,4 +36,4 @@ class TagForm(ModelForm):
 class DemandaForm(ModelForm):
     class Meta:
         model = Demandas
-        fields = ['ItemDemanda', 'Observacao', 'TagsDemandas', 'SetorDemanda', 'PrazoConclsao', 'Os']
+        fields = ['ItemDemanda', 'Observacao', 'TagsDemandas', 'SetorDemanda', 'PrazoConclsao', 'Os', 'StatusDemanda']

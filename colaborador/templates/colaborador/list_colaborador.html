@@ -11,7 +11,8 @@
                 <div class="input-group-prepend" id="button-addon3">
                     <a href="{% url 'add_colaborador' %}" class="btn btn-outline-secondary" type="button">Novo
                         Colaborador</a>
-                    <a href="{% url 'list_setor_colaborador' %}" class="btn btn-outline-secondary" type="button">Localizar por
+                    <a href="{% url 'list_setor_colaborador' %}" class="btn btn-outline-secondary" type="button">Localizar
+                        por
                         Setor</a>
                     <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
                 </div>
@@ -51,6 +52,10 @@
                     </div>
                 </td>
             </tr>
+            {% empty %}
+            <div class="alert alert-warning" role="alert">
+               Digite o nome do colaborador para efetuar a pesquisa
+            </div>
             {% endfor %}
             </tbody>
         </table>

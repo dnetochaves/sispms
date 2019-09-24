@@ -63,14 +63,10 @@ def update_colaborador_remanejamento(request, id):
 @login_required()
 def list_colaborador(request):
     busca = request.GET.get('pesquisa', None)
-
     if busca:
-        # usuarios = Usuario.objects.all()
         col = Colaborador.objects.filter(Nome__contains=busca)
-    else:
-        col = Colaborador.objects.all()
-
-    return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
+        return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
+    return render(request, 'colaborador/list_colaborador.html')
 
 
 @login_required()
@@ -123,10 +119,10 @@ def list_setor_colaborador(request):
 
     return render(request, 'colaborador/list_setor.html', {'setor': setor})
 
+
 @login_required()
 def list_colaborador_por_setor(request, id):
     busca = request.GET.get('pesquisa', None)
-
 
     if busca:
         # usuarios = Usuario.objects.all()
@@ -135,6 +131,7 @@ def list_colaborador_por_setor(request, id):
         col = Colaborador.objects.filter(SetorColaborador=id)
 
     return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
+
 
 # Functions Tags
 @login_required()

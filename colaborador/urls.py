@@ -12,7 +12,6 @@ from .views import update_colaborador_remanejamento
 from .views import list_historico_remanejamento
 from .views import carta_encaminhamento_colaborador
 from .views import observacao_colaborador
-
 from .views import list_tags
 from .views import update_tags
 from .views import info_tags

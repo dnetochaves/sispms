@@ -14,6 +14,7 @@ from .views import update_item
 from .views import list_tag
 from .views import add_tag
 from .views import info_tag
+from .views import info_status
 from .views import update_tag
 from .views import list_demandas
 from .views import list_status
@@ -42,6 +43,7 @@ urlpatterns = [
     path('list_tag/', list_tag, name="list_tag"),
     path('add_tag/', add_tag, name="add_tag"),
     path('info_tag/<int:id>/', info_tag, name="info_tag"),
+    path('info_status/<int:id>/', info_status, name="info_status"),
     path('list_demandas/', list_demandas, name="list_demandas"),
     path('list_status/', list_status, name="list_status"),
     path('add_status/', add_status, name="add_status"),

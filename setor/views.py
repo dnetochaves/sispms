@@ -277,6 +277,14 @@ def list_status(request):
 
 
 @login_required()
+def info_status(request, id):
+    demandas = Demandas.objects.filter(StatusDemanda_id=id)
+    qtd_por_tags = Demandas.objects.filter(StatusDemanda_id=id).aggregate(Count('Observacao'))['Observacao__count']
+
+    return render(request, 'setor/info_status.html', {'demandas': demandas, 'qtd_por_tags': qtd_por_tags})
+
+
+@login_required()
 def add_status(request):
     # TODO: Codigo duplicado melhorar o quanto antes
     busca_setor = Usuario.objects.filter(user_id=request.user.id)

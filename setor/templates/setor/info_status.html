@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+<h1>{{ a }}</h1>
+<div class="card">
+    <div class="card-header">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Quantidade de Itens por Status:</h4>
+                <p class="card-text">{{ qtd_por_tags }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">ItemDemanda</th>
+                <th scope="col">Observacao</th>
+                <th scope="col">SetorDemanda</th>
+                <th scope="col">DataRegistro</th>
+                <th scope="col">Prazo para Conclusão</th>
+                <th scope="col">Os</th>
+                <th scope="col">Status</th>
+                <th scope="col">Responável</th>
+                <th scope="col">Comandos</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for demandas in demandas %}
+            <tr>
+                <td>{{ demandas.ItemDemanda }}</td>
+                <td>{{ demandas.Observacao }}</td>
+                <td>{{ demandas.SetorDemanda }}</td>
+                <td>{{ demandas.DataRegistro }}</td>
+                <td>{{ demandas.PrazoConclsao }}</td>
+                <td>{{ demandas.Os }}</td>
+                <td>{{ demandas.StatusDemanda }}</td>
+                <td>{{ demandas.UsuarioDemanda }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_demanda' demandas.id %}"
+                           class="btn btn-success">Atualizar</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

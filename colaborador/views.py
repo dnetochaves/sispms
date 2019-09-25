@@ -178,8 +178,10 @@ def update_tags(request, id):
 def info_tags(request, id):
     tags = Colaborador.objects.filter(tags=id)
     qtd_por_tags = Colaborador.objects.filter(tags=id).aggregate(Count('Nome'))['Nome__count']
+    desc_tag = Tags.objects.filter(id=id)[0]
 
-    return render(request, 'colaborador/info_tags.html', {'colaborador': tags, 'qtd_por_tags': qtd_por_tags})
+    return render(request, 'colaborador/info_tags.html',
+                  {'colaborador': tags, 'qtd_por_tags': qtd_por_tags, 'desc_tag': desc_tag})
 
 
 '''

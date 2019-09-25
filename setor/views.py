@@ -185,8 +185,10 @@ def add_tag(request):
 def info_tag(request, id):
     tags = Demandas.objects.filter(TagsDemandas=id)
     qtd_por_tags = Demandas.objects.filter(TagsDemandas=id).aggregate(Count('Observacao'))['Observacao__count']
+    desc_tag = Tags.objects.filter(id=id)[0]
 
-    return render(request, 'setor/info_tags.html', {'tags': tags, 'qtd_por_tags': qtd_por_tags})
+    return render(request, 'setor/info_tags.html',
+                  {'tags': tags, 'qtd_por_tags': qtd_por_tags, 'desc_tag': desc_tag})
 
 
 @login_required()
@@ -211,7 +213,7 @@ def list_demandas(request):
     for id in busca_setor:
         id_setor = id.SetorUsuario.id
 
-        demanda = Demandas.objects.all()
+        demanda = Demandas.objects.filter(SetorDemanda_id=id_setor)
 
     return render(request, 'setor/list_demanda.html', {'demanda': demanda})
 
@@ -280,8 +282,9 @@ def list_status(request):
 def info_status(request, id):
     demandas = Demandas.objects.filter(StatusDemanda_id=id)
     qtd_por_tags = Demandas.objects.filter(StatusDemanda_id=id).aggregate(Count('Observacao'))['Observacao__count']
-
-    return render(request, 'setor/info_status.html', {'demandas': demandas, 'qtd_por_tags': qtd_por_tags})
+    desc_tag = Status.objects.filter(id=id)[0]
+    return render(request, 'setor/info_status.html',
+                  {'demandas': demandas, 'qtd_por_tags': qtd_por_tags, 'desc_tag': desc_tag})
 
 
 @login_required()

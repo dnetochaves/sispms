@@ -29,6 +29,7 @@
                 <th scope="col">Prazo para Conclusão</th>
                 <th scope="col">Os</th>
                 <th scope="col">Status</th>
+                <th scope="col">Responável</th>
                 <th scope="col">Comandos</th>
             </tr>
             </thead>
@@ -42,6 +43,7 @@
                 <td>{{ demandas.PrazoConclsao }}</td>
                 <td>{{ demandas.Os }}</td>
                 <td>{{ demandas.StatusDemanda }}</td>
+                <td>{{ demandas.UsuarioDemanda }}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <a href="{% url 'update_demanda' demandas.id %}"

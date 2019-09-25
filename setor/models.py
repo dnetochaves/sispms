@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Setor(models.Model):
@@ -64,6 +65,7 @@ class Demandas(models.Model):
     PrazoConclsao = models.DateField('PrazodeConclusão', blank=True, null=True)
     Os = models.CharField(max_length=100, null=True, blank=True)
     StatusDemanda = models.ForeignKey(Status, on_delete=models.CASCADE, null=True, related_name='StatusDemanda')
+    UsuarioDemanda = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='UsuarioDemanda')
 
     def __str__(self):
         return self.Observacao

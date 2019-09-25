@@ -8,6 +8,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.db.models import Count, Avg
 
 
 # Create your views here.
@@ -182,15 +183,10 @@ def add_tag(request):
 
 @login_required()
 def info_tag(request, id):
-    busca = request.GET.get('pesquisa', None)
+    tags = Demandas.objects.filter(TagsDemandas=id)
+    qtd_por_tags = Demandas.objects.filter(TagsDemandas=id).aggregate(Count('Observacao'))['Observacao__count']
 
-    if busca:
-        # usuarios = Usuario.objects.all()
-        tags = Demandas.objects.filter(TagsDemandas=id)
-    else:
-        tags = Demandas.objects.filter(TagsDemandas=id)
-
-    return render(request, 'setor/info_tags.html', {'tags': tags})
+    return render(request, 'setor/info_tags.html', {'tags': tags, 'qtd_por_tags': qtd_por_tags})
 
 
 @login_required()

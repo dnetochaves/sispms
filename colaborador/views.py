@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from usuario.models import Usuario
 from setor.models import Setor
+from django.db.models import Count, Avg
 
 
 # Create your views here.
@@ -175,15 +176,10 @@ def update_tags(request, id):
 
 @login_required()
 def info_tags(request, id):
-    busca = request.GET.get('pesquisa', None)
+    tags = Colaborador.objects.filter(tags=id)
+    qtd_por_tags = Colaborador.objects.filter(tags=id).aggregate(Count('Nome'))['Nome__count']
 
-    if busca:
-        # usuarios = Usuario.objects.all()
-        tags = Colaborador.objects.filter(tags=id)
-    else:
-        tags = Colaborador.objects.filter(tags=id)
-
-    return render(request, 'colaborador/info_tags.html', {'colaborador': tags})
+    return render(request, 'colaborador/info_tags.html', {'colaborador': tags, 'qtd_por_tags': qtd_por_tags})
 
 
 '''

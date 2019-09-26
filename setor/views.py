@@ -253,6 +253,8 @@ def update_demanda(request, id):
     demanda = get_object_or_404(Demandas, pk=id)
     form = DemandaForm(request.POST or None, instance=demanda)
     if form.is_valid():
+        formulario = form.save(commit=False)
+        formulario.UsuarioDemanda_id = request.user.id
         form.save()
         return redirect('/setor/list_demandas')
     return render(request, 'setor/add_demanda.html', {'form': form})

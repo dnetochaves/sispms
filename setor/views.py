@@ -213,7 +213,7 @@ def list_demandas(request):
     for id in busca_setor:
         id_setor = id.SetorUsuario.id
 
-        demanda = Demandas.objects.filter(SetorDemanda_id=id_setor)
+        demanda = Demandas.objects.all()
 
     return render(request, 'setor/list_demanda.html', {'demanda': demanda})
 

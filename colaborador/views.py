@@ -160,7 +160,7 @@ def list_tags(request):
     for id in busca_setor:
         id_setor = id.SetorUsuario.id
 
-    tags = Tags.objects.filter(ColaboradorTag=id_setor)
+    tags = Tags.objects.filter(SetorTag_id=id_setor)
     return render(request, 'colaborador/lista_tags.html', {'tags': tags})
 
 

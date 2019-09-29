@@ -69,7 +69,7 @@ def list_grupo(request):
         # usuarios = Usuario.objects.all()
         grupo = Grupo.objects.filter(Nome__contains=busca)
     else:
-        grupo = Grupo.objects.all()
+        grupo = setor_setor_grupo.objects.all()
 
     return render(request, 'setor/list_grupo.html', {'grupo': grupo})
 

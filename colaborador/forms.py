@@ -4,6 +4,8 @@ from .models import Tags
 from .models import HistoricoRemanejamento
 
 
+
+
 class ColaboradorForm(ModelForm):
     class Meta:
         model = Colaborador

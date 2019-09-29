@@ -20,7 +20,7 @@ class Colaborador(models.Model):
 class Tags(models.Model):
     Nome = models.CharField(max_length=50)
     Observacao = models.CharField(max_length=50)
-    ColaboradorTag = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='ColaboradorTag')
+    SetorTag = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorTag')
 
     def __str__(self):
         return self.Nome

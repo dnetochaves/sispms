@@ -69,7 +69,7 @@ def list_grupo(request):
         # usuarios = Usuario.objects.all()
         grupo = Grupo.objects.filter(Nome__contains=busca)
     else:
-        grupo = setor_setor_grupo.objects.all()
+        grupo = Grupo.objects.all()
 
     return render(request, 'setor/list_grupo.html', {'grupo': grupo})
 
@@ -159,7 +159,7 @@ def list_tag(request):
     if busca:
         tag = Tags.objects.filter(Nome__contains=busca, SetorTag=id_setor)
     else:
-        tag = Tags.objects.filter(SetorTag=id_setor)
+        tag = Tags.objects.filter(TagSetor_id=id_setor)
 
     return render(request, 'setor/list_tag.html', {'tag': tag})
 
@@ -175,7 +175,7 @@ def add_tag(request):
     form = TagForm(request.POST or None)
     if form.is_valid():
         formulario = form.save(commit=False)
-        formulario.SetorTag_id = id_setor
+        formulario.TagSetor_id = id_setor
         form.save()
         return redirect('/setor/list_tag')
     return render(request, 'setor/add_tag.html', {'form': form})

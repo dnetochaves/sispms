@@ -41,6 +41,7 @@ class Item(models.Model):
 class Tags(models.Model):
     Nome = models.CharField(max_length=50)
     Observacao = models.CharField(max_length=50)
+    TagSetor = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, blank=True, related_name='TagSetor')
 
     def __str__(self):
         return self.Nome

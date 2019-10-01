@@ -159,7 +159,8 @@ def list_tag(request):
     if busca:
         tag = Tags.objects.filter(Nome__contains=busca, SetorTag=id_setor)
     else:
-        tag = Tags.objects.filter(TagSetor_id=id_setor)
+        #tag = Tags.objects.filter(TagSetor_id=id_setor)
+        tag = Tags.objects.all()
 
     return render(request, 'setor/list_tag.html', {'tag': tag})
 

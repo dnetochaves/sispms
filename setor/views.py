@@ -159,8 +159,8 @@ def list_tag(request):
     if busca:
         tag = Tags.objects.filter(Nome__contains=busca, SetorTag=id_setor)
     else:
-        #tag = Tags.objects.filter(TagSetor_id=id_setor)
-        tag = Tags.objects.all()
+        tag = Tags.objects.filter(TagSetor_id=id_setor)
+
 
     return render(request, 'setor/list_tag.html', {'tag': tag})
 
@@ -195,8 +195,17 @@ def info_tag(request, id):
 @login_required()
 def update_tag(request, id):
     tag = get_object_or_404(Tags, pk=id)
+
+    # TODO: Codigo duplicado melhorar o quanto antes
+    busca_setor = Usuario.objects.filter(user_id=request.user.id)
+
+    for id in busca_setor:
+        id_setor = id.SetorUsuario.id
+
     form = TagForm(request.POST or None, instance=tag)
     if form.is_valid():
+        formulario = form.save(commit=False)
+        formulario.TagSetor_id = id_setor
         form.save()
         return redirect('/setor/list_tag')
     return render(request, 'setor/add_tag.html', {'form': form})

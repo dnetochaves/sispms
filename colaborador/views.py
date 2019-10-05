@@ -146,7 +146,7 @@ def tags_colaborador(request):
     form = TagsForm(request.POST or None)
     if form.is_valid():
         formulario = form.save(commit=False)
-        formulario.ColaboradorTag_id = id_setor
+        formulario.SetorTag_id = id_setor
         form.save()
         return redirect('/colaborador/list_tags')
     return render(request, 'colaborador/add_tags.html', {'form': form})

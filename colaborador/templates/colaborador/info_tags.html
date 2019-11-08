@@ -20,7 +20,8 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Cpf</th>
                 <th scope="col">Telefone</th>
-                <th scope="col">Setor</th>
+                <th scope="col">Setor
+                <th scope="col">Observações</th>
             </tr>
             </thead>
             <tbody>
@@ -29,7 +30,8 @@
                 <td>{{ colaborador.Nome }}</td>
                 <td>{{ colaborador.Cpf }}</td>
                 <td>{{ colaborador.Telefone }}</td>
-                <td>{{ colaborador.SetorColaborador }}</td>
+                <td>{{ colaborador.SetorColaborador }}
+                <td>{{ colaborador.ObservacaoExpecificas }}</td>
             </tr>
             {% endfor %}
             </tbody>

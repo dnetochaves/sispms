@@ -12,6 +12,7 @@ class Colaborador(models.Model):
     SetorColaborador = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='setor')
     SetorAnterior = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorAnterior')
     Observacao = models.TextField(max_length=500, null=True, blank=True, help_text='Texto a ser inserido na carta')
+    ObservacaoExpecificas = models.TextField(max_length=500, null=True, blank=True, help_text='Observações do Colaborador')
 
     def __str__(self):
         return self.Nome

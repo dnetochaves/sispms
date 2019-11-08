@@ -9,7 +9,7 @@ from .models import HistoricoRemanejamento
 class ColaboradorForm(ModelForm):
     class Meta:
         model = Colaborador
-        fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
+        fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador', 'ObservacaoExpecificas']
 
 
 class ColaboradorRemanejamentoForm(ModelForm):

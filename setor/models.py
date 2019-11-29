@@ -58,7 +58,7 @@ class Status(models.Model):
 
 class Demandas(models.Model):
     ItemDemanda = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, related_name='ItemDemanda')
-    Observacao = models.TextField(max_length=500, null=True, blank=True)
+    Observacao = models.TextField(max_length=2000, null=True, blank=True)
     SetorDemanda = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorDemanda')
     TagsDemandas = models.ManyToManyField('Tags')
     DataRegistro = models.DateTimeField('Data', auto_now_add=True)

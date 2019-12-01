@@ -223,7 +223,7 @@ def list_demandas(request):
     for id in busca_setor:
         id_setor = id.SetorUsuario.id
 
-        demanda = Demandas.objects.all()
+        demanda = Demandas.objects.all().order_by('-SetorDemanda')
 
     return render(request, 'setor/list_demanda.html', {'demanda': demanda})
 

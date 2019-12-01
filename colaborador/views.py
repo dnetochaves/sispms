@@ -174,7 +174,6 @@ def update_tags(request, id):
     for id in busca_setor:
         id_setor = id.SetorUsuario.id
 
-
     form = TagsForm(request.POST or None, instance=tags)
     if form.is_valid():
         formulario = form.save(commit=False)

@@ -185,7 +185,7 @@ def update_tags(request, id):
 
 @login_required()
 def info_tags(request, id):
-    tags = Colaborador.objects.filter(tags=id)
+    tags = Colaborador.objects.filter(tags=id).order_by('-SetorColaborador')
     qtd_por_tags = Colaborador.objects.filter(tags=id).aggregate(Count('Nome'))['Nome__count']
     desc_tag = Tags.objects.filter(id=id)[0]
 

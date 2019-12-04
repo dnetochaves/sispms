@@ -30,19 +30,32 @@
                 <th scope="col">Cpf</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Tags</th>
+                <th scope="col">Comandos</th>
             </tr>
             </thead>
             <tbody>
             {% for colaborador in colaborador %}
             <tr>
-                 <td>{{ colaborador.SetorColaborador }}</td>
                 <td>{{ colaborador.Nome }}</td>
                 <td>{{ colaborador.Cpf }}</td>
                 <td>{{ colaborador.Telefone }}</td>
+                <td>{{ colaborador.SetorColaborador }}</td>
                 <td>
                     {% for tag in colaborador.tags.all %}
                     <span class="badge badge-light">{{ tag }}</span>
                     {% endfor %}
+                </td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <a href="{% url 'update_colaborador' colaborador.id %}"
+                           class="btn btn-success">Atualizar</a>
+                        <a href="{% url 'update_colaborador_remanejamento' colaborador.id %}"
+                           class="btn btn-danger">Remanejar</a>
+                        <a href="{% url 'list_historico_remanejamento' colaborador.id %}"
+                           class="btn btn-info">Histórico</a>
+                        <a href="{% url 'carta_encaminhamento_colaborador' colaborador.id %}"
+                           class="btn btn-primary">Carta de Encaminhamento</a>
+                    </div>
                 </td>
             </tr>
             {% empty %}

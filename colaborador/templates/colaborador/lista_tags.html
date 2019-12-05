@@ -3,6 +3,12 @@
 {% block title %} Tags {% endblock %}
 
 {% block container %}
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+        <a class="btn btn-primary" href="{% url 'tags_colaborador' %}">Add Tag</a>
+    </li>
+</ul>
+<br>
 {% for tags in tags %}
 <div class="card">
     <div class="card-body">

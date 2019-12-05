@@ -4,6 +4,8 @@
 
 {% block container %}
 
+{% for colaborador in colaborador %}
+{% endfor %}
 <div class="card">
     <div class="card-header">
         <form>
@@ -36,26 +38,41 @@
             <tbody>
             {% for colaborador in colaborador %}
             <tr>
+                <td>{{ colaborador.SetorColaborador }}</td>
                 <td>{{ colaborador.Nome }}</td>
                 <td>{{ colaborador.Cpf }}</td>
                 <td>{{ colaborador.Telefone }}</td>
-                <td>{{ colaborador.SetorColaborador }}</td>
                 <td>
                     {% for tag in colaborador.tags.all %}
-                    <span class="badge badge-light">{{ tag }}</span>
+                    <span class="badge badge-dark">{{ tag }}</span>
                     {% endfor %}
                 </td>
                 <td>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <a href="{% url 'update_colaborador' colaborador.id %}"
-                           class="btn btn-success">Atualizar</a>
-                        <a href="{% url 'update_colaborador_remanejamento' colaborador.id %}"
-                           class="btn btn-danger">Remanejar</a>
-                        <a href="{% url 'list_historico_remanejamento' colaborador.id %}"
-                           class="btn btn-info">Histórico</a>
-                        <a href="{% url 'carta_encaminhamento_colaborador' colaborador.id %}"
-                           class="btn btn-primary">Carta de Encaminhamento</a>
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <div class="btn-group-sm" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa fa-ellipsis-v"> </i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="{% url 'update_colaborador' colaborador.id %}"><i
+                                        class="fas fa fa-edit">
+                                    Editar</i></a>
+                                <a class="dropdown-item"
+                                   href="{% url 'update_colaborador_remanejamento' colaborador.id %}"><i
+                                        class="fas fa-angle-right">
+                                    Remanejar</i></a>
+                                <a class="dropdown-item" href="{% url 'list_historico_remanejamento' colaborador.id %}"><i
+                                        class="fas fa-history">
+                                    Hitórico</i></a>
+                                <a class="dropdown-item"
+                                   href="{% url 'carta_encaminhamento_colaborador' colaborador.id %}"><i
+                                        class="fas fa-sticky-note">
+                                    Ofício</i></a>
+                            </div>
+                        </div>
                     </div>
+
                 </td>
             </tr>
             {% empty %}

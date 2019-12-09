@@ -27,6 +27,7 @@
         <table class="table table-hover table-sm table-bordered">
             <thead class="thead-light">
             <tr>
+                <th scope="col">Check</th>
                 <th scope="col">Setor</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Cpf</th>
@@ -38,6 +39,7 @@
             <tbody>
             {% for colaborador in colaborador %}
             <tr>
+                <td><input type="checkbox" value="" id="defaultCheck1"></td>
                 <td>{{ colaborador.SetorColaborador }}</td>
                 <td>{{ colaborador.Nome }}</td>
                 <td>{{ colaborador.Cpf }}</td>

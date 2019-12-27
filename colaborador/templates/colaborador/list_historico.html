@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Administracao {% endblock %}
+
+{% block container %}
+
+<div class="card">
+    <div class="card-header">
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" id="button-addon3">
+                    <a href="{% url 'add_colaborador' %}" class="btn btn-outline-secondary" type="button">Novo
+                        Colaborador</a>
+                    <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
+                </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
+                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Nome</th>
+                 <th scope="col">SetorAnterior</th>
+                 <th scope="col">SetorAtual</th>
+                 <th scope="col">DataRegistro</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for colaborador in colaborador %}
+            <tr>
+                <td>{{ colaborador.ColaboradorHistorico }}</td>
+                <td>{{ colaborador.SetorAnterior }}</td>
+                <td>{{ colaborador.SetorAtual }}</td>
+                <td>{{ colaborador.DataRegistro }}</td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

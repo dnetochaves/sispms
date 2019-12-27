@@ -84,6 +84,12 @@ def list_historico_remanejamento(request, id):
 
 
 @login_required()
+def list_historico(request):
+    col = HistoricoRemanejamento.objects.all()
+    return render(request, 'colaborador/list_historico.html', {'colaborador': col})
+
+
+@login_required()
 def carta_encaminhamento_colaborador(request, id):
     col = Colaborador.objects.filter(id=id).select_related()
 

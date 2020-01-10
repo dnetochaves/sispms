@@ -8,6 +8,10 @@ class SetorForm(ModelForm):
         fields = ['Nome', 'Telefone1', 'Cep', 'Bairro', 'Logradouro', 'Numero', 'Latitude', 'Longitude', 'Gestor',
                   'Descricao', 'grupo', 'Codigo', 'Email']
 
+    def __init__(self, grupos=None, *args, **kwargs):
+        super(SetorForm, self).__init__(*args, **kwargs)
+        self.fields['grupo'].queryset = grupos  ## ISSO SUBSTITUI AS TAGS PADRÃO (ALL) PELO QUE FOI PASSAGO NA FUNÇÃO
+
 
 class GrupoForm(ModelForm):
     class Meta:
@@ -36,4 +40,12 @@ class TagForm(ModelForm):
 class DemandaForm(ModelForm):
     class Meta:
         model = Demandas
-        fields = ['ItemDemanda', 'Observacao', 'TagsDemandas', 'SetorDemanda', 'PrazoConclsao', 'Os', 'StatusDemanda']
+        fields = ['ItemDemanda', 'Observacao', 'TagsDemandas', 'PrazoConclsao', 'Os', 'StatusDemanda']
+
+    def __init__(self, tags=None, status=None, items=None, *args, **kwargs):
+        super(DemandaForm, self).__init__(*args, **kwargs)
+        self.fields[
+            'TagsDemandas'].queryset = tags  ## ISSO SUBSTITUI AS TAGS PADRÃO (ALL) PELO QUE FOI PASSAGO NA FUNÇÃO
+        self.fields['StatusDemanda'].queryset = status
+        self.fields['ItemDemanda'].queryset = items
+

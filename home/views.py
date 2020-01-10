@@ -20,34 +20,22 @@ def teste_bootstrap(request):
 
 def feed(request):
     busca = request.GET.get('pesquisa', None)
-    # TODO: Codigo duplicado melhorar o quanto antes
-    busca_setor = Usuario.objects.filter(user_id=request.user.id)
 
-    for id in busca_setor:
-        id_setor = id.SetorUsuario.id
-
-   # TODO: Correção a lista da erro quando não tem feed
     if busca:
-        feed = Feed.objects.filter(Titulo=busca)
+        feed = Feed.objects.filter(Titulo__contains=busca, SetorFeed=request.user.profile.SetorUsuario)
     else:
-        feed = Feed.objects.filter(SetorFeed=id_setor)
+        feed = Feed.objects.filter(SetorFeed=request.user.profile.SetorUsuario)
 
     return render(request, 'home/feed.html', {'feed': feed})
 
 
 @login_required
 def add_feed(request):
-    # TODO: Codigo duplicado melhorar o quanto antes
-    busca_setor = Usuario.objects.filter(user_id=request.user.id)
-
-    for id in busca_setor:
-        id_setor = id.SetorUsuario.id
-
     form = FeedForm(request.POST or None)
     if form.is_valid():
         formulario = form.save(commit=False)
         formulario.UsuarioFeed = request.user
-        formulario.SetorFeed_id = id_setor
+        formulario.SetorFeed_id = request.user.profile.SetorUsuario.id
         formulario.save()
         return redirect('/home/feed')
     return render(request, 'home/add_feed.html', {'form': form})

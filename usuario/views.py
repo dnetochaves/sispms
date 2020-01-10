@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Usuario, Nota
 from .forms import UsuarioForm, NotaForm
 from colaborador.models import Colaborador
+from colaborador.views import get_accessful_sectors
 from django.db.models import Count, Avg
 
 
@@ -24,7 +25,8 @@ def painel_usuario(request):
 
 @login_required()
 def perfil(request):
-    a = Colaborador.objects.all().aggregate(Count('Nome'))['Nome__count']
+    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    a = Colaborador.objects.filter(SetorColaborador_id__in=setores).aggregate(Count('Nome'))['Nome__count']
     #b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
     return render(request, 'usuario/perfil.html', {'a': a})
 
@@ -32,13 +34,14 @@ def perfil(request):
 @login_required()
 # TODO: trazer a foto do usuario dinamicamnete
 def list_usuario(request):
+    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
     busca = request.GET.get('pesquisa', None)
 
     if busca:
         # usuarios = Usuario.objects.all()
-        usuarios = Usuario.objects.filter(Nome__contains=busca)
+        usuarios = Usuario.objects.filter(Nome__contains=busca, SetorUsuario_id__in=setores)
     else:
-        usuarios = Usuario.objects.all()
+        usuarios = Usuario.objects.filter(SetorUsuario_id__in=setores)
 
     return render(request, 'usuario/list_usuario.html', {'usu': usuarios})
 
@@ -73,9 +76,9 @@ def delete_usuario(request, id):
 
 # Nota
 @login_required()
-def add_nota(request):
+def add_nota(request, nota=None):
     if request.method == 'POST':
-        form = NotaForm(request.POST)
+        form = NotaForm(request.POST, instance=nota)
 
         if form.is_valid():
             formulario = form.save(commit=False)
@@ -89,11 +92,7 @@ def add_nota(request):
 
 def update_nota(request, id):
     nota = get_object_or_404(Nota, pk=id)
-    form = NotaForm(request.POST or None, instance=nota)
-    if form.is_valid():
-        form.save()
-        return redirect('/usuario/list_nota')
-    return render(request, 'usuario/nota_form.html', {'form': form})
+    return add_nota(request, nota=nota)
 
 
 @login_required()

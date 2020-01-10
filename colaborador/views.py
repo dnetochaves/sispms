@@ -25,13 +25,43 @@ def a4(request):
     return render(request, 'colaborador/a4.html')
 
 
+##########  ALTERAÇÃO AQUI  ##########
+def get_accessful_sectors(sector):
+    '''
+        Esta função faz com que você obtenha os setores pertencentes aos grupos aos quais um setor está associado
+
+        Você entra com o setor.
+
+    '''
+    groups = sector.grupo.all()  # Obtem os grupos associados a um setor
+    sectors = []
+    for group in groups:
+        sectors.extend(group.sectors.all())  # Obtem os setores associados a cada grupo
+    return [sector.id for sector in set(sectors)]  # Retorna todos os setores sem repetição
+
+
+##########  FIM ALTERAÇÃO  ##########
+
+
 @login_required()
-def add_colaborador(request):
-    form = ColaboradorForm(request.POST or None)
+def add_colaborador(request, colaborador=None):
+    ##########  ALTERAÇÃO AQUI  ##########
+    sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
+    form = ColaboradorForm(data=request.POST or None, instance=colaborador,
+                           sectors=Setor.objects.filter(id__in=sectors), tags=Tags.objects.filter(
+            SetorTag_id__in=sectors))  # Passa só as tags que o colaborador tem permissão
+    ##########  FIM ALTERAÇÃO  ##########
     if form.is_valid():
         form.save()
         return redirect('/colaborador/list_colaborador')
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
+
+
+def update_colaborador(request, id):
+    colaborador = get_object_or_404(Colaborador, pk=id)
+    ##########  ALTERAÇÃO AQUI  ##########
+    return add_colaborador(request, colaborador=colaborador)
+    ##########  FIM ALTERAÇÃO  ##########
 
 
 @login_required()
@@ -46,7 +76,9 @@ def add_colaborador_remanejamento(request):
 @login_required()
 def update_colaborador_remanejamento(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
-    form = ColaboradorRemanejamentoForm(request.POST or None, instance=colaborador)
+    sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
+    form = ColaboradorRemanejamentoForm(data=request.POST or None, instance=colaborador,
+                                        sectors=Setor.objects.filter(id__in=sectors))
 
     if form.is_valid():
         form.save()
@@ -64,8 +96,11 @@ def update_colaborador_remanejamento(request, id):
 @login_required()
 def list_colaborador(request):
     busca = request.GET.get('pesquisa', None)
+    ##########  ALTERAÇÃO AQUI  ##########
+    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
     if busca:
-        col = Colaborador.objects.filter(Nome__contains=busca)
+        col = Colaborador.objects.filter(Nome__contains=busca, SetorColaborador_id__in=setores)
+        ##########  FIM ALTERAÇÃO  ##########
         return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
     return render(request, 'colaborador/list_colaborador.html')
 
@@ -96,18 +131,13 @@ def carta_encaminhamento_colaborador(request, id):
     return render(request, 'colaborador/carta_encaminhamento_colaborador.html', {'colaborador': col})
 
 
-def update_colaborador(request, id):
-    colaborador = get_object_or_404(Colaborador, pk=id)
-    form = ColaboradorForm(request.POST or None, instance=colaborador)
-    if form.is_valid():
-        form.save()
-        return redirect('/colaborador/list_colaborador')
-    return render(request, 'colaborador/add_colaborador.html', {'form': form})
-
-
 def observacao_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
-    form = ObservacaoColaboradorForm(request.POST or None, instance=colaborador)
+    ##########  ALTERAÇÃO AQUI  ##########
+    sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
+    form = ObservacaoColaboradorForm(data=request.POST or None, instance=colaborador,
+                                     tags=Tags.objects.filter(SetorTag_id__id=sectors))
+    ##########  FIM ALTERAÇÃO  ##########
     if form.is_valid():
         form.save()
         return redirect('/colaborador/list_colaborador')
@@ -120,39 +150,41 @@ def list_setor_colaborador(request):
 
     if busca:
         # usuarios = Usuario.objects.all()
-        setor = Setor.objects.filter(Nome__contains=busca)
+        setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+        # setor = Setor.objects.filter(Nome__contains=busca)
     else:
-        setor = Setor.objects.all()
-
-    return render(request, 'colaborador/list_setor.html', {'setor': setor})
+        setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+        # setor = Setor.objects.all()
+    ##########  FIM ALTERAÇÃO  ##########
+    return render(request, 'colaborador/list_setor.html', {'setor': Setor.objects.filter(id__in=setores)})
 
 
 @login_required()
 def list_colaborador_por_setor(request, id):
     busca = request.GET.get('pesquisa', None)
+    ##########  ALTERAÇÃO AQUI  ##########
+    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    if id in setores:
 
-    if busca:
-        # usuarios = Usuario.objects.all()
-        col = Colaborador.objects.filter(Nome__contains=busca)
-    else:
-        col = Colaborador.objects.filter(SetorColaborador=id)
+        if busca:
+            # usuarios = Usuario.objects.all()
+            col = Colaborador.objects.filter(Nome__contains=busca, SetorColaborador_id=id)
 
-    return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
+        else:
+            col = Colaborador.objects.filter(SetorColaborador_id=id)
+        ##########  FIM ALTERAÇÃO  ##########
+        return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
 
 
 # Functions Tags
 @login_required()
-def tags_colaborador(request):
-    # TODO: Codigo duplicado melhorar o quanto antes
-    busca_setor = Usuario.objects.filter(user_id=request.user.id)
-
-    for id in busca_setor:
-        id_setor = id.SetorUsuario.id
-
-    form = TagsForm(request.POST or None)
+def tags_colaborador(request, tag=None):
+    ##########  ALTERAÇÃO AQUI (Melhoramento de código)  ##########
+    form = TagsForm(request.POST or None, instance=tag)
     if form.is_valid():
         formulario = form.save(commit=False)
-        formulario.SetorTag_id = id_setor
+        formulario.SetorTag_id = request.user.profile.SetorUsuario.id
+        ##########  FIM ALTERAÇÃO  ##########
         form.save()
         return redirect('/colaborador/list_tags')
     return render(request, 'colaborador/add_tags.html', {'form': form})
@@ -161,32 +193,17 @@ def tags_colaborador(request):
 @login_required()
 def list_tags(request):
     # TODO: Codigo duplicado melhorar o quanto antes
-    busca_setor = Usuario.objects.filter(user_id=request.user.id)
-
-    for id in busca_setor:
-        id_setor = id.SetorUsuario.id
-
-    tags = Tags.objects.filter(SetorTag_id=id_setor)
+    ##########  ALTERAÇÃO AQUI  ##########
+    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    tags = Tags.objects.filter(SetorTag_id__in=setores)
+    ##########  FIM ALTERAÇÃO  ##########
     return render(request, 'colaborador/lista_tags.html', {'tags': tags})
 
 
 @login_required()
 def update_tags(request, id):
-    tags = get_object_or_404(Tags, pk=id)
-
-    # TODO: Codigo duplicado melhorar o quanto antes
-    busca_setor = Usuario.objects.filter(user_id=request.user.id)
-
-    for id in busca_setor:
-        id_setor = id.SetorUsuario.id
-
-    form = TagsForm(request.POST or None, instance=tags)
-    if form.is_valid():
-        formulario = form.save(commit=False)
-        formulario.SetorTag_id = id_setor
-        form.save()
-        return redirect('/colaborador/list_tags')
-    return render(request, 'colaborador/add_tags.html', {'form': form})
+    tag = get_object_or_404(Tags, pk=id)
+    return tags_colaborador(request, tag=tag)
 
 
 @login_required()

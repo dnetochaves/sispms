@@ -13,7 +13,10 @@ class Setor(models.Model):
     Longitude = models.CharField(max_length=50)
     Gestor = models.CharField(max_length=50)
     Descricao = models.CharField(max_length=100)
-    grupo = models.ManyToManyField('Grupo', null=True)
+    ##########  ALTERAÇÃO AQUI  ##########
+    ##########  'related_name' faz com que você acesse os setores associados a um grupo com grupo.sectors.all()
+    grupo = models.ManyToManyField('Grupo', null=True, related_name='sectors')
+    ##########  FIM ALTERAÇÃO  ##########
     Codigo = models.CharField('Codigo', max_length=100, null=True, blank=True)
     Email = models.CharField('Email', max_length=100, null=True, blank=True)
 

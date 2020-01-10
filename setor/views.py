@@ -65,9 +65,9 @@ def list_grupo(request):
     grupos = request.user.profile.SetorUsuario.grupo.all()
     if busca:
         # usuarios = Usuario.objects.all()
-        grupo = grupos.filter(Nome__contains=busca)
+        grupos = grupos.filter(Nome__contains=busca)
 
-    return render(request, 'setor/list_grupo.html', {'grupo': grupo})
+    return render(request, 'setor/list_grupo.html', {'grupo': grupos})
 
 
 @login_required()

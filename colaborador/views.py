@@ -29,9 +29,7 @@ def a4(request):
 def get_accessful_sectors(sector):
     '''
         Esta função faz com que você obtenha os setores pertencentes aos grupos aos quais um setor está associado
-
         Você entra com o setor.
-
     '''
     groups = sector.grupo.all()  # Obtem os grupos associados a um setor
     sectors = []
@@ -134,9 +132,8 @@ def carta_encaminhamento_colaborador(request, id):
 def observacao_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
     ##########  ALTERAÇÃO AQUI  ##########
-    sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
-    form = ObservacaoColaboradorForm(data=request.POST or None, instance=colaborador,
-                                     tags=Tags.objects.filter(SetorTag_id__id=sectors))
+    #sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
+    form = ObservacaoColaboradorForm(request.POST or None)
     ##########  FIM ALTERAÇÃO  ##########
     if form.is_valid():
         form.save()
@@ -221,48 +218,31 @@ def info_tags(request, id):
 class ListaColaborador(ListView):
     model = Colaborador
     template_name = 'colaborador_list.html'
-
-
 class DetailColaborador(DetailView):
     model = Colaborador
-
-
 class CreateColaborador(CreateView):
     model = Colaborador
     fields = ['Nome', 'Cpf',  'Telefone', 'tags', 'SetorColaborador']
     success_url = reverse_lazy('colaborador_list_cbv')
-
-
 class UpdateColaborador(UpdateView):
     model = Colaborador
     fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
     success_url = reverse_lazy('colaborador_list_cbv')
-
-
 class DeleteColaborador(DeleteView):
     model = Colaborador
     success_url = reverse_lazy('colaborador_list_cbv')
-
-
 # Crud Tags CBV
 class ListaTags(ListView):
     model = Tags
     template_name = 'tags_list.html'
-
-
 class DetailTag(DetailView):
     model = Tags
-
-
 class CreateTag(CreateView):
     model = Tags
     fields = ['Nome', 'Observacao']
     success_url = reverse_lazy('tag_list_cbv')
-
-
 class UpdateTag(UpdateView):
     model = Tags
     fields = ['Nome', 'Observacao']
     success_url = reverse_lazy('tag_list_cbv')
-
 '''

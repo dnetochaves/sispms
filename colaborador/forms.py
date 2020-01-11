@@ -35,6 +35,12 @@ class ObservacaoColaboradorForm(ModelForm):
         model = Colaborador
         fields = ['Observacao']
 
+        ##########  ALTERAÇÃO AQUI  ##########
+    def __init__(self, tags=None, sectors=None, *args, **kwargs):
+        super(ObservacaoColaboradorForm, self).__init__(*args, **kwargs)
+        self.fields['Observacao'].queryset = sectors
+        ##########  FIM ALTERAÇÃO  ##########
+
 
 class TagsForm(ModelForm):
     class Meta:

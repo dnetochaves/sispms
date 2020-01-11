@@ -132,8 +132,9 @@ def carta_encaminhamento_colaborador(request, id):
 def observacao_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
     ##########  ALTERAÇÃO AQUI  ##########
-    #sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
-    form = ObservacaoColaboradorForm(request.POST or None)
+    sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
+    form = ObservacaoColaboradorForm(data=request.POST or None, instance=colaborador,
+                           sectors=Setor.objects.filter(id__in=sectors))  # Passa só as tags que o colaborador tem permissão
     ##########  FIM ALTERAÇÃO  ##########
     if form.is_valid():
         form.save()

@@ -125,20 +125,24 @@ def list_historico(request):
 @login_required()
 def carta_encaminhamento_colaborador(request, id):
     col = Colaborador.objects.filter(id=id).select_related()
-
     return render(request, 'colaborador/carta_encaminhamento_colaborador.html', {'colaborador': col})
 
 
+@login_required()
 def observacao_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
     ##########  ALTERAÇÃO AQUI  ##########
     sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
     form = ObservacaoColaboradorForm(data=request.POST or None, instance=colaborador,
-                           sectors=Setor.objects.filter(id__in=sectors))  # Passa só as tags que o colaborador tem permissão
+                                     sectors=Setor.objects.filter(
+                                         id__in=sectors))  # Passa só as tags que o colaborador tem permissão
     ##########  FIM ALTERAÇÃO  ##########
     if form.is_valid():
         form.save()
-        return redirect('/colaborador/list_colaborador')
+        # TODO PReciso fazer outra função a parte para execultar o bloco da linha 143 a 145 (urgente)
+        #carta_encaminhamento_colaborador(request, id)
+        col = Colaborador.objects.filter(id=id).select_related()
+        return render(request, 'colaborador/carta_encaminhamento_colaborador.html', {'colaborador': col})
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
 
 

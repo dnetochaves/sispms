@@ -216,6 +216,7 @@ def add_demanda(request, demanda=None):
     return render(request, 'setor/add_demanda.html', {'form': form})
 
 
+
 @login_required()
 def update_demanda(request, id):
     demanda = get_object_or_404(Demandas, pk=id)

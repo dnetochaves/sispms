@@ -207,15 +207,12 @@ def add_demanda(request, demanda=None):
         setores=Setor.objects.filter(id__in=setores)
 
     )
-    print(form.errors)
     if form.is_valid():
         formulario = form.save(commit=False)
         formulario.UsuarioDemanda_id = request.user.id
         #formulario.SetorDemanda_id = request.user.profile.SetorUsuario.id
-        formulario.save(commit=True)
-        print('Entrou aqui')
+        formulario.save()
         return redirect('/setor/list_demandas')
-    print(form.errors)
     return render(request, 'setor/add_demanda.html', {'form': form})
 
 

@@ -175,9 +175,9 @@ def info_tag(request, id):
 
 @login_required()
 def list_demandas(request):
-    #setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
 
-    demanda = Demandas.objects.filter(SetorDemanda=request.user.profile.SetorUsuario).order_by('-SetorDemanda')
+    demanda = Demandas.objects.filter(SetorDemanda_id__in=setores).order_by('-SetorDemanda')
 
     return render(request, 'setor/list_demanda.html', {'demanda': demanda})
 
@@ -207,12 +207,15 @@ def add_demanda(request, demanda=None):
         setores=Setor.objects.filter(id__in=setores)
 
     )
+    print(form.errors)
     if form.is_valid():
         formulario = form.save(commit=False)
         formulario.UsuarioDemanda_id = request.user.id
-        formulario.SetorDemanda_id = request.user.profile.SetorUsuario.id
-        form.save()
+        #formulario.SetorDemanda_id = request.user.profile.SetorUsuario.id
+        formulario.save(commit=True)
+        print('Entrou aqui')
         return redirect('/setor/list_demandas')
+    print(form.errors)
     return render(request, 'setor/add_demanda.html', {'form': form})
 
 

@@ -44,8 +44,7 @@ class DemandaForm(ModelForm):
 
     def __init__(self, tags=None, status=None, items=None, setores=None, *args, **kwargs):
         super(DemandaForm, self).__init__(*args, **kwargs)
-        self.fields[
-            'TagsDemandas'].queryset = tags  ## ISSO SUBSTITUI AS TAGS PADRÃO (ALL) PELO QUE FOI PASSAGO NA FUNÇÃO
+        self.fields['TagsDemandas'].queryset = tags  ## ISSO SUBSTITUI AS TAGS PADRÃO (ALL) PELO QUE FOI PASSAGO NA FUNÇÃO
         self.fields['StatusDemanda'].queryset = status
         self.fields['ItemDemanda'].queryset = items
         self.fields['SetorDemanda'].queryset = setores

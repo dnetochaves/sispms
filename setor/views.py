@@ -197,18 +197,18 @@ def list_grupo_setor(request):
 @login_required()
 def add_demanda(request, demanda=None):
     setores = get_accessful_sectors(request.user.profile.SetorUsuario)
-    #setores = request.user.profile.SetorUsuario
+    setor = request.user.profile.SetorUsuario.id
     form = DemandaForm(
         data=request.POST or None,
         instance=demanda,
-        items=Item.objects.filter(SetorItem_id__in=setores),
-        status=Status.objects.filter(SetoraStatus_id__in=setores),
-        tags=Tags.objects.filter(TagSetor_id__in=setores),
+        items=Item.objects.filter(SetorItem_id=setor),
+        status=Status.objects.filter(SetoraStatus_id=setor),
+        tags=Tags.objects.filter(TagSetor_id=setor),
         setores=Setor.objects.filter(id__in=setores)
 
     )
     if form.is_valid():
-        formulario = form.save(commit=False)
+        formulario = form.save()
         formulario.UsuarioDemanda_id = request.user.id
         #formulario.SetorDemanda_id = request.user.profile.SetorUsuario.id
         formulario.save()

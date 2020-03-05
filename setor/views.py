@@ -201,7 +201,7 @@ def add_demanda(request, demanda=None):
     form = DemandaForm(
         data=request.POST or None,
         instance=demanda,
-        items=Item.objects.filter(SetorItem_id=setor),
+        items=Item.objects.filter(SetorItem_id=setor).order_by('Nome'),
         status=Status.objects.filter(SetoraStatus_id=setor),
         tags=Tags.objects.filter(TagSetor_id=setor),
         setores=Setor.objects.filter(id__in=setores)

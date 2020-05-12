@@ -223,6 +223,11 @@ def update_demanda(request, id):
     return add_demanda(request, demanda=demanda)
 
 
+@login_required()
+def filtrar_demanda_setor(request, id):
+   demandas = Demandas.objects.filter(SetorDemanda_id=id)
+   return render(request, 'setor/filtrar_demanda_setor.html', {'demanda': demandas})
+
 '''Fim Demandas'''
 
 '''

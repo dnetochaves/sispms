@@ -36,7 +36,7 @@
             <tbody>
             {% for demandas in demanda %}
             <tr>
-                <td><a class="btn btn-primary" href="{% url 'filtrar_demanda_setor' demandas.SetorDemanda.id %}">{{ demandas.SetorDemanda }}</td></a>
+                <td><a href="{% url 'filtrar_demanda_setor' demandas.StatusDemanda.id %}">{{ demandas.SetorDemanda }}</td></a>
                 <td>{{ demandas.ItemDemanda }}</td>
                 <td>{{ demandas.Observacao }}</td>
                 <td>{{ demandas.DataRegistro }}</td>

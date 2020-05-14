@@ -7,11 +7,35 @@ Perfil
 {% block container %}
 
 <div class="card-columns">
-    <div class="card bg-whith">
+   
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card bg-whith">
         <div class="card-body">
-            <h5 class="card-title">Total de Colaboradores</h5>
+            <h5 class="card-title">Terceirizados</h5>
             <p class="card-text">{{ a }}</p>
         </div>
     </div>
+    </div>
+    <div class="col-sm">
+       <div class="card bg-whith">
+        <div class="card-body">
+            <h5 class="card-title">Manutenção</h5>
+            <p class="card-text">{{ a }}</p>
+        </div>
+    </div>
+    </div>
+    <div class="col-sm">
+       <div class="card bg-whith">
+        <div class="card-body">
+            <h5 class="card-title">Suporte</h5>
+            <p class="card-text">{{ a }}</p>
+        </div>
+    </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

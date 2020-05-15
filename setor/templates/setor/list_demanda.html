@@ -3,7 +3,23 @@
 {% block title %} Administracao {% endblock %}
 
 {% block container %}
-
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'list_item' %}">Item</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'list_tag' %}">Tags</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'list_status' %}">Status</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'add_demanda' %}">Gerar Demandas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'list_demandas' %}">Relação Demandas</a>
+  </li>
+</ul>
 <div class="card">
     <div class="card-header">
         <form>

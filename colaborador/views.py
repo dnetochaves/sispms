@@ -11,6 +11,8 @@ from django.urls import reverse_lazy
 from usuario.models import Usuario
 from setor.models import Setor
 from django.db.models import Count, Avg
+from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -93,12 +95,18 @@ def update_colaborador_remanejamento(request, id):
 
 @login_required()
 def list_colaborador(request):
+    if not request.user.has_perm('colaborador.view_colaborador'):
+        messages.success(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        return render(request, 'usuario/perfil.html')
+
     busca = request.GET.get('pesquisa', None)
+    
     ##########  ALTERAÇÃO AQUI  ##########
     setores = get_accessful_sectors(request.user.profile.SetorUsuario)
     if busca:
         col = Colaborador.objects.filter(Nome__contains=busca, SetorColaborador_id__in=setores)
         ##########  FIM ALTERAÇÃO  ##########
+
         return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
     return render(request, 'colaborador/list_colaborador.html')
 

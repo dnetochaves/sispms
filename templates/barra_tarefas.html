@@ -1,8 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<!--
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3262a8;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -21,7 +24,7 @@
                     <a class="dropdown-item" href="{% url 'list_colaborador' %}">Operações</a>
                     <a class="dropdown-item" href="{% url 'list_tags' %}">Tags</a>
                     <!--<a class="dropdown-item" href="{% url 'list_historico' %}">Listagem de Histórico</a>-->
-                </div>
+ <!--               </div>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -34,7 +37,7 @@
                     <a class="dropdown-item" href="{% url 'add_demanda' %}">Gerar Demandas</a>
                     <a class="dropdown-item" href="{% url 'list_demandas' %}">Relação de Demandas</a>
                     <!--<a class="dropdown-item" href="{% url 'list_grupo_setor' %}">Gerar Demandas de Grupo</a>-->
-                </div>
+<!--                </div>
             </li>
 
             <li class="nav-item dropdown">
@@ -62,5 +65,17 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div>  
 </nav>
+-->
+<br>
+<div class="container">
+  {% if messages %}
+  <div class="alert alert-warning" role="alert">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </div>
+{% endif %}
+</div>
+ 

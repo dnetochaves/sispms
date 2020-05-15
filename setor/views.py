@@ -10,6 +10,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db.models import Count, Avg
+from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -175,6 +177,10 @@ def info_tag(request, id):
 
 @login_required()
 def list_demandas(request):
+    if not request.user.has_perm('setor.view_demandas'):
+        messages.success(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        return render(request, 'usuario/perfil.html')
+    
     setores = get_accessful_sectors(request.user.profile.SetorUsuario)
 
     demanda = Demandas.objects.filter(SetorDemanda_id__in=setores).order_by('-SetorDemanda')

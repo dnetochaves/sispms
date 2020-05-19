@@ -19,7 +19,10 @@ from django.contrib import messages
 
 @login_required()
 def painel_colaborador(request):
-    return render(request, 'colaborador/painel_colaborador.html')
+    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    a = Colaborador.objects.filter(SetorColaborador_id__in=setores).aggregate(Count('Nome'))['Nome__count']
+    #b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
+    return render(request, 'colaborador/painel_colaborador.html', {'a': a})
 
 
 @login_required()

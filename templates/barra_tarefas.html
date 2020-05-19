@@ -1,5 +1,5 @@
-<!--
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3262a8;">
+
+<nav class="navbar navbar-expand-lg navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,13 +8,25 @@
 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
+                <a class="nav-link" href="javascript:history.back()"><i class="fa fa-undo"></i> Voltar<span class="sr-only">(current)</span></a>
+            </li>
+             <li class="nav-item active">
+                <a class="nav-link" href="{% url 'painel_colaborador' %}"><i class="fa fa-th-large"></i> DashBoard<span class="sr-only">(current)</span></a>
+            </li>
+            <!--
+                <li class="nav-item active">
                 <a class="nav-link" href="{% url 'feed' %}"><i class="fa fa-rss"></i> Feed<span class="sr-only">(current)</span></a>
             </li>
+            -->
+            <!--
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'perfil' %}"><i class="fa fa-id-card"></i> Perfil</a>
             </li>
+            -->
+            <!--
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -23,8 +35,11 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'list_colaborador' %}">Operações</a>
                     <a class="dropdown-item" href="{% url 'list_tags' %}">Tags</a>
-                    <!--<a class="dropdown-item" href="{% url 'list_historico' %}">Listagem de Histórico</a>-->
- <!--               </div>
+                    <!--<a class="dropdown-item" href="{% url 'list_historico' %}">Listagem de Histórico</a>
+                </div>
+            </li>   
+            --> 
+            <!--
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -36,9 +51,12 @@
                     <a class="dropdown-item" href="{% url 'list_status' %}">Status</a>
                     <a class="dropdown-item" href="{% url 'add_demanda' %}">Gerar Demandas</a>
                     <a class="dropdown-item" href="{% url 'list_demandas' %}">Relação de Demandas</a>
-                    <!--<a class="dropdown-item" href="{% url 'list_grupo_setor' %}">Gerar Demandas de Grupo</a>-->
-<!--                </div>
+                    <!--<a class="dropdown-item" href="{% url 'list_grupo_setor' %}">Gerar Demandas de Grupo</a>
+                </div>
             </li>
+            -->
+
+            <!--
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
@@ -51,6 +69,8 @@
                     <a class="dropdown-item" href="#">Mensagens</a>
                 </div>
             </li>
+            -->
+            <!--
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -64,10 +84,12 @@
 
                 </div>
             </li>
+            -->
         </ul>
     </div>  
+    
 </nav>
--->
+
 <br>
 <div class="container">
   {% if messages %}

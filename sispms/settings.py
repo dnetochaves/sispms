@@ -131,6 +131,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_URL = '/usuario/'
 LOGIN_REDIRECT_URL = '/usuario/perfil/'
 
+
+
 # Configurações AWS
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')

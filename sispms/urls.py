@@ -19,6 +19,7 @@ from usuario import urls as usuario_urls
 from home import urls as home_urls
 from colaborador import urls as colaborador_urls
 from setor import urls as setor_urls
+from nti import urls as nti_urls
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
@@ -31,6 +32,7 @@ urlpatterns = [
     path('usuario/', include(usuario_urls)),
     path('colaborador/', include(colaborador_urls)),
     path('setor/', include(setor_urls)),
+    path('nti/', include(nti_urls)),
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
 ]  # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

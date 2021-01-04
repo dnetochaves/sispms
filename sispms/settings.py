@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'colaborador',
     'setor',
+    'nti',
 ]
 
 MIDDLEWARE = [

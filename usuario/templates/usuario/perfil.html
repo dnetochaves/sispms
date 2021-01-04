@@ -7,35 +7,47 @@ Perfil
 {% block container %}
 
 <div class="card-columns">
-   
+
 </div>
 
 <div class="container">
-  
+
   <div class="row">
     <div class="col-sm">
       <div class="card bg-whith">
-        <div class="card-body">
-            <h5 class="card-title">Terceirizados</h5>
-            <p class="card-text">  <a href="{% url 'list_colaborador' %}" class="btn btn-primary">Acessar</a></p>
+        <div class="card-body border border-primary">
+          <h5 class="card-title">Terceirizados</h5>
+          <p class="card-text"> <a href="{% url 'list_colaborador' %}" class="btn btn-primary">Acessar</a></p>
         </div>
-    </div>
+      </div>
     </div>
     <div class="col-sm">
-       <div class="card bg-whith">
-        <div class="card-body">
-            <h5 class="card-title">Manutenção</h5>
-            <p class="card-text">  <a href="{% url 'list_demandas' %}" class="btn btn-primary">Acessar</a></p>
+      <div class="card bg-whith">
+        <div class="card-body border border-primary">
+          <h5 class="card-title">Manutenção</h5>
+          <p class="card-text"> <a href="{% url 'list_demandas' %}" class="btn btn-primary">Acessar</a></p>
         </div>
+      </div>
     </div>
+   
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <div class="card bg-whith border border-primary">
+        <div class="card-body">
+          <h5 class="card-title">NTI</h5>
+          <p class="card-text"> <a href="{% url 'nti' %}" class="btn btn-primary">Acessar</a></p>
+        </div>
+      </div>
     </div>
     <div class="col-sm">
-       <div class="card bg-whith">
+      <div class="card bg-whith border border-primary">
         <div class="card-body">
-            <h5 class="card-title">Suporte</h5>
-            <p class="card-text">  <a href="#" class="btn btn-primary">Acessar</a></p>
+          <h5 class="card-title">Suporte</h5>
+          <p class="card-text"> <a href="{% url 'nti' %}" class="btn btn-primary">Acessar</a></p>
         </div>
-    </div>
+      </div>
     </div>
   </div>
 </div>

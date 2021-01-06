@@ -6,6 +6,8 @@ from .forms import UsuarioForm, NotaForm
 from colaborador.models import Colaborador
 from colaborador.views import get_accessful_sectors
 from django.db.models import Count, Avg
+from django.contrib.auth.models import User
+from .models import Usuario
 
 
 # Create your views here.
@@ -25,10 +27,11 @@ def painel_usuario(request):
 
 @login_required()
 def perfil(request):
-    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
-    a = Colaborador.objects.filter(SetorColaborador_id__in=setores).aggregate(Count('Nome'))['Nome__count']
+    #setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    #a = Colaborador.objects.filter(SetorColaborador_id__in=setores).aggregate(Count('Nome'))['Nome__count']
     #b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
-    return render(request, 'usuario/perfil.html', {'a': a})
+    dados_user = Usuario.objects.get(user=request.user.id)
+    return render(request, 'usuario/perfil.html', {'dados_user': dados_user})
 
 
 @login_required()

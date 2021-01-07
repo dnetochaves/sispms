@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} Nti {% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'add_tags' %}">Inserir nova Tag</a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Pesquisa">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Observação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tag in tags %}
+                        <tr>
+                            <th scope="row">{{ tag.id }}</th>
+                            <td><span class="badge badge-primary">{{ tag.nome }}</span></td>
+                            <td>{{ tag.observacao }}</td>
+                            <td>
+                                {% for tag in eq.tag.all %}
+                                <span class="badge badge-dark">{{ tag }}</span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

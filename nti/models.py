@@ -7,6 +7,9 @@ class Tags(models.Model):
     observacao = models.CharField(max_length=50)
     setor_tag = models.ForeignKey(Setor, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.nome
+
 
 class Equipamento(models.Model):
     descricao = models.CharField(max_length=255)

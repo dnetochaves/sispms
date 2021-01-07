@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light border border-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,14 @@
                 <a class="nav-link" href="{% url 'feed' %}"><i class="fa fa-rss"></i> Feed<span
                         class="sr-only">(current)</span></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'list_nota' %}"><i class="fa fa-user-edit"></i> Notas</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'perfil' %}"><i class="fa fa-id-card"></i> Perfil</a>
             </li>
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user-plus"></i> Colaborador
@@ -74,7 +78,7 @@
                     <a class="dropdown-item" href="{% url 'list_grupo' %}">Grupo Setor</a>
 
                 </div>
-            </li>
+            </li>-->
         </ul>
     </div>
 

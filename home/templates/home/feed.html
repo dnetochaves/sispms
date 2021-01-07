@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% load static %}
 {% block title %} Administracao {% endblock %}
 
 {% block container %}
+
 
 <div class="row">
     <div class="col">
@@ -13,31 +15,33 @@
                     <button type="submit" class="btn btn-outline-secondary">Pesquisar</button>
                 </div>
                 <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons"
-                       aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
+                    aria-describedby="button-addon3" id="pesquisa" name="pesquisa">
             </div>
         </form>
     </div>
 </div>
+{% for feeds in feed %}
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                    data-target="#{{ feeds.Titulo }}" aria-expanded="true" aria-controls="collapseOne">
+                    <h4>{{ feeds.Titulo }}</h4>
+                    <small>Postado por {{ feeds.UsuarioFeed }} {{ feeds.DataRegistro | naturalday}}</small>
+                </button>
+            </h2>
+        </div>
 
-<div class="row">
-
-    <div class="col-12">
-        {% for feeds in feed %}
-        <div class="card">
+        <div id="{{ feeds.Titulo }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
-                <h4 class="card-title">{{ feeds.Titulo }}</h4>
-                <p class="card-text">{{ feeds.Descricao }}</p>
-                <a href="#" class="btn btn-primary btn-sm">{{ feeds.SetorFeed }}</a>
-                <a href="#" class="btn btn-danger btn-sm">{{ feeds.UsuarioFeed }}</a>
-                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-share-alt"></i></a>
+                {{ feeds.Descricao }}
             </div>
         </div>
-        {% empty %}
-        <div class="alert alert-info" role="alert">
-           Não há feeds a serem exibidos
-        </div>
-        {% endfor %}
-
     </div>
+
 </div>
+
+{% endfor %}
+<br><br><br><br>
 {% endblock %}

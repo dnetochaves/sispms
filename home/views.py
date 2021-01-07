@@ -19,14 +19,12 @@ def teste_bootstrap(request):
 
 
 def feed(request):
-    busca = request.GET.get('pesquisa', None)
-
-    if busca:
-        feed = Feed.objects.filter(Titulo__contains=busca, SetorFeed=request.user.profile.SetorUsuario)
-    else:
-        feed = Feed.objects.filter(SetorFeed=request.user.profile.SetorUsuario)
-
+    #busca = request.GET.get('pesquisa', None)
+    #feed = Feed.objects.filter(SetorFeed=request.user.profile.SetorUsuario)
+    feed = Feed.objects.filter(SetorFeed=request.user.profile.SetorUsuario).order_by('-DataRegistro')
     return render(request, 'home/feed.html', {'feed': feed})
+
+    
 
 
 @login_required

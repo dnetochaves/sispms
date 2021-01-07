@@ -3,11 +3,16 @@ from .models import Equipamento, Tags
 from .forms import EquipamentoForm, TagsForm
 from django.contrib.auth.models import User
 from usuario.models import Usuario
+from django.contrib import messages
 
 # Create your views here.
 
 
 def index(request):
+    if not request.user.has_perm('setor.view_demandas'):
+        messages.success(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        return render(request, 'usuario/perfil.html')
+       
     return render(request, 'nti/index.html')
 
 

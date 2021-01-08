@@ -16,7 +16,7 @@
   <title>{% block title %} {% endblock %}</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" style="margin-top:70px">
   <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="{% url 'perfil' %}"><img src="{% static 'img/logo-prefeitura-salvador.png' %}"
         alt="My image"></a>
@@ -53,7 +53,7 @@
   {% include 'barra_tarefas.html' %}
   {% endblock %}
   {% include 'partials/_message.html' %}
-  <div class="container-fluid" style="margin-top:50px">
+  <div class="container-fluid" style="margin-top:40px">
     {% block container %}
     {% endblock %}
 

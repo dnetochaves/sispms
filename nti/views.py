@@ -10,7 +10,7 @@ from django.contrib import messages
 
 def index(request):
     if not request.user.has_perm('nti.view_equipamento'):
-        messages.success(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        messages.error(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
         return render(request, 'usuario/perfil.html')
        
     return render(request, 'nti/index.html')

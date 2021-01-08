@@ -37,7 +37,7 @@ body {
   justify-content: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #3262a8;
+  
 }
 
 .form-signin {
@@ -71,7 +71,7 @@ body {
 }
 </style>
 </head>
-<body class="text-center">
+<body class="text-center bg-primary">
     <form class="form-signin" method="post">
          {% csrf_token %}
       <img src="{% static "img/logo-prefeitura-salvador.png" %}" alt="My image"></a>
@@ -81,7 +81,7 @@ body {
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Entre</button>
+      <button class="btn btn-lg btn-secondary btn-block" type="submit">Entre</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2019 | Versão 3.2.19</p>
     </form>
   </body>

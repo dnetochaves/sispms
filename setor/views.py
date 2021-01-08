@@ -178,7 +178,7 @@ def info_tag(request, id):
 @login_required()
 def list_demandas(request):
     if not request.user.has_perm('setor.view_demandas'):
-        messages.success(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        messages.error(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
         return render(request, 'usuario/perfil.html')
     
     setores = get_accessful_sectors(request.user.profile.SetorUsuario)

@@ -99,7 +99,7 @@ def update_colaborador_remanejamento(request, id):
 @login_required()
 def list_colaborador(request):
     if not request.user.has_perm('colaborador.view_colaborador'):
-        messages.success(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        messages.error(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
         return render(request, 'usuario/perfil.html')
 
     busca = request.GET.get('pesquisa', None)

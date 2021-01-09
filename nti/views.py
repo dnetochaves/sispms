@@ -4,21 +4,25 @@ from .forms import EquipamentoForm, TagsForm
 from django.contrib.auth.models import User
 from usuario.models import Usuario
 from django.contrib import messages
+from django.db.models import Count, Avg
 
 # Create your views here.
 
 
 def index(request):
     if not request.user.has_perm('nti.view_equipamento'):
-        messages.error(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        messages.error(
+            request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
         return render(request, 'usuario/perfil.html')
-       
+
     return render(request, 'nti/index.html')
 
 
-def equipamentos(request,  equipamento=None):
-    eqs = Equipamento.objects.all()
-    return render(request, 'nti/equipamentos.html', {'eqs': eqs})
+def equipamentos(request):
+    eqs = Equipamento.objects.all().order_by('setor')
+    total_equipamentos = Equipamento.objects.all().aggregate(
+        Count('id'))['id__count']
+    return render(request, 'nti/equipamentos.html', {'eqs': eqs, 'total_equipamentos': total_equipamentos})
 
 
 def add_equipamento(request, equipamento=None):
@@ -29,12 +33,19 @@ def add_equipamento(request, equipamento=None):
 
         if form.is_valid():
             formulario = form.save()
-            #formulario.setor = 2
             formulario.save()
+            messages.success(request, 'Equipamento inserido com sucesso')
             return redirect('/nti/equipamentos')
     else:
         form = EquipamentoForm()
         return render(request, 'nti/add_equipamento.html', {'form': form})
+
+
+def search_equipamento(request, param):
+    equipamentos = Equipamento.objects.filter(setor=param)
+    total_equipamentos = Equipamento.objects.filter(setor=param).aggregate(
+        Count('id'))['id__count']
+    return render(request, 'nti/search_equipamento.html', {'equipamentos': equipamentos, 'total_equipamentos': total_equipamentos})
 
 
 def tags(request):
@@ -52,6 +63,7 @@ def add_tags(request, tags=None):
             formulario = form.save(commit=False)
             formulario.setor_tag = dados_user.SetorUsuario
             formulario.save()
+            messages.success(request, 'Tag inserido com sucesso')
             return redirect('/nti/tags')
     else:
         form = TagsForm()

@@ -44,37 +44,29 @@
                             <th scope="col">Modelo</th>
                             <th scope="col">Tombo</th>
                             <th scope="col">Observação</th>
-                            <th scope="col">Tag</th>
                             <th scope="col" class="text-success">
                                 <center>Setor <i class="fas fa-search"></i></center>
                             </th>
-                            <th scope="col"></th>
+                            <th scope="col">Tag</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        {% for eq in eqs %}
+                        {% for eq in equipamentos %}
                         <tr>
                             <td>{{ eq.descricao }}</td>
                             <td>{{ eq.fabricante }}</td>
                             <td>{{ eq.modelo }}</td>
                             <td>{{ eq.tombo }}</td>
-                            <td>{{ eq.observacao | linebreaks }}</td>
-                            <td>
-                                {% for tag in eq.tag.all %}
-                                <span class="badge badge-primary">{{ tag }}</span>
-                                {% endfor %}
-                            </td>
+                            <td>{{ eq.observacao }}</td>
                             <td class="border border-success">
                                 <center><a class="btn btn-success" href="{% url 'search_equipamento' eq.setor.id %}">
                                         {{eq.setor }}</a></center>
                             </td>
                             <td>
-                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                      <button type="button" class="btn btn-secondary"><i class="fas fa-exchange-alt"></i></button>
-                                      <button type="button" class="btn btn-secondary"><i class="fas fa-history"></i></button>
-                                    </div>
+                                {% for tag in eq.tag.all %}
+                                <span class="badge badge-primary">{{ tag }}</span>
+                                {% endfor %}
                             </td>
 
                         </tr>

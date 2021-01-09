@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from usuario.models import Usuario
 from django.contrib import messages
 from django.db.models import Count, Avg
+from django.db.models import Q, Value
+from django.db.models.functions import Concat
 
 # Create your views here.
 
@@ -46,6 +48,26 @@ def search_equipamento(request, param):
     total_equipamentos = Equipamento.objects.filter(setor=param).aggregate(
         Count('id'))['id__count']
     return render(request, 'nti/search_equipamento.html', {'equipamentos': equipamentos, 'total_equipamentos': total_equipamentos})
+
+
+def search(request):
+    search = request.GET.get('search')
+
+    if search is None or not search:
+        messages.error(request, 'Campo pesquisa não pode ficar vazio')
+        return render(request, 'nti/equipamentos.html')
+
+    eqs = Equipamento.objects.filter(
+
+        Q(descricao__icontains=search) |
+        Q(fabricante__icontains=search) |
+        Q(modelo__icontains=search) |
+        Q(tombo__icontains=search) |
+        Q(observacao__icontains=search)
+
+    )
+
+    return render(request, 'nti/equipamentos.html', {'eqs': eqs})
 
 
 def tags(request):

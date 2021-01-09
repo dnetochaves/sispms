@@ -4,30 +4,38 @@
 
 {% block container %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col"><p class="h4">Total de Equipamentos: {{ total_equipamentos }}</p></div>
-    </div>
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active btn btn-primary" href="{% url 'add_equipamento' %}"><i
-                    class="fas fa-plus"></i></a>
-        </li> |
-        <li class="nav-item">
-            <a class="nav-link active btn btn-danger" href=""><i
-                    class="fas fa-file-pdf"></i></a>
-        </li> |
-        <li class="nav-item">
-            <a class="nav-link active btn btn-success" href=""><i
-                    class="fas fa-file-excel"></i></a>
-        </li>
-    </ul>
-    <hr>
+
+
+    {% for pesquisa in pesquisa %}
+    <p>{{ pesquisa.id }}</p>
+
+    {% endfor %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                Total de Equipamentos: {{ total_equipamentos }}
+            </li>
+            <li class="breadcrumb-item">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary btn-sm" href="{% url 'add_equipamento' %}"><i class="fas fa-plus"></i></a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'add_equipamento' %}"><i
+                            class="fas fa-file-pdf"></i></a>
+                    <a class="btn btn-success btn-sm" href="{% url 'add_equipamento' %}"><i
+                            class="fas fa-file-excel"></i></a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+
     <div class="row">
         <div class="col-12">
-            <form>
-                <div class="row">
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Pesquisa">
+            <form method="get" action="{% url 'search' %}">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <input class="form-control" type="search" value="{{ request.GET.termo }}" id="search-input"
+                            placeholder="Digite sua pesquisa" name="search">
                     </div>
                 </div>
             </form>
@@ -65,15 +73,18 @@
                                 <span class="badge badge-primary">{{ tag }}</span>
                                 {% endfor %}
                             </td>
-                            <td class="border border-success">
-                                <center><a class="btn btn-success" href="{% url 'search_equipamento' eq.setor.id %}">
+                            <td class="bg-secondary">
+                                <center><a class="btn btn-success btn-sm"
+                                        href="{% url 'search_equipamento' eq.setor.id %}">
                                         {{eq.setor }}</a></center>
                             </td>
                             <td>
                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                     <div class="btn-group mr-2" role="group" aria-label="First group">
-                                      <button type="button" class="btn btn-secondary"><i class="fas fa-exchange-alt"></i></button>
-                                      <button type="button" class="btn btn-secondary"><i class="fas fa-history"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm"><i
+                                                class="fas fa-exchange-alt"></i></button>
+                                        <button type="button" class="btn btn-success btn-sm"><i
+                                                class="fas fa-history"></i></button>
                                     </div>
                             </td>
 

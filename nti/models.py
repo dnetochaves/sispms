@@ -22,3 +22,13 @@ class Equipamento(models.Model):
 
     def __str__(self):
         return self.descricao
+
+class Historico(models.Model):
+    id_equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
+    id_setor_ant = models.ForeignKey(Setor, on_delete=models.CASCADE, related_name='id_setor_ant')
+    id_setor_atu = models.ForeignKey(Setor, on_delete=models.CASCADE, related_name='id_setor_atu')
+    data = models.DateTimeField('Data', auto_now_add=True)
+
+    def __str__(self):
+        return self.id_equipamento.id
+    

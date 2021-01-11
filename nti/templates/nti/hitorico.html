@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %} Nti {% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active btn btn-primary" href="{% url 'add_tags' %}"><i class="fas fa-plus"></i></a>
+        </li>
+    </ul>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Pesquisa">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Equipamento</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Data Registro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for historico in historicos %}
+                        <tr>
+                            <td>{{ historico.id_equipamento.descricao }}</td>
+                            <td>{{ historico.id_setor_atu.Nome }}</td>
+                            <td>
+                                {% for tag in eq.tag.all %}
+                                <span class="badge badge-dark">{{ tag }}</span>
+                                {% endfor %}
+                            </td>
+                            <td>{{ historico.data }}</td>
+                        </tr>
+                        {% empty %}
+                        <div class="alert alert-info" role="alert">
+                            Equipamento sem hitórico de remanejamento
+                        </div>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

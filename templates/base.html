@@ -3,6 +3,22 @@
 <html lang="en">
 
 <head>
+  <!--Paper CSS-->
+  <!-- Normalize or reset CSS with your favorite library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+
+  <!-- Load paper.css for happy printing -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+
+  <!-- Set page size here: A5, A4 or A3 -->
+  <!-- Set also "landscape" if you need -->
+  <style>
+    @page {
+      size: A4 landscape
+    }
+  </style>
+  <!--Fim Paper CSS-->
+
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +32,7 @@
   <title>{% block title %} {% endblock %}</title>
 </head>
 
-<body class="bg-light" style="margin-top:70px">
+<body class="bg-light A4" style="margin-top:70px">
   <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="{% url 'perfil' %}"><img src="{% static 'img/logo-prefeitura-salvador.png' %}"
         alt="My image"></a>

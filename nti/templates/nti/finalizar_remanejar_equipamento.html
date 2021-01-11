@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %} Administracao {% endblock %}
+{% load static %}
+
+{% block container %}
+<section class="sheet padding-10mm">
+
+    <!-- Write HTML just like a web page -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <center>
+                        <h1>Remanejamento de Equipamento</h1>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+
+        {% for equipamento in equipamentos %}
+
+        <p>{{equipamento.id}}</p>
+        <p>{{equipamento.descricao}}</p>
+        <p>{{equipamento.modelo}}</p>
+        <p>{{equipamento.tombo}}</p>
+        <p>{{equipamento.observacao}}</p>
+        <p>{{equipamento.setor}}</p>
+        <p>
+            {% for tag in equipamento.tag.all %}
+            <span class="badge badge-primary">{{ tag }}</span>
+            {% endfor %}
+        </p>
+        
+
+        {% endfor %}
+    </article>
+
+</section>
+{% endblock %}

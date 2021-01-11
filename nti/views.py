@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Equipamento, Tags
+from .models import Equipamento, Tags, Historico
 from .forms import EquipamentoForm, TagsForm
 from django.contrib.auth.models import User
 from usuario.models import Usuario
@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.db.models import Count, Avg
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
+from setor.models import Setor
 
 # Create your views here.
 
@@ -68,6 +69,36 @@ def search(request):
     )
 
     return render(request, 'nti/equipamentos.html', {'eqs': eqs})
+
+
+def remanejar_equipamento(request, id):
+    equipamento = Equipamento.objects.get(pk=id)
+    request.session['id_equipamento_session'] = equipamento.id
+    request.session['id_setor_ant_session'] = equipamento.setor.id
+    # print(request.session.get('id_setor_ant_session'))
+
+    setores = Setor.objects.all()
+    return render(request, 'nti/remanejar_equipamento.html', {'setores': setores, 'equipamento': equipamento})
+
+
+def finalizar_remanejar_equipamento(request, id):
+    id_equipamento_session = request.session.get('id_equipamento_session')
+    id_setor_ant_session = request.session.get('id_setor_ant_session')
+
+    equipamento = Equipamento.objects.get(pk=id_equipamento_session)
+    equipamento.setor_id = id
+    equipamento.save()
+    finalizar = Historico.objects.create(
+        id_equipamento_id=id_equipamento_session, id_setor_ant_id=id_setor_ant_session, id_setor_atu_id=id)
+    
+    equipamentos = Equipamento.objects.filter(pk=id_equipamento_session)
+
+    return render(request, 'nti/finalizar_remanejar_equipamento.html', {'equipamentos': equipamentos})
+
+
+def hitorico(request, id):
+    historicos = Historico.objects.filter(id_equipamento_id = id)
+    return render(request, 'nti/hitorico.html', {'historicos': historicos})
 
 
 def tags(request):

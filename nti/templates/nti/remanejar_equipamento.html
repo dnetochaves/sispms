@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} Nti {% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+
+
+    <div class="row">
+        <div class="col-2">
+            <ul class="list-group">
+                <li class="list-group-item">{{ equipamento.id }}</li>
+                <li class="list-group-item">{{ equipamento.descricao }}</li>
+                <li class="list-group-item">{{ equipamento.setor }}</li>
+            </ul>   
+
+        </div>
+        <div class="col-10">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">
+                       Remanejamento
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for setor in setores %}
+                    <tr>
+                        <th scope="row">{{ setor.id }}</th>
+                        <td>{{ setor.Nome }}</td>
+                        <td>
+                            <a href="{% url 'finalizar_remanejar_equipamento'  setor.id %}" class="btn btn-primary"><i class="fas fa-exchange-alt"></i></a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

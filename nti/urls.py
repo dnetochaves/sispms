@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, equipamentos, add_equipamento, tags, add_tags, search_equipamento, search, remanejar_equipamento, finalizar_remanejar_equipamento, hitorico
+from .views import index, equipamentos, add_equipamento, tags, add_tags, search_equipamento, search, remanejar_equipamento, finalizar_remanejar_equipamento, hitorico, relatorio_equipamentos
 
 urlpatterns = [
     path('', index, name="nti"),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('hitorico/<int:id>/',
          hitorico, name="hitorico"),
     path('search/', search, name="search"),
+    path('relatorio_equipamentos/', relatorio_equipamentos, name="relatorio_equipamentos"),
     path('tags', tags, name="tags"),
     path('add_tags', add_tags, name="add_tags"),
 ]

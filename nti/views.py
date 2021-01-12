@@ -8,8 +8,9 @@ from django.db.models import Count, Avg
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
 from setor.models import Setor
-
-# Create your views here.
+from django.template.loader import get_template
+import xhtml2pdf.pisa as pisa
+from django.http import HttpResponse
 
 
 def index(request):
@@ -90,15 +91,67 @@ def finalizar_remanejar_equipamento(request, id):
     equipamento.save()
     finalizar = Historico.objects.create(
         id_equipamento_id=id_equipamento_session, id_setor_ant_id=id_setor_ant_session, id_setor_atu_id=id)
-    
+
     equipamentos = Equipamento.objects.filter(pk=id_equipamento_session)
 
     return render(request, 'nti/finalizar_remanejar_equipamento.html', {'equipamentos': equipamentos})
 
 
 def hitorico(request, id):
-    historicos = Historico.objects.filter(id_equipamento_id = id)
+    historicos = Historico.objects.filter(id_equipamento_id=id)
     return render(request, 'nti/hitorico.html', {'historicos': historicos})
+
+
+def link_callback(uri, rel):
+    """
+    Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+    resources
+    """
+    result = finders.find(uri)
+    if result:
+        if not isinstance(result, (list, tuple)):
+            result = [result]
+        result = list(os.path.realpath(path) for path in result)
+        path = result[0]
+    else:
+        sUrl = settings.STATIC_URL        # Typically /static/
+        sRoot = settings.STATIC_ROOT      # Typically /home/userX/project_static/
+        mUrl = settings.MEDIA_URL         # Typically /media/
+        mRoot = settings.MEDIA_ROOT       # Typically /home/userX/project_static/media/
+
+        if uri.startswith(mUrl):
+            path = os.path.join(mRoot, uri.replace(mUrl, ""))
+        elif uri.startswith(sUrl):
+            path = os.path.join(sRoot, uri.replace(sUrl, ""))
+        else:
+            return uri
+
+    # make sure that file exists
+    if not os.path.isfile(path):
+        raise Exception(
+            'media URI must start with %s or %s' % (sUrl, mUrl)
+        )
+    return path
+
+
+def relatorio_equipamentos(request):
+    template_path = 'nti/relatorio_equipamentos.html'
+    context = {'myvar': 'this is your template context'}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    response['Content-Disposition'] = 'attachment;filename=%s.pdf' % relatorio_equipamentos
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 
 def tags(request):

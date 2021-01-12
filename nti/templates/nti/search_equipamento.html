@@ -80,11 +80,11 @@
                             </td>
                             <td>
                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                        <button type="button" class="btn btn-danger btn-sm"><i
-                                                class="fas fa-exchange-alt"></i></button>
-                                        <button type="button" class="btn btn-success btn-sm"><i
-                                                class="fas fa-history"></i></button>
+                                    <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="First group">
+                                        <a href="{% url 'remanejar_equipamento' eq.id %}" class="btn btn-danger"><i
+                                                class="fas fa-exchange-alt"></i></a>
+                                        <a href="{% url 'hitorico' eq.id %}" class="btn btn-warning"><i
+                                                class="fas fa-history"></i></a>
                                     </div>
                             </td>
 

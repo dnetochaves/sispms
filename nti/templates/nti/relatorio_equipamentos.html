@@ -1,24 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-        thead{
-            border: 1px solid blue;
-        }
-        .teste{
-            color: brown;
-        }
-        .titulo{
-            background-color: black;
-            color: blanchedalmond;
+        @page {
+            size: letter portrait;
 
+            @frame content_frame {
+                left: 50pt;
+                width: 512pt;
+                top: 50pt;
+                height: 692pt;
+                -pdf-frame-border: 1;
+                /* for debugging the layout */
+            }
+        }
+
+        table {
+            border: 1px solid black;
+            width: 100%;
+            font-weight: bold;
+        }
+
+
+        .cabecalho {
+            text-align: center;
+            color: black;
+            background-color: silver;
+            font-size: 20px;
+
+
+        }
+
+        .titulo {
+            text-align: center;
+            vertical-align: text-bottom;
+            background-color: black;
+            color: white;
+
+        }
+
+        .conteudo {
+            background-color: silver;
+
+        }
+        .space{
+            background-color: black;
         }
     </style>
 </head>
@@ -26,50 +52,53 @@
 <body>
     <table>
         <tr>
-            <td>
-                <h1 class="titulo">
-                    <center>Relatório de Equipamento GRE Itapuã</center>
-                </h1>
+            <td class="titulo" colspan="4"><h1>Relatório Geral de Equipamentos Gre Itapuã</h1></td>
+        </tr>
+        {% for eq in eqs %}
+        <tr>
+            <td class="conteudo">Descrição</td>
+            <td class="conteudo">Fabricante</td>
+            <td class="conteudo">Modelo</td>
+            <td class="conteudo">Tombo</td>
+        </tr>
+        <tr>
+            <td>{{ eq.descricao }} </td>
+            <td>{{ eq.fabricante }} </td>
+            <td>{{ eq.modelo }} </td>
+            <td>{{ eq.tombo }} </td>
+        </tr>
+        <tr>
+            <td class="conteudo" colspan="4">Observação</td>
+        </tr>
+        <tr>
+            <td colspan="4">{{ eq.observacao }} </td>
+        </tr>
+        <tr>
+            <td class="conteudo" colspan="4">Setor</td>
+        </tr>
+        <tr>
+            <td colspan="4">{{ eq.setor }} </td>
+        </tr>
+        <tr>
+            <td class="conteudo" colspan="4">Tags</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                {% for tag in eq.tag.all %}
+                {{ tag }}
+                {% endfor %}
             </td>
         </tr>
+        <tr>
+            <td colspan="4" class="space"></td>
+        </tr>
+
+        {% endfor %}
+       
     </table>
 
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">descricao</th>
-                <th scope="col">fabricante</th>
-                <th scope="col">modelo</th>
-                <th scope="col">tombo</th>
-                <th scope="col">observacao</th>
-                <th scope="col">setor</th>
-                <th scope="col">tag</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for eq in eqs %}
-            <tr>
 
 
-                <th scope="row">{{ eq.descricao }}</th>
-                <td>{{ eq.descricao }}</td>
-                <td>{{ eq.fabricante }}</td>
-                <td>{{ eq.modelo }}</td>
-                <td>{{ eq.tombo }}</td>
-                <td>{{ eq.observacao }}</td>
-                <td>{{ eq.setor }}</td>
-                <td>
-                    {% for tag in eq.tag.all %}
-                    {{ tag }}
-                    {% endfor %}
-                </td>
-
-
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </body>
 
 </html>

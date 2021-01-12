@@ -22,6 +22,9 @@ class Equipamento(models.Model):
 
     def __str__(self):
         return self.descricao
+    
+
+   
 
 class Historico(models.Model):
     id_equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)

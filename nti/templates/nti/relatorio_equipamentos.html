@@ -1,1 +1,75 @@
-{{ myvar }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        thead{
+            border: 1px solid blue;
+        }
+        .teste{
+            color: brown;
+        }
+        .titulo{
+            background-color: black;
+            color: blanchedalmond;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <h1 class="titulo">
+                    <center>Relatório de Equipamento GRE Itapuã</center>
+                </h1>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">descricao</th>
+                <th scope="col">fabricante</th>
+                <th scope="col">modelo</th>
+                <th scope="col">tombo</th>
+                <th scope="col">observacao</th>
+                <th scope="col">setor</th>
+                <th scope="col">tag</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for eq in eqs %}
+            <tr>
+
+
+                <th scope="row">{{ eq.descricao }}</th>
+                <td>{{ eq.descricao }}</td>
+                <td>{{ eq.fabricante }}</td>
+                <td>{{ eq.modelo }}</td>
+                <td>{{ eq.tombo }}</td>
+                <td>{{ eq.observacao }}</td>
+                <td>{{ eq.setor }}</td>
+                <td>
+                    {% for tag in eq.tag.all %}
+                    {{ tag }}
+                    {% endfor %}
+                </td>
+
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

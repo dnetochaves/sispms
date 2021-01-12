@@ -136,7 +136,8 @@ def link_callback(uri, rel):
 
 def relatorio_equipamentos(request):
     template_path = 'nti/relatorio_equipamentos.html'
-    context = {'myvar': 'this is your template context'}
+    eqs = Equipamento.objects.all()
+    context = {'eqs': eqs}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     #response['Content-Disposition'] = 'attachment; filename="report.pdf"'

@@ -52,3 +52,12 @@ class HistoricoRemanejamentoForm(ModelForm):
     class Meta:
         model = HistoricoRemanejamento
         fields = ['ColaboradorHistorico', 'SetorAnterior', 'SetorAtual']
+
+
+#Refatoração
+class RColaboradorForm(ModelForm):
+    class Meta:
+        model = Colaborador
+        fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador', 'ObservacaoExpecificas', 'excluido']
+
+   

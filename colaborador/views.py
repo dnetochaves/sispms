@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Colaborador, Tags, HistoricoRemanejamento, Setor
 from .forms import ColaboradorForm, TagsForm, HistoricoRemanejamentoForm, ColaboradorRemanejamentoForm, \
-    ObservacaoColaboradorForm
+    ObservacaoColaboradorForm, RColaboradorForm
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -13,6 +13,7 @@ from setor.models import Setor
 from django.db.models import Count, Avg
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib import messages
+from django.db.models import Q, Value
 
 
 # Create your views here.
@@ -20,8 +21,9 @@ from django.contrib import messages
 @login_required()
 def painel_colaborador(request):
     setores = get_accessful_sectors(request.user.profile.SetorUsuario)
-    a = Colaborador.objects.filter(SetorColaborador_id__in=setores).aggregate(Count('Nome'))['Nome__count']
-    #b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
+    a = Colaborador.objects.filter(SetorColaborador_id__in=setores).aggregate(
+        Count('Nome'))['Nome__count']
+    # b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
     return render(request, 'colaborador/painel_colaborador.html', {'a': a})
 
 
@@ -39,8 +41,10 @@ def get_accessful_sectors(sector):
     groups = sector.grupo.all()  # Obtem os grupos associados a um setor
     sectors = []
     for group in groups:
-        sectors.extend(group.sectors.all())  # Obtem os setores associados a cada grupo
-    return [sector.id for sector in set(sectors)]  # Retorna todos os setores sem repetição
+        # Obtem os setores associados a cada grupo
+        sectors.extend(group.sectors.all())
+    # Retorna todos os setores sem repetição
+    return [sector.id for sector in set(sectors)]
 
 
 ##########  FIM ALTERAÇÃO  ##########
@@ -52,7 +56,7 @@ def add_colaborador(request, colaborador=None):
     sectors = get_accessful_sectors(request.user.profile.SetorUsuario)
     form = ColaboradorForm(data=request.POST or None, instance=colaborador,
                            sectors=Setor.objects.filter(id__in=sectors), tags=Tags.objects.filter(
-            SetorTag_id__in=sectors))  # Passa só as tags que o colaborador tem permissão
+                               SetorTag_id__in=sectors))  # Passa só as tags que o colaborador tem permissão
     ##########  FIM ALTERAÇÃO  ##########
     if form.is_valid():
         form.save()
@@ -99,15 +103,17 @@ def update_colaborador_remanejamento(request, id):
 @login_required()
 def list_colaborador(request):
     if not request.user.has_perm('colaborador.view_colaborador'):
-        messages.error(request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
+        messages.error(
+            request, 'Contate o administrador do sistema. Você não tem permiossão para acessar esse setor')
         return render(request, 'usuario/perfil.html')
 
     busca = request.GET.get('pesquisa', None)
-    
+
     ##########  ALTERAÇÃO AQUI  ##########
     setores = get_accessful_sectors(request.user.profile.SetorUsuario)
     if busca:
-        col = Colaborador.objects.filter(Nome__contains=busca, SetorColaborador_id__in=setores)
+        col = Colaborador.objects.filter(
+            Nome__contains=busca, SetorColaborador_id__in=setores)
         ##########  FIM ALTERAÇÃO  ##########
 
         return render(request, 'colaborador/list_colaborador.html', {'colaborador': col})
@@ -151,7 +157,7 @@ def observacao_colaborador(request, id):
     if form.is_valid():
         form.save()
         # TODO PReciso fazer outra função a parte para execultar o bloco da linha 143 a 145 (urgente)
-        #carta_encaminhamento_colaborador(request, id)
+        # carta_encaminhamento_colaborador(request, id)
         col = Colaborador.objects.filter(id=id).select_related()
         return render(request, 'colaborador/carta_encaminhamento_colaborador.html', {'colaborador': col})
     return render(request, 'colaborador/add_colaborador.html', {'form': form})
@@ -181,7 +187,8 @@ def list_colaborador_por_setor(request, id):
 
         if busca:
             # usuarios = Usuario.objects.all()
-            col = Colaborador.objects.filter(Nome__contains=busca, SetorColaborador_id=id)
+            col = Colaborador.objects.filter(
+                Nome__contains=busca, SetorColaborador_id=id)
 
         else:
             col = Colaborador.objects.filter(SetorColaborador_id=id)
@@ -222,43 +229,50 @@ def update_tags(request, id):
 @login_required()
 def info_tags(request, id):
     tags = Colaborador.objects.filter(tags=id).order_by('-SetorColaborador')
-    qtd_por_tags = Colaborador.objects.filter(tags=id).aggregate(Count('Nome'))['Nome__count']
+    qtd_por_tags = Colaborador.objects.filter(
+        tags=id).aggregate(Count('Nome'))['Nome__count']
     desc_tag = Tags.objects.filter(id=id)[0]
 
     return render(request, 'colaborador/info_tags.html',
                   {'colaborador': tags, 'qtd_por_tags': qtd_por_tags, 'desc_tag': desc_tag})
 
 
-'''
-# Crud Colaborador CBV
-class ListaColaborador(ListView):
-    model = Colaborador
-    template_name = 'colaborador_list.html'
-class DetailColaborador(DetailView):
-    model = Colaborador
-class CreateColaborador(CreateView):
-    model = Colaborador
-    fields = ['Nome', 'Cpf',  'Telefone', 'tags', 'SetorColaborador']
-    success_url = reverse_lazy('colaborador_list_cbv')
-class UpdateColaborador(UpdateView):
-    model = Colaborador
-    fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador']
-    success_url = reverse_lazy('colaborador_list_cbv')
-class DeleteColaborador(DeleteView):
-    model = Colaborador
-    success_url = reverse_lazy('colaborador_list_cbv')
-# Crud Tags CBV
-class ListaTags(ListView):
-    model = Tags
-    template_name = 'tags_list.html'
-class DetailTag(DetailView):
-    model = Tags
-class CreateTag(CreateView):
-    model = Tags
-    fields = ['Nome', 'Observacao']
-    success_url = reverse_lazy('tag_list_cbv')
-class UpdateTag(UpdateView):
-    model = Tags
-    fields = ['Nome', 'Observacao']
-    success_url = reverse_lazy('tag_list_cbv')
-'''
+def colaborador(request):
+    colaboradores = Colaborador.objects.filter(excluido=False)
+    return render(request, 'colaborador/colaborador.html', {'colaboradores': colaboradores})
+
+
+def new_colaborador(request):
+    form = RColaboradorForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('/colaborador/colaborador')
+    return render(request, 'colaborador/new_colaborador.html', {'form': form})
+
+
+def edit_colaborador(request, id):
+    colaborador = get_object_or_404(Colaborador, pk=id)
+    form = RColaboradorForm(request.POST or None,
+                           request.FILES or None, instance=colaborador)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, f'O colaborador {colaborador.Nome} foi alterado com sucesso.')
+        return redirect('colaborador')
+    return render(request, 'colaborador/new_colaborador.html', {'form': form})
+
+
+def search_colaborador(request):
+    search = request.GET.get('search')
+
+    if search is None or not search:
+        messages.error(request, 'Campo pesquisa não pode ficar vazio')
+        return render(request, 'colaborador/colaborador.html')
+
+    colaboradores = Colaborador.objects.filter(
+        Q(Nome__icontains=search) |
+        Q(Cpf__icontains=search) |
+        Q(Telefone__icontains=search) 
+    ).filter(excluido=False)
+
+    return render(request, 'colaborador/colaborador.html', {'colaboradores': colaboradores})

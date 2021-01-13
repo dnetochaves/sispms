@@ -13,6 +13,7 @@ class Colaborador(models.Model):
     SetorAnterior = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorAnterior')
     Observacao = models.TextField(max_length=500, null=True, blank=True, help_text='Texto a ser inserido na carta')
     ObservacaoExpecificas = models.TextField(max_length=500, null=True, blank=True, help_text='Observações do Colaborador')
+    excluido = models.BooleanField(default=False)
 
     def __str__(self):
         return self.Nome

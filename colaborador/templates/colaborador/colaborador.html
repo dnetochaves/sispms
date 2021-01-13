@@ -6,10 +6,6 @@
 <div class="container-fluid">
 
 
-    {% for pesquisa in pesquisa %}
-    <p>{{ pesquisa.id }}</p>
-
-    {% endfor %}
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -18,7 +14,7 @@
             </li>
             <li class="breadcrumb-item">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a class="btn btn-primary btn-sm" href="{% url 'add_equipamento' %}"><i class="fas fa-plus"></i></a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'new_colaborador' %}"><i class="fas fa-plus"></i></a>
                     <a class="btn btn-danger btn-sm" href="{% url 'relatorio_equipamentos' %}"><i
                             class="fas fa-file-pdf"></i></a>
                     <a class="btn btn-success btn-sm" href="{% url 'add_equipamento' %}"><i
@@ -31,7 +27,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form method="get" action="{% url 'search' %}">
+            <form method="get" action="{% url 'search_colaborador' %}">
                 <div class="form-group row">
                     <div class="col-12">
                         <input class="form-control" type="search" value="{{ request.GET.search }}" id="search-input"
@@ -47,44 +43,40 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Fabricante</th>
-                            <th scope="col">Modelo</th>
-                            <th scope="col">Tombo</th>
-                            <th scope="col">Observação</th>
-                            <th scope="col">Tag</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cpf</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">tags</th>
                             <th scope="col" class="text-success">
-                                <center>Setor <i class="fas fa-search"></i></center>
+                                <center><a href="" class="btn btn-success">Setor <i class="fas fa-search"></i></a> </center>
                             </th>
                             <th scope="col"></th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        {% for eq in eqs %}
+                        {% for colaborador in colaboradores %}
                         <tr>
-                            <td>{{ eq.descricao }}</td>
-                            <td>{{ eq.fabricante }}</td>
-                            <td>{{ eq.modelo }}</td>
-                            <td>{{ eq.tombo }}</td>
-                            <td>{{ eq.observacao | linebreaks }}</td>
+                            <td>{{ colaborador.Nome }}</td>
+                            <td>{{ colaborador.Cpf }}</td>
+                            <td>{{ colaborador.Telefone }}</td>
                             <td>
-                                {% for tag in eq.tag.all %}
-                                <span class="badge badge-primary">{{ tag }}</span>
+                                {% for tag in colaborador.tags.all %}
+                                <span class="badge badge-dark">{{ tag }}</span>
                                 {% endfor %}
                             </td>
                             <td class="bg-secondary">
                                 <center><a class="btn btn-success btn-sm"
-                                        href="{% url 'search_equipamento' eq.setor.id %}">
-                                        {{eq.setor }}</a></center>
+                                        href="">
+                                        {{colaborador.SetorColaborador }}</a></center>
                             </td>
                             <td>
                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                     <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="First group">
-                                        <a href="{% url 'remanejar_equipamento' eq.id %}" class="btn btn-danger"><i
-                                                class="fas fa-exchange-alt"></i></a>
-                                        <a href="{% url 'hitorico' eq.id %}" class="btn btn-warning"><i
-                                                class="fas fa-history"></i></a>
+                                        <a href="{% url 'edit_colaborador' colaborador.id %}" class="btn btn-success"><i class="fas fa-user-edit"></i></a>
+                                        <a href="" class="btn btn-danger"><i class="fas fa-user-minus"></i></a>
+                                        <a href="" class="btn btn-danger"><i class="fas fa-exchange-alt"></i></a>
+                                        <a href="" class="btn btn-warning"><i class="fas fa-history"></i></a>
                                     </div>
                             </td>
 

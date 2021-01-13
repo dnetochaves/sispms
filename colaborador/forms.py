@@ -58,6 +58,6 @@ class HistoricoRemanejamentoForm(ModelForm):
 class RColaboradorForm(ModelForm):
     class Meta:
         model = Colaborador
-        fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'SetorColaborador', 'ObservacaoExpecificas', 'excluido']
+        fields = ['Nome', 'Cpf', 'Telefone', 'tags', 'ObservacaoExpecificas', 'excluido']
 
    

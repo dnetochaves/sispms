@@ -19,7 +19,7 @@ from .views import list_historico
 
 
 # Refatoração
-from .views import colaborador, new_colaborador, search_colaborador, edit_colaborador
+from .views import colaborador, new_colaborador, search_colaborador, edit_colaborador, remanejar, finalizar_remanejar, carta_encaminhamento
 
 
 urlpatterns = [
@@ -56,4 +56,9 @@ urlpatterns = [
     path('new_colaborador/', new_colaborador, name="new_colaborador"),
     path('search_colaborador/', search_colaborador, name="search_colaborador"),
     path('edit_colaborador/<int:id>/', edit_colaborador, name="edit_colaborador"),
+    path('remanejar/<int:id_colaborador>/', remanejar, name="remanejar"),
+    path('finalizar_remanejar/<int:id_setor_atu>/',
+         finalizar_remanejar, name="finalizar_remanejar"),
+    path('carta_encaminhamento/<int:id>/',
+         carta_encaminhamento, name="carta_encaminhamento"),
 ]

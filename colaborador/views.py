@@ -14,6 +14,9 @@ from django.db.models import Count, Avg
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib import messages
 from django.db.models import Q, Value
+from django.template.loader import get_template
+import xhtml2pdf.pisa as pisa
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -253,11 +256,12 @@ def new_colaborador(request):
 def edit_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
     form = RColaboradorForm(request.POST or None,
-                           request.FILES or None, instance=colaborador)
+                            request.FILES or None, instance=colaborador)
 
     if form.is_valid():
         form.save()
-        messages.success(request, f'O colaborador {colaborador.Nome} foi alterado com sucesso.')
+        messages.success(
+            request, f'O colaborador {colaborador.Nome} foi alterado com sucesso.')
         return redirect('colaborador')
     return render(request, 'colaborador/new_colaborador.html', {'form': form})
 
@@ -272,7 +276,86 @@ def search_colaborador(request):
     colaboradores = Colaborador.objects.filter(
         Q(Nome__icontains=search) |
         Q(Cpf__icontains=search) |
-        Q(Telefone__icontains=search) 
+        Q(Telefone__icontains=search)
     ).filter(excluido=False)
 
     return render(request, 'colaborador/colaborador.html', {'colaboradores': colaboradores})
+
+
+def remanejar(request, id_colaborador):
+    colaborador = Colaborador.objects.get(pk=id_colaborador)
+    request.session['id_colaborador_session'] = colaborador.id
+    request.session['id_setor_colaborador'] = colaborador.SetorColaborador.id
+    # print(request.session.get('id_colaborador_session'))
+    # print(request.session.get('id_setor_colaborador'))
+    setores = Setor.objects.all()
+    return render(request, 'colaborador/remanejar.html', {'setores': setores, 'id_colaborador': colaborador.id, 'id_setor_atu': colaborador.SetorColaborador.id})
+
+
+def finalizar_remanejar(request, id_setor_atu):
+    id_colaborador_session = request.session.get('id_colaborador_session')
+    id_setor_colaborador = request.session.get('id_setor_colaborador')
+
+    colaborador_fi = Colaborador.objects.get(pk=id_colaborador_session)
+    colaborador_fi.SetorColaborador_id = id_setor_atu
+    colaborador_fi.save()
+
+    finalizar = HistoricoRemanejamento.objects.create(
+        ColaboradorHistorico_id=id_colaborador_session, SetorAnterior_id=id_setor_colaborador, SetorAtual_id=id_setor_atu)
+
+    messages.success(
+        request, f'O colaborador {colaborador_fi.Nome} foi alterado com sucesso.')
+    return redirect('/colaborador/colaborador')
+
+
+def link_callback(uri, rel):
+    """
+    Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+    resources
+    """
+    result = finders.find(uri)
+    if result:
+        if not isinstance(result, (list, tuple)):
+            result = [result]
+        result = list(os.path.realpath(path) for path in result)
+        path = result[0]
+    else:
+        sUrl = settings.STATIC_URL        # Typically /static/
+        sRoot = settings.STATIC_ROOT      # Typically /home/userX/project_static/
+        mUrl = settings.MEDIA_URL         # Typically /media/
+        mRoot = settings.MEDIA_ROOT       # Typically /home/userX/project_static/media/
+
+        if uri.startswith(mUrl):
+            path = os.path.join(mRoot, uri.replace(mUrl, ""))
+        elif uri.startswith(sUrl):
+            path = os.path.join(sRoot, uri.replace(sUrl, ""))
+        else:
+            return uri
+
+    # make sure that file exists
+    if not os.path.isfile(path):
+        raise Exception(
+            'media URI must start with %s or %s' % (sUrl, mUrl)
+        )
+    return path
+
+
+def carta_encaminhamento(request, id):
+    template_path = 'colaborador/carta_encaminhamento.html'
+    cols = Colaborador.objects.filter(pk=id)
+    context = {'cols': cols}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="carta_encaminhamento.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response

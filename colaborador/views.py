@@ -23,10 +23,10 @@ from django.http import HttpResponse
 
 @login_required()
 def painel_colaborador(request):
-    setores = get_accessful_sectors(request.user.profile.SetorUsuario)
-    a = Colaborador.objects.filter(SetorColaborador_id__in=setores).aggregate(
-        Count('Nome'))['Nome__count']
-    # b = Colaborador.objects.all().aggregate(Avg('Nome'))['Nome__avg']
+    #setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    #a = Colaborador.objects.filter(SetorColaborador_id__in=setores, excluido=False).aggregate(
+    #    Count('Nome'))['Nome__count']
+    a = Colaborador.objects.filter(excluido=False).aggregate(Count('Nome'))['Nome__count']
     return render(request, 'colaborador/painel_colaborador.html', {'a': a})
 
 

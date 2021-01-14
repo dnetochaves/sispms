@@ -9,10 +9,14 @@ class Colaborador(models.Model):
     Cpf = models.CharField(max_length=50)
     Telefone = models.CharField(max_length=50)
     tags = models.ManyToManyField('Tags')
-    SetorColaborador = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='setor')
-    SetorAnterior = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorAnterior')
-    Observacao = models.TextField(max_length=500, null=True, blank=True, help_text='Texto a ser inserido na carta')
-    ObservacaoExpecificas = models.TextField(max_length=500, null=True, blank=True, help_text='Observações do Colaborador')
+    SetorColaborador = models.ForeignKey(
+        Setor, on_delete=models.CASCADE, null=True, related_name='setor')
+    SetorAnterior = models.ForeignKey(
+        Setor, on_delete=models.CASCADE, null=True, related_name='SetorAnterior')
+    Observacao = models.TextField(
+        max_length=500, null=True, blank=True, help_text='Texto a ser inserido na carta')
+    ObservacaoExpecificas = models.TextField(
+        max_length=500, null=True, blank=True, help_text='Observações do Colaborador')
     excluido = models.BooleanField(default=False)
 
     def __str__(self):
@@ -22,7 +26,8 @@ class Colaborador(models.Model):
 class Tags(models.Model):
     Nome = models.CharField(max_length=50)
     Observacao = models.CharField(max_length=50)
-    SetorTag = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, related_name='SetorTag')
+    SetorTag = models.ForeignKey(
+        Setor, on_delete=models.CASCADE, null=True, related_name='SetorTag')
 
     def __str__(self):
         return self.Nome

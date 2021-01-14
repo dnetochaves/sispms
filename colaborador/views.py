@@ -241,7 +241,7 @@ def info_tags(request, id):
 
 
 def colaborador(request):
-    colaboradores = Colaborador.objects.filter(excluido=False)
+    colaboradores = Colaborador.objects.filter(excluido=False).order_by('Nome')
     return render(request, 'colaborador/colaborador.html', {'colaboradores': colaboradores})
 
 
@@ -306,6 +306,14 @@ def finalizar_remanejar(request, id_setor_atu):
     messages.success(
         request, f'O colaborador {colaborador_fi.Nome} foi alterado com sucesso.')
     return redirect('/colaborador/colaborador')
+
+def colaborador_setor(request, id):
+    colaborador_setors = Colaborador.objects.filter(SetorColaborador_id=id, excluido=False).order_by('Nome')
+    return render(request, 'colaborador/colaborador_setor.html', {'colaborador_setors': colaborador_setors})
+
+def setor_colaborador(request):
+    setor_colaboradors = Setor.objects.all().order_by('Codigo')
+    return render(request, 'colaborador/setor_colaborador.html', {'setor_colaboradors': setor_colaboradors})
 
 
 def link_callback(uri, rel):

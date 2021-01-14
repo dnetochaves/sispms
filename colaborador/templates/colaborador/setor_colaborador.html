@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %} Nti {% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                Total de Equipamentos: {{ total_equipamentos }}
+            </li>
+            <li class="breadcrumb-item">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary btn-sm" href=""><i class="fas fa-plus"></i></a>
+                    <a class="btn btn-danger btn-sm" href=""><i class="fas fa-file-pdf"></i></a>
+                    <a class="btn btn-success btn-sm" href="{% url 'add_equipamento' %}"><i
+                            class="fas fa-file-excel"></i></a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-12">
+            <form method="get" action="{% url 'search_colaborador' %}">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <input class="form-control" type="search" value="{{ request.GET.search }}" id="search-input"
+                            placeholder="Digite sua pesquisa" name="search">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Telefone1</th>
+                            <th scope="col">Cep</th>
+                            <th scope="col">Bairro</th>
+                            <th scope="col">Logradouro</th>
+                            <th scope="col">Numero</th>
+                            <th scope="col">Gestor</th>
+                            <th scope="col">Email</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for setor_colaborador in setor_colaboradors %}
+                        <tr>
+                            <th scope="row">{{ setor_colaborador.Codigo }}</th>
+                            <td>{{ setor_colaborador.Nome }}</td>
+                            <td>{{ setor_colaborador.Nome }}</td>
+                            <td>{{ setor_colaborador.Telefone1 }}</td>
+                            <td>{{ setor_colaborador.Cep }}</td>
+                            <td>{{ setor_colaborador.Bairro }}</td>
+                            <td>{{ setor_colaborador.Logradouro }}</td>
+                            <td>{{ setor_colaborador.Numero }}</td>
+                            <td>{{ setor_colaborador.Email }}</td>
+                            <td>
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="First group">
+                                        <a href="{% url 'colaborador_setor' setor_colaborador.id %}" class="btn btn-success"><i class="fas fa-user-edit"></i>Filtrar por Unidade</a>
+                                    </div>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

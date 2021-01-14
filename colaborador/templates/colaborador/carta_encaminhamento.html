@@ -1,15 +1,306 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carta de Encaminhamento</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <style type="text/css">
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
+        table td,
+        table th {
+            padding: 0
+        }
+
+        .c7 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #000000;
+            border-top-width: 1pt;
+            border-right-width: 1pt;
+            border-left-color: #000000;
+            vertical-align: top;
+            border-right-color: #000000;
+            border-left-width: 1pt;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-bottom-width: 1pt;
+            width: 451.4pt;
+            border-top-color: #000000;
+            border-bottom-style: solid
+        }
+
+        .c2 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #000000;
+            border-top-width: 1pt;
+            border-right-width: 1pt;
+            border-left-color: #000000;
+            vertical-align: top;
+            border-right-color: #000000;
+            border-left-width: 1pt;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-bottom-width: 1pt;
+            width: 150.5pt;
+            border-top-color: #000000;
+            border-bottom-style: solid
+        }
+
+        .c4 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: left;
+            height: 11pt
+        }
+
+        .c6 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: center;
+            height: 11pt
+        }
+
+        .c1 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 15pt;
+            font-family: "Arial";
+            font-style: normal
+        }
+
+        .c9 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: center
+        }
+
+        .c3 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            text-align: left;
+            height: 11pt
+        }
+
+        .c8 {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-right: auto
+        }
+
+        .c5 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            text-align: left
+        }
+
+        .c10 {
+            background-color: #ffffff;
+            max-width: 451.4pt;
+            padding: 72pt 72pt 72pt 72pt
+        }
+
+        .c0 {
+            height: 0pt
+        }
+
+        .title {
+            padding-top: 0pt;
+            color: #000000;
+            font-size: 26pt;
+            padding-bottom: 3pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .subtitle {
+            padding-top: 0pt;
+            color: #666666;
+            font-size: 15pt;
+            padding-bottom: 16pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        li {
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        h1 {
+            padding-top: 20pt;
+            color: #000000;
+            font-size: 20pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h2 {
+            padding-top: 18pt;
+            color: #000000;
+            font-size: 16pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h3 {
+            padding-top: 16pt;
+            color: #434343;
+            font-size: 14pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h4 {
+            padding-top: 14pt;
+            color: #666666;
+            font-size: 12pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h5 {
+            padding-top: 12pt;
+            color: #666666;
+            font-size: 11pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h6 {
+            padding-top: 12pt;
+            color: #666666;
+            font-size: 11pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            font-style: italic;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+    </style>
 </head>
-<body>
-    <table>
-        <tr>
-            <td>Carta de Encaminhamento</td>
-        </tr>
+
+<body class="c10">
+    <p class="c9"><span class="c1">Carta de Encaminhamento de Terceirizado </span></p>
+    <p class="c6"><span class="c1"></span></p>
+    <p class="c6"><span class="c1"></span></p>
+    <p class="c4"><span class="c1"></span></p><a id="t.30e168811d28d197346b9fd2258a6e45e8643d80"></a><a id="t.0"></a>
+    <table class="c8">
+        <tbody>
+            <tr class="c0">
+                <td class="c2" colspan="1" rowspan="1">
+                    <p class="c5"><span class="c1">Nome:</span></p>
+                </td>
+                <td class="c2" colspan="1" rowspan="1">
+                    <p class="c5"><span class="c1">Cpf:</span></p>
+                </td>
+                <td class="c2" colspan="1" rowspan="1">
+                    <p class="c5"><span class="c1">Telefone:</span></p>
+                </td>
+            </tr>
+            <tr class="c0">
+                <td class="c2" colspan="1" rowspan="1">
+                    <p class="c3"><span class="c1"></span></p>
+                </td>
+                <td class="c2" colspan="1" rowspan="1">
+                    <p class="c3"><span class="c1"></span></p>
+                </td>
+                <td class="c2" colspan="1" rowspan="1">
+                    <p class="c3"><span class="c1"></span></p>
+                </td>
+            </tr>
+        </tbody>
     </table>
+    <p class="c4"><span class="c1"></span></p><a id="t.7120b66b54c619ca7b8da6bed859d122b1df5492"></a><a id="t.1"></a>
+    <table class="c8">
+        <tbody>
+            <tr class="c0">
+                <td class="c7" colspan="1" rowspan="1">
+                    <p class="c5"><span class="c1">Setor:</span></p>
+                </td>
+            </tr>
+            <tr class="c0">
+                <td class="c7" colspan="1" rowspan="1">
+                    <p class="c3"><span class="c1"></span></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="c4"><span class="c1"></span></p><a id="t.33ea9c29f9f9507c7c00d44aae7cf6b12bcc1306"></a><a id="t.2"></a>
+    <table class="c8">
+        <tbody>
+            <tr class="c0">
+                <td class="c7" colspan="1" rowspan="1">
+                    <p class="c5"><span class="c1">Fun&ccedil;&atilde;o</span></p>
+                </td>
+            </tr>
+            <tr class="c0">
+                <td class="c7" colspan="1" rowspan="1">
+                    <p class="c3"><span class="c1"></span></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="c4"><span class="c1"></span></p>
 </body>
+
 </html>

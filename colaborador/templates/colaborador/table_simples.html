@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %} Tabela Simples {% endblock %}
+
+{% block container %}
+
+<table border="1" style="width: 100%;">
+    <tr>
+        <td>Nome</td>
+        <td>Cpf</td>
+        <td>Telefone</td>
+        <td>tags</td>
+        <td>SetorColaborador</td>
+        <td>Observacao</td>
+        <td>ObservacaoExpecificas</td>
+        <td>excluido</td>
+    </tr>
+
+    {% for col_simple in col_simples %}
+    <tr>
+
+        <td>{{ col_simple.Nome }}</td>
+        <td>{{ col_simple.Cpf }}</td>
+        <td>{{ col_simple.Telefone }}</td>
+        <td>
+            {% for tag in col_simple.tags.all %}
+             {{ tag }} |
+            {% endfor %}
+        </td>
+        <td>{{ col_simple.SetorAnterior }}</td>
+        <td>{{ col_simple.Observacao }}</td>
+        <td>{{ col_simple.ObservacaoExpecificas }}</td>
+        <td>{{ col_simple.excluido }}</td>
+
+    </tr>
+    {% endfor %}
+
+
+</table>
+{% endblock %}

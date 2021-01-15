@@ -17,16 +17,17 @@ from django.db.models import Q, Value
 from django.template.loader import get_template
 import xhtml2pdf.pisa as pisa
 from django.http import HttpResponse
+import xlwt
+from django.views import View
 
-
-# Create your views here.
 
 @login_required()
 def painel_colaborador(request):
-    #setores = get_accessful_sectors(request.user.profile.SetorUsuario)
-    #a = Colaborador.objects.filter(SetorColaborador_id__in=setores, excluido=False).aggregate(
+    # setores = get_accessful_sectors(request.user.profile.SetorUsuario)
+    # a = Colaborador.objects.filter(SetorColaborador_id__in=setores, excluido=False).aggregate(
     #    Count('Nome'))['Nome__count']
-    a = Colaborador.objects.filter(excluido=False).aggregate(Count('Nome'))['Nome__count']
+    a = Colaborador.objects.filter(excluido=False).aggregate(
+        Count('Nome'))['Nome__count']
     return render(request, 'colaborador/painel_colaborador.html', {'a': a})
 
 
@@ -307,9 +308,12 @@ def finalizar_remanejar(request, id_setor_atu):
         request, f'O colaborador {colaborador_fi.Nome} foi alterado com sucesso.')
     return redirect('/colaborador/colaborador')
 
+
 def colaborador_setor(request, id):
-    colaborador_setors = Colaborador.objects.filter(SetorColaborador_id=id, excluido=False).order_by('Nome')
+    colaborador_setors = Colaborador.objects.filter(
+        SetorColaborador_id=id, excluido=False).order_by('Nome')
     return render(request, 'colaborador/colaborador_setor.html', {'colaborador_setors': colaborador_setors})
+
 
 def setor_colaborador(request):
     setor_colaboradors = Setor.objects.all().order_by('Codigo')
@@ -354,7 +358,7 @@ def carta_encaminhamento(request, id):
     context = {'cols': cols}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
-    #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
     response['Content-Disposition'] = 'attachment; filename="carta_encaminhamento.pdf"'
     # find the template and render it.
     template = get_template(template_path)
@@ -367,3 +371,43 @@ def carta_encaminhamento(request, id):
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+
+class rel_geral_colaborador(View):
+    def get(self, request):
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="rel_geral_colaborador.xls"'
+
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet('rel_geral_colaborador')
+
+        row_num = 0
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        columns = ['Nome', 'Cpf', 'Telefone', 'SetorColaborador', 'Observacao', 'ObservacaoExpecificas']
+
+        for col_num in range(len(columns)):
+            ws.write(row_num, col_num, columns[col_num], font_style)
+
+        font_style = xlwt.XFStyle()
+
+        cols = Colaborador.objects.filter(excluido=False)
+
+        row_num = 1
+        for col in cols:
+            ws.write(row_num, 0, col.Nome, font_style)
+            ws.write(row_num, 1, col.Cpf, font_style)
+            ws.write(row_num, 2, col.Telefone, font_style)
+            ws.write(row_num, 3, col.SetorColaborador.Nome, font_style)
+            ws.write(row_num, 4, col.Observacao, font_style)
+            ws.write(row_num, 5, col.ObservacaoExpecificas, font_style)
+            row_num += 1
+
+        wb.save(response)
+        return response
+
+def table_simples(request):
+    col_simples = Colaborador.objects.all()
+    return render(request, 'colaborador/table_simples.html', {'col_simples':col_simples})

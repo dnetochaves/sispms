@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %} Colaborador {% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+            </li>
+            <li class="breadcrumb-item">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary btn-sm" href="{% url 'new_colaborador' %}"><i class="fas fa-plus"></i></a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'relatorio_equipamentos' %}"><i
+                            class="fas fa-file-pdf"></i></a>
+                    <a class="btn btn-success btn-sm" href="{% url 'rel_geral_colaborador' %}"><i
+                            class="fas fa-file-excel"></i></a>
+                    <a class="btn btn-success btn-sm" href="{% url 'table_simples' %}"><i class="fas fa-table"></i></a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-12">
+            <form method="get" action="{% url 'search_colaborador' %}">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <input class="form-control" type="search" value="{{ request.GET.search }}" id="search-input"
+                            placeholder="Digite sua pesquisa" name="search">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">ColaboradorHistorico</th>
+                            <th scope="col">SetorAnterior</th>
+                            <th scope="col">SetorAtual</th>
+                            <th scope="col">DataRegistro</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for his in historico %}
+                        <tr>
+                            <td>{{ his.ColaboradorHistorico}}</td>
+                            <td>{{ his.SetorAnterior}}</td>
+                            <td>{{ his.SetorAtual}}</td>
+                            <td>{{ his.DataRegistro}}</td>
+
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

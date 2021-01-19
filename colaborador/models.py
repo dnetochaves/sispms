@@ -41,3 +41,8 @@ class HistoricoRemanejamento(models.Model):
     SetorAtual = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, blank=True,
                                    related_name='setor_atual_historico')
     DataRegistro = models.DateTimeField('Data', auto_now_add=True)
+
+    
+
+    def __str__(self):
+        return self.ColaboradorHistorico.id

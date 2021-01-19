@@ -18,8 +18,7 @@
                             class="fas fa-file-pdf"></i></a>
                     <a class="btn btn-success btn-sm" href="{% url 'rel_geral_colaborador' %}"><i
                             class="fas fa-file-excel"></i></a>
-                    <a class="btn btn-success btn-sm" href="{% url 'table_simples' %}"><i
-                            class="fas fa-table"></i></a>
+                    <a class="btn btn-success btn-sm" href="{% url 'table_simples' %}"><i class="fas fa-table"></i></a>
                 </div>
             </li>
         </ol>
@@ -74,16 +73,22 @@
                             </td>
                             <td>
                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                                    <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="First group">
+                                    <div class="btn-group mr-2 btn-group-sm" title="Editar Colaborador" role="group" aria-label="First group">
                                         <a href="{% url 'edit_colaborador' colaborador.id %}" class="btn btn-success"><i
                                                 class="fas fa-user-edit"></i></a>
-                                        <a href="" class="btn btn-danger"><i class="fas fa-user-minus"></i></a>
-                                        <a href="{% url 'remanejar' colaborador.id %}" class="btn btn-danger"><i
-                                                class="fas fa-exchange-alt"></i></a>
+                                        <a href="{% url 'exclude_colaborador' colaborador.id  %}"
+                                            class="btn btn-danger btn-sm confirm-delete" title="Marcar colaborador como excluido"
+                                            data-toggle="modal" data-target="#confirmDeleteModal"
+                                            id="deleteButton{{colaborador.id}}" class="btn btn-danger"><i
+                                                class="fas fa-user-minus"></i></a>
+                                        <a href="{% url 'remanejar' colaborador.id %}" class="btn btn-warning"><i
+                                                class="fas fa-exchange-alt" data-toggle="tooltip" data-placement="top" title="Remanejamento de Colaborador"></i></a>
                                         <a href="{% url 'carta_encaminhamento' colaborador.id %}"
-                                            class="btn btn-warning"><i class="fas fa-sticky-note"></i></a>
-                                        <a href="" class="btn btn-warning"><i class="fas fa-history"></i></a>
+                                            class="btn btn-dark"><i class="fas fa-sticky-note" data-toggle="tooltip" data-placement="top" title="Carta de Encaminhamento"></i></a>
+                                        <a href="{% url 'historico' colaborador.id %}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Histórico de Colaborador"><i
+                                                class="fas fa-history"></i></a>
                                     </div>
+                                   
                             </td>
 
                         </tr>
@@ -94,7 +99,7 @@
             </div>
         </div>
     </div>
-
+    {% include 'partials/_confirm_delete_modal.html' %}
 </div>
 
 

@@ -241,6 +241,7 @@ def info_tags(request, id):
                   {'colaborador': tags, 'qtd_por_tags': qtd_por_tags, 'desc_tag': desc_tag})
 
 
+# Refatoração
 def colaborador(request):
     colaboradores = Colaborador.objects.filter(excluido=False).order_by('Nome')
     return render(request, 'colaborador/colaborador.html', {'colaboradores': colaboradores})
@@ -253,6 +254,12 @@ def new_colaborador(request):
         return redirect('/colaborador/colaborador')
     return render(request, 'colaborador/new_colaborador.html', {'form': form})
 
+def exclude_colaborador(request, id):
+    exc = Colaborador.objects.get(pk=id)
+    exc.excluido = True
+    exc.save()
+    messages.success(request, f'O colaborador {exc.Nome} foi alterado com sucesso.')
+    return redirect('colaborador')
 
 def edit_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
@@ -386,7 +393,8 @@ class rel_geral_colaborador(View):
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
 
-        columns = ['Nome', 'Cpf', 'Telefone', 'SetorColaborador', 'Observacao', 'ObservacaoExpecificas']
+        columns = ['Nome', 'Cpf', 'Telefone', 'SetorColaborador',
+                   'Observacao', 'ObservacaoExpecificas']
 
         for col_num in range(len(columns)):
             ws.write(row_num, col_num, columns[col_num], font_style)
@@ -408,6 +416,12 @@ class rel_geral_colaborador(View):
         wb.save(response)
         return response
 
+
 def table_simples(request):
     col_simples = Colaborador.objects.all()
-    return render(request, 'colaborador/table_simples.html', {'col_simples':col_simples})
+    return render(request, 'colaborador/table_simples.html', {'col_simples': col_simples})
+
+
+def historico(request, id):
+    historico = HistoricoRemanejamento.objects.filter(ColaboradorHistorico_id=id).order_by('DataRegistro')
+    return render(request, 'colaborador/historico.html', {'historico': historico})

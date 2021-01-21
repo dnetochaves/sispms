@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %} Colaborador {% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+            </li>
+            <li class="breadcrumb-item">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary btn-sm" href=""><i class="fas fa-plus"></i></a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-12">
+            <form method="get" action="{% url 'search_colaborador' %}">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <input class="form-control" type="search" value="{{ request.GET.search }}" id="search-input"
+                            placeholder="Digite sua pesquisa" name="search">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Observação</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tag in tags %}
+                        <tr>
+                            <td>{{ tag.Nome }}</td>
+                            <td>{{ tag.Observacao }}</td>
+                            <td>
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group mr-2 btn-group-sm" title="Editar Colaborador" role="group"
+                                        aria-label="First group">
+                                        <a href="" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                        <a href="{% url 'exclude_tag' tag.id %}"
+                                            class="btn btn-danger btn-sm confirm-delete"
+                                            title="Excluir Tag" data-toggle="modal"
+                                            data-target="#confirmDeleteModal" id="deleteButton{{tag.id}}"
+                                            class="btn btn-danger"><i class="fas fa-user-minus"></i></a>
+                                        <a href="{% url 'filter_tag' tag.id %}" class="btn btn-info btn-sm"><i
+                                                class="fas fa-filter"></i></a>
+                                    </div>
+
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% include 'partials/_confirm_delete_modal.html' %}
+</div>
+
+
+
+
+
+
+
+{% endblock %}

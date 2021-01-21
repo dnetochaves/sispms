@@ -41,12 +41,15 @@
         <div class="col">
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
-                    <thead>
+                    <thead class="bg-secondary text-light">
                         <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">Cpf</th>
                             <th scope="col">Telefone</th>
-                            <th scope="col">tags</th>
+                            <th scope="col" class="text-success">
+                                <center><a href="{% url 'tags_colaborador_r' %}" class="btn btn-success">Tags <i
+                                            class="fas fa-search"></i></a> </center>
+                            </th>
                             <th scope="col" class="text-success">
                                 <center><a href="{% url 'setor_colaborador' %}" class="btn btn-success">Setor <i
                                             class="fas fa-search"></i></a> </center>
@@ -63,10 +66,10 @@
                             <td>{{ colaborador.Telefone }}</td>
                             <td>
                                 {% for tag in colaborador.tags.all %}
-                                <span class="badge badge-dark">{{ tag }}</span>
+                                <a href="{% url 'filter_tag' tag.id %}"><span class="badge bg-primary">{{ tag }}</span></a>
                                 {% endfor %}
                             </td>
-                            <td class="bg-secondary">
+                            <td class="">
                                 <center><a class="btn btn-success btn-sm"
                                         href="{% url 'colaborador_setor' colaborador.SetorColaborador.id %}">
                                         {{colaborador.SetorColaborador }}</a></center>

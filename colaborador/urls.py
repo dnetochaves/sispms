@@ -19,8 +19,7 @@ from .views import list_historico
 
 
 # Refatoração
-from .views import colaborador, new_colaborador, search_colaborador, edit_colaborador, remanejar, finalizar_remanejar, carta_encaminhamento, colaborador_setor, setor_colaborador, rel_geral_colaborador, table_simples, historico, exclude_colaborador
-
+from .views import colaborador, new_colaborador, search_colaborador, edit_colaborador, remanejar, finalizar_remanejar, carta_encaminhamento, colaborador_setor, setor_colaborador, rel_geral_colaborador, table_simples, historico, exclude_colaborador, tags_colaborador_r, filter_tag, exclude_tag
 
 urlpatterns = [
     path('painel_colaborador/', painel_colaborador, name="painel_colaborador"),
@@ -45,6 +44,7 @@ urlpatterns = [
     path('observacao_colaborador/<int:id>/', observacao_colaborador,
          name="observacao_colaborador"),
 
+
     path('tags_colaborador/', tags_colaborador, name="tags_colaborador"),
     path('list_tags/', list_tags, name="list_tags"),
     path('info_tags/<int:id>/', info_tags, name="info_tags"),
@@ -54,7 +54,8 @@ urlpatterns = [
     # Refatoração
     path('colaborador/', colaborador, name="colaborador"),
     path('new_colaborador/', new_colaborador, name="new_colaborador"),
-    path('exclude_colaborador/<int:id>/', exclude_colaborador, name="exclude_colaborador"),
+    path('exclude_colaborador/<int:id>/',
+         exclude_colaborador, name="exclude_colaborador"),
     path('search_colaborador/', search_colaborador, name="search_colaborador"),
     path('edit_colaborador/<int:id>/', edit_colaborador, name="edit_colaborador"),
     path('remanejar/<int:id_colaborador>/', remanejar, name="remanejar"),
@@ -71,6 +72,9 @@ urlpatterns = [
     path('table_simples/',
          table_simples, name="table_simples"),
     path('historico/<int:id>/', historico, name="historico"),
+    path('tags_colaborador_r', tags_colaborador_r, name="tags_colaborador_r"),
+    path('filter_tag/<int:id>/', filter_tag, name="filter_tag"),
+    path('exclude_tag/<int:id>/', exclude_tag, name="exclude_tag"),
 
 
 

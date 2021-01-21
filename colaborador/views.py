@@ -254,12 +254,15 @@ def new_colaborador(request):
         return redirect('/colaborador/colaborador')
     return render(request, 'colaborador/new_colaborador.html', {'form': form})
 
+
 def exclude_colaborador(request, id):
     exc = Colaborador.objects.get(pk=id)
     exc.excluido = True
     exc.save()
-    messages.success(request, f'O colaborador {exc.Nome} foi alterado com sucesso.')
+    messages.success(
+        request, f'O colaborador {exc.Nome} foi alterado com sucesso.')
     return redirect('colaborador')
+
 
 def edit_colaborador(request, id):
     colaborador = get_object_or_404(Colaborador, pk=id)
@@ -319,7 +322,7 @@ def finalizar_remanejar(request, id_setor_atu):
 def colaborador_setor(request, id):
     colaborador_setors = Colaborador.objects.filter(
         SetorColaborador_id=id, excluido=False).order_by('Nome')
-    return render(request, 'colaborador/colaborador_setor.html', {'colaborador_setors': colaborador_setors})
+    return render(request, 'colaborador/colaborador.html', {'colaboradores': colaborador_setors})
 
 
 def setor_colaborador(request):
@@ -423,5 +426,25 @@ def table_simples(request):
 
 
 def historico(request, id):
-    historico = HistoricoRemanejamento.objects.filter(ColaboradorHistorico_id=id).order_by('DataRegistro')
+    historico = HistoricoRemanejamento.objects.filter(
+        ColaboradorHistorico_id=id).order_by('DataRegistro')
     return render(request, 'colaborador/historico.html', {'historico': historico})
+
+
+def tags_colaborador_r(request):
+    tags = Tags.objects.all()
+    return render(request, 'colaborador/tags.html', {'tags': tags})
+
+
+def filter_tag(request, id):
+    tags_filter = Colaborador.objects.filter(tags=id)
+    return render(request, 'colaborador/colaborador.html', {'colaboradores': tags_filter})
+
+
+def exclude_tag(request, id):
+    exc = Tags.objects.get(pk=id)
+    exc.delete()
+    messages.success(
+        request, f'A Tag {exc.Nome} foi excluida com sucesso.')
+    return redirect('tags_colaborador')
+

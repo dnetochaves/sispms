@@ -243,8 +243,8 @@ def info_tags(request, id):
 
 # Refatoração
 def colaborador(request):
-    colaboradores = Colaborador.objects.filter(excluido=False).order_by('Nome')
-    return render(request, 'colaborador/colaborador.html', {'colaboradores': colaboradores})
+    #colaboradores = Colaborador.objects.filter(excluido=False).order_by('Nome')
+    return render(request, 'colaborador/colaborador.html')
 
 
 def new_colaborador(request):

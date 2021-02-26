@@ -46,6 +46,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Cpf</th>
                             <th scope="col">Telefone</th>
+                            <th scope="col">Empresa</th>
                             <th scope="col">Cargo</th>
                             <th scope="col" class="text-success">
                                 <center><a href="{% url 'tags_colaborador_r' %}" class="btn btn-success">Tags <i
@@ -65,6 +66,7 @@
                             <td>{{ colaborador.Nome }}</td>
                             <td>{{ colaborador.Cpf }}</td>
                             <td>{{ colaborador.Telefone }}</td>
+                            <td>{{ colaborador.empresa }}</td>
                             <td>{{ colaborador.cargo }}</td>
                             <td>
                                 {% for tag in colaborador.tags.all %}

@@ -3,9 +3,18 @@ from django.db import models
 from setor.models import Setor
 
 
+class Empresa(models.Model):
+    Nome = models.CharField(max_length=50)
+    Descricao = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.Nome
+
+
 class Cargo(models.Model):
     Nome = models.CharField(max_length=50)
     Descricao = models.TextField(blank=True, null=True)
+    empresa_cargo = models.ForeignKey(Empresa, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.Nome
@@ -25,7 +34,9 @@ class Colaborador(models.Model):
     ObservacaoExpecificas = models.TextField(
         max_length=500, null=True, blank=True, help_text='Observações do Colaborador')
     excluido = models.BooleanField(default=False)
-    cargo = models.ForeignKey(Cargo, null=True, blank=True, on_delete=models.SET_NULL)
+    cargo = models.ForeignKey(
+        Cargo, null=True, blank=True, on_delete=models.SET_NULL)
+    empresa = models.ForeignKey(Empresa, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.Nome

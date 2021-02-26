@@ -3,7 +3,14 @@ from django.db import models
 from setor.models import Setor
 
 
-# Create your models here.
+class Cargo(models.Model):
+    Nome = models.CharField(max_length=50)
+    Descricao = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.Nome
+
+
 class Colaborador(models.Model):
     Nome = models.CharField(max_length=50)
     Cpf = models.CharField(max_length=50)
@@ -18,6 +25,7 @@ class Colaborador(models.Model):
     ObservacaoExpecificas = models.TextField(
         max_length=500, null=True, blank=True, help_text='Observações do Colaborador')
     excluido = models.BooleanField(default=False)
+    cargo = models.ForeignKey(Cargo, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.Nome
@@ -41,8 +49,6 @@ class HistoricoRemanejamento(models.Model):
     SetorAtual = models.ForeignKey(Setor, on_delete=models.CASCADE, null=True, blank=True,
                                    related_name='setor_atual_historico')
     DataRegistro = models.DateTimeField('Data', auto_now_add=True)
-
-    
 
     def __str__(self):
         return self.ColaboradorHistorico.id

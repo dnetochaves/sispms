@@ -384,7 +384,7 @@ def carta_encaminhamento(request, id):
 
 
 class rel_geral_colaborador(View):
-    def get(self, request):
+     def get(self, request):
         response = HttpResponse(content_type='application/ms-excel')
         response['Content-Disposition'] = 'attachment; filename="rel_geral_colaborador.xls"'
 
@@ -396,7 +396,7 @@ class rel_geral_colaborador(View):
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
 
-        columns = ['Nome', 'Cpf', 'Telefone', 'SetorColaborador',
+        columns = ['Nome', 'Cpf', 'Telefone','Empresa', 'Cargo', 'SetorColaborador',
                    'Observacao', 'ObservacaoExpecificas']
 
         for col_num in range(len(columns)):
@@ -411,14 +411,15 @@ class rel_geral_colaborador(View):
             ws.write(row_num, 0, col.Nome, font_style)
             ws.write(row_num, 1, col.Cpf, font_style)
             ws.write(row_num, 2, col.Telefone, font_style)
-            ws.write(row_num, 3, col.SetorColaborador.Nome, font_style)
-            ws.write(row_num, 4, col.Observacao, font_style)
-            ws.write(row_num, 5, col.ObservacaoExpecificas, font_style)
+            ws.write(row_num, 3, col.empresa.Nome, font_style)
+            ws.write(row_num, 4, col.cargo.Nome, font_style)
+            ws.write(row_num, 5, col.SetorColaborador.Nome, font_style)
+            ws.write(row_num, 6, col.Observacao, font_style)
+            ws.write(row_num, 7, col.ObservacaoExpecificas, font_style)
             row_num += 1
 
         wb.save(response)
         return response
-
 
 def table_simples(request):
     col_simples = Colaborador.objects.all()

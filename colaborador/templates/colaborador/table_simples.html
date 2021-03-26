@@ -14,6 +14,8 @@
         <td>Observacao</td>
         <td>ObservacaoExpecificas</td>
         <td>excluido</td>
+        <td>cargo</td>
+        <td>empresa</td>
     </tr>
 
     {% for col_simple in col_simples %}
@@ -31,6 +33,8 @@
         <td>{{ col_simple.Observacao }}</td>
         <td>{{ col_simple.ObservacaoExpecificas }}</td>
         <td>{{ col_simple.excluido }}</td>
+        <td>{{ col_simple.cargo.Nome }}</td>
+        <td>{{ col_simple.empresa.Nome }}</td>
 
     </tr>
     {% endfor %}

@@ -459,7 +459,7 @@ def list_empresa(request):
 def list_empresa_id(request, id):
     request.session['empresa_id'] = id
     list_empresas = Colaborador.objects.filter(
-        empresa=id).order_by('cargo').order_by('SetorColaborador')
+        empresa=id).filter(excluido=False).order_by('cargo').order_by('SetorColaborador')
     return render(request, 'colaborador/list_empresa_id.html', {'list_empresas': list_empresas})
 
 
@@ -486,7 +486,7 @@ class rel_empresa_colaborador_exclel(View):
         font_style = xlwt.XFStyle()
 
         cols = Colaborador.objects.filter(
-            empresa=empresa_id).order_by('cargo').order_by('SetorColaborador')
+            empresa=empresa_id).filter(excluido=False).order_by('cargo').order_by('SetorColaborador')
 
         row_num = 1
         for col in cols:

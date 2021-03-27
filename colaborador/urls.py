@@ -20,7 +20,7 @@ from .views import list_historico
 
 # Refatoração
 from .views import colaborador, new_colaborador, search_colaborador, edit_colaborador, remanejar, finalizar_remanejar, carta_encaminhamento, colaborador_setor, setor_colaborador, rel_geral_colaborador, table_simples, historico, exclude_colaborador, tags_colaborador_r, filter_tag, exclude_tag
-
+from .views import list_empresa, list_empresa_id, rel_empresa_colaborador_exclel
 urlpatterns = [
     path('painel_colaborador/', painel_colaborador, name="painel_colaborador"),
     path('a4/', a4, name="a4"),
@@ -75,7 +75,10 @@ urlpatterns = [
     path('tags_colaborador_r', tags_colaborador_r, name="tags_colaborador_r"),
     path('filter_tag/<int:id>/', filter_tag, name="filter_tag"),
     path('exclude_tag/<int:id>/', exclude_tag, name="exclude_tag"),
-
+    path('list_empresa/', list_empresa, name="list_empresa"),
+    path('list_empresa_id/<int:id>/', list_empresa_id, name="list_empresa_id"),
+    path('rel_empresa_colaborador_exclel/',
+         rel_empresa_colaborador_exclel.as_view(), name="rel_empresa_colaborador_exclel"),
 
 
 ]

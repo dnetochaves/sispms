@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Colaborador, Tags, HistoricoRemanejamento, Setor
+from .models import Colaborador, Tags, HistoricoRemanejamento, Setor, Empresa, Cargo
 from .forms import ColaboradorForm, TagsForm, HistoricoRemanejamentoForm, ColaboradorRemanejamentoForm, \
     ObservacaoColaboradorForm, RColaboradorForm
 from django.views.generic.list import ListView
@@ -288,7 +288,7 @@ def search_colaborador(request):
         Q(Nome__icontains=search) |
         Q(Cpf__icontains=search) |
         Q(Telefone__icontains=search)
-    ).filter(excluido=False)
+    ).filter(excluido=False).order_by('empresa', 'cargo')
 
     return render(request, 'colaborador/colaborador.html', {'colaboradores': colaboradores})
 
@@ -396,7 +396,8 @@ class rel_geral_colaborador(View):
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
 
-        columns = ['Nome', 'Cpf', 'Telefone', 'SetorColaborador', 'Observacao', 'ObservacaoExpecificas', 'cargo','empresa']
+        columns = ['Nome', 'Cpf', 'Telefone', 'SetorColaborador',
+                   'Observacao', 'ObservacaoExpecificas', 'cargo', 'empresa']
 
         for col_num in range(len(columns)):
             ws.write(row_num, col_num, columns[col_num], font_style)
@@ -412,13 +413,14 @@ class rel_geral_colaborador(View):
             ws.write(row_num, 2, col.Telefone, font_style)
             ws.write(row_num, 3, col.SetorColaborador.Nome, font_style)
             ws.write(row_num, 4, col.Observacao, font_style)
-            ws.write(row_num, 5, col.ObservacaoExpecificas, font_style)  
-            ws.write(row_num, 6, col.cargo.Nome, font_style)  
-            ws.write(row_num, 7, col.empresa.Nome, font_style)      
+            ws.write(row_num, 5, col.ObservacaoExpecificas, font_style)
+            ws.write(row_num, 6, col.cargo.Nome, font_style)
+            ws.write(row_num, 7, col.empresa.Nome, font_style)
             row_num += 1
 
         wb.save(response)
         return response
+
 
 def table_simples(request):
     col_simples = Colaborador.objects.all()
@@ -448,3 +450,53 @@ def exclude_tag(request, id):
         request, f'A Tag {exc.Nome} foi excluida com sucesso.')
     return redirect('tags_colaborador')
 
+
+def list_empresa(request):
+    list_empresas = Empresa.objects.all()
+    return render(request, 'colaborador/list_empresa.html', {'list_empresas': list_empresas})
+
+
+def list_empresa_id(request, id):
+    request.session['empresa_id'] = id
+    list_empresas = Colaborador.objects.filter(
+        empresa=id).order_by('Nome').order_by('cargo')
+    return render(request, 'colaborador/list_empresa_id.html', {'list_empresas': list_empresas})
+
+
+class rel_empresa_colaborador_exclel(View):
+    def get(self, request):
+        empresa_id = request.session.get('empresa_id')
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="rel_empresa_colaborador_exclel.xls"'
+
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet('rel_empresa_colaborador_exclel')
+
+        row_num = 0
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        columns = ['Nome', 'Cpf', 'Telefone',
+                   'SetorColaborador', 'Empresa', 'Cargo']
+
+        for col_num in range(len(columns)):
+            ws.write(row_num, col_num, columns[col_num], font_style)
+
+        font_style = xlwt.XFStyle()
+
+        cols = Colaborador.objects.filter(
+            empresa=empresa_id).order_by('Nome').order_by('cargo')
+
+        row_num = 1
+        for col in cols:
+            ws.write(row_num, 0, col.Nome, font_style)
+            ws.write(row_num, 1, col.Cpf, font_style)
+            ws.write(row_num, 2, col.Telefone, font_style)
+            ws.write(row_num, 4, col.SetorColaborador.Nome, font_style)
+            ws.write(row_num, 5, col.empresa.Nome, font_style)
+            ws.write(row_num, 6, col.cargo.Nome, font_style)
+            row_num += 1
+
+        wb.save(response)
+        return response

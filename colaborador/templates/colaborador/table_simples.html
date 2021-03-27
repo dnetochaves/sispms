@@ -9,13 +9,13 @@
         <td>Nome</td>
         <td>Cpf</td>
         <td>Telefone</td>
-        <td>tags</td>
+        <td>cargo</td>
+        <td>empresa</td>
         <td>SetorColaborador</td>
         <td>Observacao</td>
         <td>ObservacaoExpecificas</td>
         <td>excluido</td>
-        <td>cargo</td>
-        <td>empresa</td>
+        
     </tr>
 
     {% for col_simple in col_simples %}
@@ -24,17 +24,13 @@
         <td>{{ col_simple.Nome }}</td>
         <td>{{ col_simple.Cpf }}</td>
         <td>{{ col_simple.Telefone }}</td>
-        <td>
-            {% for tag in col_simple.tags.all %}
-             {{ tag }} |
-            {% endfor %}
-        </td>
+        <td>{{ col_simple.cargo.Nome }}</td>
+        <td>{{ col_simple.empresa.Nome }}</td>
         <td>{{ col_simple.SetorColaborador }}</td>
         <td>{{ col_simple.Observacao }}</td>
         <td>{{ col_simple.ObservacaoExpecificas }}</td>
         <td>{{ col_simple.excluido }}</td>
-        <td>{{ col_simple.cargo.Nome }}</td>
-        <td>{{ col_simple.empresa.Nome }}</td>
+       
 
     </tr>
     {% endfor %}

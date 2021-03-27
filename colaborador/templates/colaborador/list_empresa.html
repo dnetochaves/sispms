@@ -40,27 +40,19 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Codigo</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Telefone1</th>
-                            <th scope="col">Gestor</th>
-                            <th scope="col">Email</th>
                             <th scope="col"></th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        {% for setor_colaborador in setor_colaboradors %}
+                        {% for list_empresa in list_empresas %}
                         <tr>
-                            <th scope="row">{{ setor_colaborador.Codigo }}</th>
-                            <td>{{ setor_colaborador.Nome }}</td>
-                            <td>{{ setor_colaborador.Telefone1 }}</td>
-                            <td>{{ setor_colaborador.Gestor }}</td>
-                            <td>{{ setor_colaborador.Email }}</td>
+                            <th scope="row">{{ list_empresa.Nome }}</th>
                             <td>
                                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                     <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="First group">
-                                        <a href="{% url 'colaborador_setor' setor_colaborador.id %}" class="btn btn-success"><i class="fas fa-user-edit"></i>Filtrar por Unidade</a>
+                                        <a href="{% url 'list_empresa_id' list_empresa.id %}" class="btn btn-success"><i class="fas fa-user-edit"></i>Filtrar por Empresa</a>
                                     </div>
                             </td>
 

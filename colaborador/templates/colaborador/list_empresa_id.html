@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} Nti {% endblock %}
+
+{% block container %}
+<div class="container-fluid">
+
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          
+            <li class="breadcrumb-item">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-success btn-sm" href="{% url 'rel_empresa_colaborador_exclel' %}"><i
+                            class="fas fa-file-excel"></i> Download em ecxcel colaboradores da emresa selecionada</a>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-12">
+            <form method="get" action="{% url 'search_colaborador' %}">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <input class="form-control" type="search" value="{{ request.GET.search }}" id="search-input"
+                            placeholder="Digite sua pesquisa" name="search">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cpf</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">SetorColaborador</th>
+                            <th scope="col">Empresa</th>
+                            <th scope="col">Cargo</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for list_empresa in list_empresas %}
+                        <tr>
+                            <th scope="row">{{ list_empresa.Nome }}</th>
+                            <th scope="row">{{ list_empresa.Cpf }}</th>
+                            <th scope="row">{{ list_empresa.Telefone }}</th>
+                            <th scope="row">{{ list_empresa.SetorColaborador }}</th>
+                            <th scope="row">{{ list_empresa.empresa }}</th>
+                            <th scope="row">{{ list_empresa.cargo }}</th>
+                           
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
